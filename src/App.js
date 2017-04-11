@@ -39,20 +39,21 @@ class App extends Component {
 
   render() {
 
+    //if(node===m1) checkboxes =
+
     return (
       <div className="App">
         <p className="App-intro">
         <code>'learning'</code>
         </p>
+        {/* <a href='#' onClick={() => this.setState({  mode: 11 })}>appNone</a> -
+        <a href='#' onClick={() => this.setState({  mode: 12 })}>appAll</a> -
+        <a href='#' onClick={() => this.setState({  mode: 22 })}>appFlip</a> */}
+        <MyComponent1 checkboxes={checkboxes}  mode={1} />
+        <MyComponent1 checkboxes={checkboxes}  mode={0} />
 
-        <MyComponent1 />
-
-
-
+        <p>xxxxxxxxx</p>
         <MyComponent0 />
-
-
-
        ----0-----
         <br />
 

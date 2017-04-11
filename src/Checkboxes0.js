@@ -40,7 +40,8 @@ class Checkboxes0 extends Component {
   }
 
   uncheckAll = () => {
-     console.log('uncheck all');   
+     console.log('uncheck all');
+   
   }
 
   componentWillMount = () => {
