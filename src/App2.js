@@ -51,6 +51,7 @@ class App2 extends Component {
             - <Link to="/count">count</Link>
             - <Link to="/count2">count2</Link>
             - <Link to="/list">list</Link>
+            - <Link to="/one_s">one_s</Link>
             - <Link to="/one">one</Link>
 
             <Route exact={true} path="/" render={() => (<p>Welcome</p>)} />
@@ -62,7 +63,7 @@ class App2 extends Component {
             <Route exact={true} path="/count" render={() => <Count />} />
             <Route exact={true} path="/count2" render={() => (<div><Count /><Count /></div>)} />
             <Route exact={true} path="/list" component={List} />
-            {/* <Route exact={true} path='/one' component={One} /> */}
+            <Route exact={true} path='/one_s' component={One} />
             <Route exact={true} path='/one' render={() => (<One id={'-KeY8wPa0_TaQhSCcO-N'} />)} />
 
           </div>

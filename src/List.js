@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import firebase from './base'
 import './list.css'
+import { Route } from 'react-router-dom';
+import One from './One'
 
 
 class List extends Component {
@@ -26,14 +28,17 @@ class List extends Component {
       const { id } = t;
       return (
         <tr key={id}>
-          <td></td>
+          <td><input type='button' onClick={(
+          ) => {
+            console.log(id);
+            return <Route exact={true} path='/one' render={() => (<One id={'-KeY8wPa0_TaQhSCcO-N'} />)} />
+          }}/></td>
           { flds.map(fld => <td key={fld}>{t[fld]}</td>) }
         </tr>
       )
     })
 
     return (
-      // <div className='List' style={{ border: '1px solid black' }}>
       <div className='List'>
         <table>
           <caption>

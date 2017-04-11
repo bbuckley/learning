@@ -3,40 +3,31 @@ import React, { Component } from 'react';
 import firebase from './base'
 
 class One extends Component {
-  state = {
-    tc: null
+  constructor(){
+    super()
+    this.flds = ['pbc','calc_type','dob','doe','completed','id']
+    this.state = {
+      tc: null
+    }
   }
 
   componentWillMount(){
-    console.log('compoent will mount');
-
     firebase.database().ref('tcs/' + this.props.id).on('value', snapshot => {
       const tc = snapshot.val();
       this.setState({ tc })
     })
   }
 
-  componentDidMount(){
-     console.log('compoent did mount');
-  }
-
 
   render(){
-    const { id } = this.props;
     const { tc } = this.state;
+    if(tc === null) return <p>no tc</p>;
 
-    console.log(JSON.stringify(tc))
-    const t = JSON.parse(JSON.stringify(tc));
-    //const { calc_type } = t;
-
+    const rows = this.flds.map(fld =><p key={fld}>{fld}, {tc[fld]}</p>)
 
     return (
       <div>
-        One! {id}
-        <p>{JSON.stringify(this.state)}</p>
-        <p>{JSON.stringify(tc)}</p>
-        {/* {Object.keys(tc).map(k => k)} */}
-
+        {rows}
       </div>
      )
   }
