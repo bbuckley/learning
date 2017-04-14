@@ -1,6 +1,6 @@
 // For this demo, we are using the UMD build of react-router-dom
-import React from 'react'
-import { Switch, Route, Link } from 'react-router-dom'
+import React from "react";
+import { Switch, Route, Link } from "react-router-dom";
 
 // import ReactRouterDOM from 'react-router-dom'
 //
@@ -10,8 +10,6 @@ import { Switch, Route, Link } from 'react-router-dom'
 //   Route,
 //   Link
 // } = ReactRouterDOM
-
-
 
 // A simple data API that will be used to get the data for our
 // components. On a real website, a more robust data fetching
@@ -26,60 +24,59 @@ const PlayerAPI = {
     { number: 6, name: "Fillipe Forward", position: "F" },
     { number: 7, name: "Willie Wing", position: "M" }
   ],
-  all: function() { return this.players},
+  all: function() {
+    return this.players;
+  },
   get: function(id) {
-    const isPlayer = p => p.number === id
-    return this.players.find(isPlayer)
+    const isPlayer = p => p.number === id;
+    return this.players.find(isPlayer);
   }
-}
+};
 
 // The FullRoster iterates over all of the players and creates
 // a link to their profile page.
 export const FullRoster = () => (
   <div>
     <ul>
-      {
-        PlayerAPI.all().map(p => (
-          <li key={p.number}>
-            <Link to={`/roster/${p.number}`}>{p.name}</Link> {p.number}
-            <Link to={`/team/roster/${p.number}`}>{p.name}</Link> {p.number}
-            <Link to={`/${p.number}`}>{p.name}</Link> {p.number}
-          </li>
-        ))
-      }
+      {PlayerAPI.all().map(p => (
+        <li key={p.number}>
+          <Link to={`/roster/${p.number}`}>{p.name}</Link> {p.number}
+          <Link to={`/team/roster/${p.number}`}>{p.name}</Link> {p.number}
+          <Link to={`/${p.number}`}>{p.name}</Link> {p.number}
+        </li>
+      ))}
     </ul>
   </div>
-)
+);
 
 // The Player looks up the player using the number parsed from
 // the URL's pathname. If no player is found with the given
 // number, then a "player not found" message is displayed.
-const Player = (props) => {
-  const player = PlayerAPI.get(
-    parseInt(props.match.params.number, 10)
-  )
+const Player = props => {
+  const player = PlayerAPI.get(parseInt(props.match.params.number, 10));
   if (!player) {
-    return <div>Sorry, but the player was not found</div>
+    return <div>Sorry, but the player was not found</div>;
   }
   return (
     <div>
       <h1>{player.name} (#{player.number})</h1>
       <h2>Position: {player.position}</h2>
-      <Link to='/roster'>Back</Link>
+      <Link to="/roster">Back</Link>
     </div>
-  )
-}
+  );
+};
 
 // The Roster component matches one of two different routes
 // depending on the full pathname
 const Roster = () => {
-  console.log('Roster');
+  console.log("Roster");
   return (
-  <Switch>
-    <Route exact path='/roster' component={FullRoster}/>
-    <Route path='/roster/:number' component={Player}/>
-  </Switch>
-)}
+    <Switch>
+      <Route exact path="/roster" component={FullRoster} />
+      <Route path="/roster/:number" component={Player} />
+    </Switch>
+  );
+};
 
 export const Schedule = () => (
   <div>
@@ -89,16 +86,16 @@ export const Schedule = () => (
       <li>6/14 @ United</li>
     </ul>
 
-    b<Route component={FullRoster}/>b
+    b<Route component={FullRoster} />b
 
   </div>
-)
+);
 
 const Home = () => (
   <div>
     <h1>Welcome to the Tornadoes Website!</h1>
   </div>
-)
+);
 
 // The Main component renders one of the three provided
 // Routes (provided that one matches). Both the /roster
@@ -106,32 +103,34 @@ const Home = () => (
 // with /roster or /schedule. The / route will only match
 // when the pathname is exactly the string "/"
 const Main = () => {
-  console.log('Main');
+  console.log("Main");
   return (
-  <main>
-    <Switch>
-      <Route exact path='/' component={Home}/>
-      <Route path='/roster' component={Roster}/>
-      <Route path='/schedule' component={Schedule}/>
-    </Switch>
-  </main>
-)}
+    <main>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/roster" component={Roster} />
+        <Route path="/schedule" component={Schedule} />
+      </Switch>
+    </main>
+  );
+};
 
 // The Header creates links that can be used to navigate
 // between routes.
-const Header = (props) => {
-  console.log('Header', props);
+const Header = props => {
+  console.log("Header", props);
   return (
-  <header>
-    <nav>
-      <ul>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/roster'>Roster</Link></li>
-        <li><Link to='/schedule'>Schedule</Link></li>
-      </ul>
-    </nav>
-  </header>
-)}
+    <header>
+      <nav>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/roster">Roster</Link></li>
+          <li><Link to="/schedule">Schedule</Link></li>
+        </ul>
+      </nav>
+    </header>
+  );
+};
 
 export const Appp = () => (
   <div>
@@ -140,4 +139,4 @@ export const Appp = () => (
     <Main />
     yyy
   </div>
-)
+);

@@ -1,21 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from "react";
 
-import './Checkbox.css';
-
+import "./Checkbox.css";
 
 class Checkbox extends Component {
-
-  manuallySetValue(value){
+  manuallySetValue(value) {
     this.setState(({ isChecked }) => ({
-      isChecked: value,
+      isChecked: value
     }));
   }
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      isChecked: props.isChecked,
-    }
+      isChecked: props.isChecked
+    };
 
     this.onChange = this.onChange.bind(this);
     this.manuallySetValue = this.manuallySetValue.bind(this);
@@ -25,9 +23,9 @@ class Checkbox extends Component {
     const { handleCheckboxChange, label } = this.props;
 
     this.setState(({ isChecked }) => ({
-      isChecked: !isChecked,
+      isChecked: !isChecked
     }));
-    handleCheckboxChange(label)
+    handleCheckboxChange(label);
   }
 
   render() {
@@ -37,7 +35,7 @@ class Checkbox extends Component {
     return (
       <div className="Checkbox">
         <label>
-          <input type='checkbox' checked={isChecked} onChange={this.onChange}/>
+          <input type="checkbox" checked={isChecked} onChange={this.onChange} />
           {label}
         </label>
       </div>
@@ -47,12 +45,13 @@ class Checkbox extends Component {
 
 Checkbox.propTypes = {
   label: PropTypes.string.isRequired,
-  handleCheckboxChange: PropTypes.func.isRequired,
+  handleCheckboxChange: PropTypes.func.isRequired
 };
 Checkbox.defaultProps = {
-  handleCheckboxChange: () => { console.log('handleCheckboxChange') },
-  isChecked: true,
+  handleCheckboxChange: () => {
+    console.log("handleCheckboxChange");
+  },
+  isChecked: true
 };
-
 
 export default Checkbox;

@@ -1,46 +1,65 @@
-
-import React, { Component } from 'react';
-import firebase from './base'
+import React, { Component } from "react";
+import firebase from "./base";
 
 class One extends Component {
-  constructor(){
-    super()
-    this.flds = ['pbc','tc','calc_type','dob','doe','dot','completed','id','tags']
+  constructor() {
+    super();
+    this.flds = [
+      "pbc",
+      "tc",
+      "calc_type",
+      "dob",
+      "doe",
+      "dot",
+      "crd",
+      "completed",
+      "id",
+      "tags",
+    ];
     this.state = {
-      tc: null
-    }
+      tc: null,
+    };
   }
 
-  update(id){
-    firebase.database().ref('tcs/' + id).on('value', snapshot => {
+  update(id) {
+    firebase.database().ref("tcs/" + id).on("value", snapshot => {
       const tc = snapshot.val();
-      this.setState({ tc })
-    })
+      this.setState({ tc });
+    });
   }
 
-  componentWillReceiveProps(nextProps){
-    this.update(nextProps.id)
+  componentWillReceiveProps(nextProps) {
+    this.update(nextProps.id);
   }
 
-  componentWillMount(){
+  componentWillMount() {
     this.update(this.props.id);
   }
 
-  render(){
+  render() {
     const { tc } = this.state;
-    if(tc === null) return <p>no tc</p>;
 
-    const rows = this.flds.map(fld =><tr key={fld}><td>{fld}</td><td>{tc[fld]}</td></tr>)
+    const isEditing = true;
+
+    if (tc === null || this.props.id === "") return <p>no tc</p>;
+
+    const headers = <tr><th>field</th><th>value</th></tr>;
+
+    const rows = this.flds.map(fld => (
+      <tr key={fld}><td>{fld}</td><td>{tc[fld]}</td></tr>
+    ));
 
     return (
       <div>
-        <table><tbody>
-          {rows}
-        </tbody></table>
+        <table>
+          <tbody>
+            {headers}
+            {rows}
+          </tbody>
+        </table>
       </div>
-     )
+    );
   }
 }
-
 
 export default One;
