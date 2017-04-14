@@ -4,12 +4,13 @@ import React, { Component } from 'react';
 import firebase from './base'
 import './list.css'
 import { Route } from 'react-router-dom';
+import { browserHistory } from 'react-router';
 import One from './One'
 
 
 class List extends Component {
   state = {
-    tcs: []
+    tcs: [],
   }
 
   componentWillMount(){
@@ -28,10 +29,9 @@ class List extends Component {
       const { id } = t;
       return (
         <tr key={id}>
-          <td><input type='button' onClick={(
-          ) => {
+          <td><input type='button' onClick={() => {
             console.log(id);
-            return <Route exact={true} path='/one' render={() => (<One id={'-KeY8wPa0_TaQhSCcO-N'} />)} />
+          
           }}/></td>
           { flds.map(fld => <td key={fld}>{t[fld]}</td>) }
         </tr>
@@ -39,7 +39,11 @@ class List extends Component {
     })
 
     return (
+
       <div className='List'>
+        <Route render={({match}) => <One id={this.xid} />} />
+        <Route render={({match}) => <One id='-KeY8FVZ5QFnFWth_SIe' />} />
+
         <table>
           <caption>
             {this.state.tcs.length}

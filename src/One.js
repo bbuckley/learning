@@ -5,29 +5,38 @@ import firebase from './base'
 class One extends Component {
   constructor(){
     super()
-    this.flds = ['pbc','calc_type','dob','doe','completed','id']
+    this.flds = ['pbc','tc','calc_type','dob','doe','dot','completed','id','tags']
     this.state = {
       tc: null
     }
   }
 
-  componentWillMount(){
-    firebase.database().ref('tcs/' + this.props.id).on('value', snapshot => {
+  update(id){
+    firebase.database().ref('tcs/' + id).on('value', snapshot => {
       const tc = snapshot.val();
       this.setState({ tc })
     })
   }
 
+  componentWillReceiveProps(nextProps){
+    this.update(nextProps.id)
+  }
+
+  componentWillMount(){
+    this.update(this.props.id);
+  }
 
   render(){
     const { tc } = this.state;
     if(tc === null) return <p>no tc</p>;
 
-    const rows = this.flds.map(fld =><p key={fld}>{fld}, {tc[fld]}</p>)
+    const rows = this.flds.map(fld =><tr key={fld}><td>{fld}</td><td>{tc[fld]}</td></tr>)
 
     return (
       <div>
-        {rows}
+        <table><tbody>
+          {rows}
+        </tbody></table>
       </div>
      )
   }

@@ -1,10 +1,16 @@
 
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
+
+import { Switch } from 'react-router'
+
 import Checkboxes from './Checkboxes';
 import One from './One';
 import List from './List';
+import BasicExample from './basic';
+import { Schedule } from './team'
 
+const NotFound = () => <div>not found</div>;
 const Foo = () => (<div style={{ padding: '20px'}}>this is foo</div>);
 const Bar = (props) => (<div>Bar {props.name}</div>);
 const Barp = ({name, age}) => (<div>Barp {name}, {age}</div>);
@@ -13,7 +19,14 @@ const randomBarp = () => {
   const names = ['David','Brian','Karl']
   const i = Math.floor(Math.random() * names.length)
   const j = Math.floor(Math.random() * 44 + 21)
-  return <Barp name={names[i]} age={j} />
+  const i2 = Math.floor(Math.random() * names.length)
+  const j2 = Math.floor(Math.random() * 44 + 21)
+  return (
+    <div>
+      <Barp name={names[i]} age={j} />
+      <Barp name={names[i2]} age={j2} />
+    </div>
+  )
 }
 
 class Count extends Component {
@@ -43,7 +56,14 @@ class App2 extends Component {
   render(){
   return (
           <div style={{ padding: '10px'}}>
-              <Link to="/">Home</Link>
+            <Switch>
+              <Route path='/xxx' component={Foo} />
+              <Route component={NotFound} />
+            </Switch>
+
+            <Link to="/">Home</Link>
+            - <Link to="/team">team!!</Link>
+            - <Link to="/basic">Basic</Link>
             - <Link to="/barp">Barp</Link>
             - <Link to="/foo">Foo</Link>
             - <Link to="/rand">Rand</Link>
@@ -53,8 +73,15 @@ class App2 extends Component {
             - <Link to="/list">list</Link>
             - <Link to="/one_s">one_s</Link>
             - <Link to="/one">one</Link>
+            - <Link to="/one_id/-KeY8wPlmmU9VkwCoQjG">brian </Link>
+            - <Link to="/one_id/-KeY8wPngcOzIF7X8vmg">karl</Link>
+            - <Link to="/one_id/-KeY8wPngcOzIF7X8vm">no tc</Link>
+
+
 
             <Route exact={true} path="/" render={() => (<p>Welcome</p>)} />
+            <Route exact={true} path="/team" component={Schedule} />
+            <Route exact={true} path="/basic" component={BasicExample} />
             <Route exact={true} path="/barp" render={({name}) => (<Barp name={name}/>)} />
             <Route exact={true} path="/ch" component={Checkboxes} />
             <Route exact={true} path="/foo" component={Foo} />
@@ -65,6 +92,8 @@ class App2 extends Component {
             <Route exact={true} path="/list" component={List} />
             <Route exact={true} path='/one_s' component={One} />
             <Route exact={true} path='/one' render={() => (<One id={'-KeY8wPa0_TaQhSCcO-N'} />)} />
+            
+            <Route path='/one_id/:id' render={({match}) => <One id={match.params.id} />} />
 
           </div>
     )
