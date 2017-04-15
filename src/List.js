@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import firebase from "./base";
 import "./list.css";
-import { Route } from "react-router-dom";
-import { browserHistory } from "react-router";
-import One from "./One";
+// import { Route } from "react-router-dom";
+// import { browserHistory } from "react-router";
+// import One from "./One";
 
 class List extends Component {
   state = {
@@ -46,8 +46,8 @@ class List extends Component {
 
     return (
       <div className="List">
-        <Route render={({ match }) => <One id={this.xid} />} />
-        <Route render={({ match }) => <One id="-KeY8FVZ5QFnFWth_SIe" />} />
+        {/* <Route render={({ match }) => <One id={this.xid} />} />
+        <Route render={({ match }) => <One id="-KeY8FVZ5QFnFWth_SIe" />} /> */}
 
         <table>
           <caption>

@@ -1,0 +1,10 @@
+
+.One table {
+    border-collapse: collapse;
+    border-style: hidden;
+}
+
+.One table td, table th {
+    border: 1px dotted black;
+    padding: 5px;
+}

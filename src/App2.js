@@ -1,38 +1,37 @@
-import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
 
-import { Switch } from "react-router";
+import { Switch } from 'react-router';
 
-import Checkboxes from "./Checkboxes";
-import One from "./One";
-import List from "./List";
-import BasicExample from "./basic";
-import { Schedule } from "./team";
+import Checkboxes from './Checkboxes';
+import One from './One';
+import List from './List';
+import BasicExample from './basic';
+import { Schedule } from './team';
 
 const NotFound = () => <div>not found</div>;
-const Foo = () => <div style={{ padding: "20px" }}>this is foo</div>;
+const Foo = () => <div style={{ padding: '20px' }}>this is foo</div>;
 const Bar = props => <div>Bar {props.name}</div>;
 const Barp = ({ name, age }) => <div>Barp {name}, {age}</div>;
 
 const ListOne = () => {
   const ids = [
-    "-KeVt1dUDpeOTBKLK5uH",
-    "-KeY8FVZ5QFnFWth_SIe",
-    "-KeY8wPa0_TaQhSCcO-N",
-    "",
+    '-KeVt1dUDpeOTBKLK5uH',
+    '-KeY8FVZ5QFnFWth_SIe',
+    '-KeY8wPa0_TaQhSCcO-N',
   ];
   const i = Math.floor(Math.random() * ids.length);
   const x = ids[i];
   return (
     <div>
-      ListOne - {x}
       <One id={x} />
+      <List />
     </div>
   );
 };
 
 const randomBarp = () => {
-  const names = ["David", "Brian", "Karl"];
+  const names = ['David', 'Brian', 'Karl'];
   const i = Math.floor(Math.random() * names.length);
   const j = Math.floor(Math.random() * 44 + 21);
   const i2 = Math.floor(Math.random() * names.length);
@@ -52,7 +51,7 @@ class Count extends Component {
 
   render() {
     return (
-      <div style={{ padding: "20px" }}>
+      <div style={{ padding: '20px' }}>
         n {this.state.n}
         <input
           type="button"
@@ -71,7 +70,7 @@ class Count extends Component {
 class App2 extends Component {
   render() {
     return (
-      <div style={{ padding: "10px" }}>
+      <div style={{ padding: '15px' }}>
         <Link to="/">Home</Link>
         - <Link to="/team">team!!</Link>
         - <Link to="/basic">Basic</Link>
@@ -81,13 +80,13 @@ class App2 extends Component {
         - <Link to="/ch">ch</Link>
         - <Link to="/count">count</Link>
         - <Link to="/count2">count2</Link>
-        - <Link to="/list">list</Link>
         - <Link to="/one_s">one_s</Link>
         - <Link to="/one">one</Link>
         - <Link to="/one_id/-KeY8wPlmmU9VkwCoQjG">brian </Link>
         - <Link to="/one_id/-KeY8wPngcOzIF7X8vmg">karl</Link>
-        - <Link to="/one_id/-KeY8wPngcOzIF7X8vm">no tc</Link>
-        - <Link to="/ListOne">ListOne</Link>
+        - <Link to="/one_id/-KeY8wPngcO">no tc</Link>
+        - <Link to="/list">List</Link>
+        - <Link to="/RandomOne">RandomOne</Link>
 
         <Switch>
           <Route exact={true} path="/" render={() => <p>Welcome</p>} />
@@ -113,14 +112,14 @@ class App2 extends Component {
           <Route
             exact={true}
             path="/one"
-            render={() => <One id={"-KeY8wPa0_TaQhSCcO-N"} />}
+            render={() => <One id={'-KeY8wPa0_TaQhSCcO-N'} />}
           />
           <Route
             path="/one_id/:id"
             render={({ match }) => <One id={match.params.id} />}
           />
           <Route path="/xxx" component={Foo} />
-          <Route path="/ListOne" component={ListOne} />
+          <Route path="/RandomOne" component={ListOne} />
           <Route component={NotFound} />
         </Switch>
 
