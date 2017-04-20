@@ -113,6 +113,10 @@ class App2 extends Component {
                 <BitArray
                   data={[["A", 4, true], ["B", 2, true], ["C", 15, false]]}
                 />
+              
+                <BitArray
+                  data={[["A", 40, true], ["B", 2, true], ["C", 15, true]]}
+                />
 
               </div>
             )}
