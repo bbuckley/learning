@@ -1,24 +1,25 @@
-import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Route, Link } from "react-router-dom";
 
-import { Switch } from 'react-router';
+import { Switch } from "react-router";
 
-import Checkboxes from './Checkboxes';
-import One from './One';
-import List from './List';
-import BasicExample from './basic';
-import { Schedule } from './team';
+import Checkboxes from "./Checkboxes";
+import One from "./One";
+import List from "./List";
+import BasicExample from "./basic";
+import { Schedule } from "./team";
+import BitArray from "./BitArray";
 
 const NotFound = () => <div>not found</div>;
-const Foo = () => <div style={{ padding: '20px' }}>this is foo</div>;
+const Foo = () => <div style={{ padding: "20px" }}>this is foo</div>;
 const Bar = props => <div>Bar {props.name}</div>;
 const Barp = ({ name, age }) => <div>Barp {name}, {age}</div>;
 
 const ListOne = () => {
   const ids = [
-    '-KeVt1dUDpeOTBKLK5uH',
-    '-KeY8FVZ5QFnFWth_SIe',
-    '-KeY8wPa0_TaQhSCcO-N',
+    "-KeVt1dUDpeOTBKLK5uH",
+    "-KeY8FVZ5QFnFWth_SIe",
+    "-KeY8wPa0_TaQhSCcO-N"
   ];
   const i = Math.floor(Math.random() * ids.length);
   const x = ids[i];
@@ -31,7 +32,7 @@ const ListOne = () => {
 };
 
 const randomBarp = () => {
-  const names = ['David', 'Brian', 'Karl'];
+  const names = ["David", "Brian", "Karl"];
   const i = Math.floor(Math.random() * names.length);
   const j = Math.floor(Math.random() * 44 + 21);
   const i2 = Math.floor(Math.random() * names.length);
@@ -46,12 +47,12 @@ const randomBarp = () => {
 
 class Count extends Component {
   state = {
-    n: 0,
+    n: 0
   };
 
   render() {
     return (
-      <div style={{ padding: '20px' }}>
+      <div style={{ padding: "20px" }}>
         n {this.state.n}
         <input
           type="button"
@@ -70,9 +71,10 @@ class Count extends Component {
 class App2 extends Component {
   render() {
     return (
-      <div style={{ padding: '15px' }}>
+      <div style={{ padding: "15px" }}>
         <Link to="/">Home</Link>
-        - <Link to="/team">team!!</Link>
+        - <Link to="/BitArray">ArrayBit</Link>
+        - <Link to="/team">Team!!</Link>
         - <Link to="/basic">Basic</Link>
         - <Link to="/barp">Barp</Link>
         - <Link to="/foo">Foo</Link>
@@ -91,6 +93,30 @@ class App2 extends Component {
         <Switch>
           <Route exact={true} path="/" render={() => <p>Welcome</p>} />
           <Route exact={true} path="/team" component={Schedule} />
+          <Route
+            exact={true}
+            path="/BitArray"
+            render={() => (
+              <div>
+                <BitArray
+                  data={[
+                    ["One", 4, true],
+                    ["Two", 0, true],
+                    ["Three", 4, false],
+                    ["Four", 4, true],
+                    ["Fourx", 0, false],
+                    ["Foury", 3, false],
+                    ["[blank]", 4, true]
+                  ]}
+                />
+
+                <BitArray
+                  data={[["A", 4, true], ["B", 2, true], ["C", 15, false]]}
+                />
+
+              </div>
+            )}
+          />
           <Route exact={true} path="/basic" component={BasicExample} />
           <Route
             exact={true}
@@ -112,7 +138,7 @@ class App2 extends Component {
           <Route
             exact={true}
             path="/one"
-            render={() => <One id={'-KeY8wPa0_TaQhSCcO-N'} />}
+            render={() => <One id={"-KeY8wPa0_TaQhSCcO-N"} />}
           />
           <Route
             path="/one_id/:id"

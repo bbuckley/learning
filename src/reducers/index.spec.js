@@ -1,4 +1,4 @@
-import { index } from './index';
+import { index }  from './index';
 
 describe('index', () => {
   it('should handle initial state', () => {
