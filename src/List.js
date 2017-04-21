@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import firebase from "./base";
 import "./list.css";
+import BitArray from "./BitArray";
 // import { Route } from "react-router-dom";
 // import { browserHistory } from "react-router";
 // import One from "./One";
@@ -19,6 +20,20 @@ class List extends Component {
         return v;
       });
       this.setState({ tcs });
+
+      // let dat = tcs.reduce((total, tc) => {
+      //   let key = tc["pbc"];
+      //   if (key === undefined || key === "") {
+      //     key = "blank";
+      //   }
+      //   total[key] ? total[key]++ : (total[key] = 1);
+      //   return total;
+      // }, {});
+      // const ks = Object.keys(dat);
+      // let data = ks.map(k => [k, dat[k], true]);
+      // this.setState({ data });
+      // console.log(this.state);
+
     });
   }
 
@@ -44,10 +59,32 @@ class List extends Component {
       );
     });
 
+    // let dat = tcs.reduce((total, tc) => {
+    //   let key = tc["pbc"];
+    //   if (key === undefined || key === "") {
+    //     key = "blank";
+    //   }
+    //   total[key] ? total[key]++ : (total[key] = 1);
+    //   return total;
+    // }, {});
+    // const ks = Object.keys(dat);
+    // let data = ks.map(k => { return [k, dat[k], true]});
+    // console.log(ks, data);
+
     return (
       <div className="List">
-        {/* <Route render={({ match }) => <One id={this.xid} />} />
-        <Route render={({ match }) => <One id="-KeY8FVZ5QFnFWth_SIe" />} /> */}
+
+        <BitArray
+          data={[["aaa", 3, true], ["b", 2, false], ["ccc", 2, true]]}
+        />
+
+      <BitArray
+        data={[["here", 3, true]]}
+      />
+
+        <BitArray
+            data={[["here", 3, true], ["there", 2, true]]}
+        />
 
         <table>
           <caption>

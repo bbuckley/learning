@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import firebase from "./base";
 
 class BitArray extends Component {
   setAll() {
@@ -13,21 +14,40 @@ class BitArray extends Component {
     this.setInternals(this.state.a.map(e => [e[0], e[1], !e[2]]));
   }
 
+  componentWillMount() {
+    console.log('here');
+    firebase.database().ref("tcs").on("value", snapshot => {
+      const o = snapshot.val();
+      let tcs = Object.keys(o).map(k => {
+        const v = o[k];
+        v.id = k;
+        return v;
+      });
+      this.setState({ tcs });
+
+
+    });
+
+
+  }
+
   setInternals(state) {
     this.setState({
       a: state,
-      count: state.filter(e => e[2] === true).reduce((a, b) => a + b[1], 0)
+      count: state
+        .filter(([, , checked]) => checked)
+        .reduce((total, [, count]) => total + count, 0)
     });
   }
 
   constructor(props) {
     super(props);
 
-    const a = this.props.data;
+    const aa = props.data;
+    console.log(aa);
     this.state = {
-      //a: a.map(e => e),
-      a: [...a],
-      count: a.filter(e => e[2] === true).reduce((a, b) => a + b[1], 0)
+      a: aa.map(e => e),
+      count: aa.filter(e => e[2]).reduce((total, b) => total + b[1], 0)
     };
 
     this.onChange = this.onChange.bind(this);
@@ -39,10 +59,10 @@ class BitArray extends Component {
 
   onChange(e) {
     const { a } = this.state;
-    const [value, label, checked] = a.find(
-      ([value]) => value === e.target.value
-    );
+    const [value, label, checked] = a.find(([v]) => v === e.target.value);
+    console.log(e.target.value, value, label, checked);
     const i = a.findIndex(([value]) => value === e.target.value);
+    console.log(i);
     this.setInternals([
       ...a.slice(0, i),
       [value, label, !checked],
@@ -56,24 +76,25 @@ class BitArray extends Component {
     return (
       <div>
         {a.map(e => {
-          const [label, count, checked] = e;
+          const [v, co, ch] = e
           return (
-            <div key={label}>
+            <div key={v}>
               <label>
                 <input
-                  value={label}
+                  value={v}
                   type="checkbox"
-                  checked={checked}
+                  checked={ch}
                   onChange={this.onChange}
                 />
-                {label}, {count}
+                {v}, {co}
               </label>
             </div>
           );
         })}
 
-        <div><p>{count}</p></div>
-
+        <div>
+          {count}
+        </div>
         <p>
           <a href="#" onClick={this.setNone}>None</a> -
           <a href="#" onClick={this.setAll}>All</a> -

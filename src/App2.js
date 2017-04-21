@@ -9,6 +9,7 @@ import List from "./List";
 import BasicExample from "./basic";
 import { Schedule } from "./team";
 import BitArray from "./BitArray";
+import BitField from "./BitField";
 
 const NotFound = () => <div>not found</div>;
 const Foo = () => <div style={{ padding: "20px" }}>this is foo</div>;
@@ -70,10 +71,14 @@ class Count extends Component {
 
 class App2 extends Component {
   render() {
+    const style = { "vertical-align": "top" };
+
     return (
       <div style={{ padding: "15px" }}>
         <Link to="/">Home</Link>
+        - <Link to="/BitField">BitField</Link>
         - <Link to="/BitArray">ArrayBit</Link>
+        - <Link to="/BitArray2">ArrayBit2</Link>
         - <Link to="/team">Team!!</Link>
         - <Link to="/basic">Basic</Link>
         - <Link to="/barp">Barp</Link>
@@ -95,6 +100,38 @@ class App2 extends Component {
           <Route exact={true} path="/team" component={Schedule} />
           <Route
             exact={true}
+            path="/BitField"
+            render={() => (
+              <div>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td style={style}>
+                        <BitField fld="pbc" />
+                      </td>
+                      <td style={style}>
+                        <BitField fld="ric" />
+                      </td>
+                      <td style={style}>
+                        <BitField fld="tags" />
+                      </td>
+                      <td style={style}>
+                        <BitField fld="completed" />
+                      </td>
+                      <td style={style}>
+                        <BitField fld="calc_type" />
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+
+                <ListOne />
+              </div>
+            )}
+          />
+          <Route
+            exact={true}
             path="/BitArray"
             render={() => (
               <div>
@@ -113,10 +150,25 @@ class App2 extends Component {
                 <BitArray
                   data={[["A", 4, true], ["B", 2, true], ["C", 15, false]]}
                 />
-              
+
                 <BitArray
                   data={[["A", 40, true], ["B", 2, true], ["C", 15, true]]}
                 />
+
+              </div>
+            )}
+          />
+          <Route
+            exact={true}
+            path="/BitArray2"
+            render={() => (
+              <div>
+
+                <BitArray
+                  data={[["A", 4, true], ["B", 2, true], ["C", 15, false]]}
+                />
+
+                <List />
 
               </div>
             )}
