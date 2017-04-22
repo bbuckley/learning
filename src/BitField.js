@@ -28,7 +28,7 @@ class BitField extends Component {
 
       let dat = tcs.reduce((total, tc) => {
         let key = tc[this.props.fld];
-        if (key === undefined || key == "") {
+        if (key === undefined || key === "") {
           key = "<blank>";
         }
         total[key] ? total[key]++ : (total[key] = 1);
@@ -100,8 +100,8 @@ class BitField extends Component {
     return (
       <div>
         {this.props.fld}
-        {this.state.data.map(e => {
-          const [value, count, checked] = e;
+          {this.state.data.map(([value, count, checked]) => {
+          // const [value, count, checked] = e;
           return (
             <div key={value}>
               <label>
