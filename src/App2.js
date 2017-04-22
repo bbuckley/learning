@@ -71,7 +71,7 @@ class Count extends Component {
 
 class App2 extends Component {
   render() {
-    const style = { "vertical-align": "top" };
+    const style = { verticalAlign: "top" };
 
     return (
       <div style={{ padding: "15px" }}>
@@ -121,7 +121,6 @@ class App2 extends Component {
                       <td style={style}>
                         <BitField fld="calc_type" />
                       </td>
-
                     </tr>
                   </tbody>
                 </table>
@@ -149,10 +148,6 @@ class App2 extends Component {
 
                 <BitArray
                   data={[["A", 4, true], ["B", 2, true], ["C", 15, false]]}
-                />
-
-                <BitArray
-                  data={[["A", 40, true], ["B", 2, true], ["C", 15, true]]}
                 />
 
               </div>

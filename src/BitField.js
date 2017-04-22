@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import firebase from "./base";
 import PropTypes from "prop-types";
 
+
 class BitField extends Component {
   setAll() {
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, true]));
@@ -27,7 +28,7 @@ class BitField extends Component {
 
       let dat = tcs.reduce((total, tc) => {
         let key = tc[this.props.fld];
-        if (key === undefined || key === "") {
+        if (key === undefined || key == "") {
           key = "<blank>";
         }
         total[key] ? total[key]++ : (total[key] = 1);
@@ -36,7 +37,6 @@ class BitField extends Component {
       const ks = Object.keys(dat).sort();
       let data = ks.map(k => [k, dat[k], true]);
       this.setState({ data });
-      //console.log(this.state);
     });
   }
 
@@ -50,13 +50,10 @@ class BitField extends Component {
     });
   }
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
-    //const aa = [["a", 10, true]];
     this.state = {
-      //a: aa.map(e => e),
-      //count: aa.filter(e => e[2]).reduce((total, b) => total + b[1], 0)
     };
 
     this.onChange = this.onChange.bind(this);
@@ -88,27 +85,33 @@ class BitField extends Component {
       .reduce((total, [, count]) => total + count, 0);
     const tcount = data.reduce((total, [, count]) => total + count, 0);
 
+    const Lk = ({ label, onClick }) => (
+      <a href="#" onClick={onClick}>{label}</a>
+    );
+
+    const footer = (
+      <div>
+        <Lk label='All' onClick={this.setAll} /> -
+        <Lk label='None' onClick={this.setNone} /> -
+        <Lk label='Flip' onClick={this.setFlip} />
+      </div>
+    );
+
     return (
       <div>
-      <p>
-      <a href="#" onClick={this.setNone}>None</a> -
-      <a href="#" onClick={this.setAll}>All</a> -
-      <a href="#" onClick={this.setFlip}>Flip</a>
-      </p>
         {this.props.fld}
         {this.state.data.map(e => {
-          const [v, co, ch] = e;
-
+          const [value, count, checked] = e;
           return (
-            <div key={v}>
+            <div key={value}>
               <label>
                 <input
-                  value={v}
+                  value={value}
                   type="checkbox"
-                  checked={ch}
+                  checked={checked}
                   onChange={this.onChange}
                 />
-                {v}, {co}
+                {value}, {count}
               </label>
             </div>
           );
@@ -117,6 +120,8 @@ class BitField extends Component {
         <div>
           {count} of {tcount}
         </div>
+
+        {footer}
 
       </div>
     );
