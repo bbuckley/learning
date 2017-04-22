@@ -2,14 +2,26 @@ import React, { Component } from "react";
 import firebase from "./base";
 import PropTypes from "prop-types";
 
+import { store } from "./index";
 
 class BitField extends Component {
   setAll() {
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, true]));
+    const values = this.state.data.map(([keys]) => keys);
+    store.dispatch({
+      type: "HIDE_ALL",
+      field: this.props.fld,
+      values
+    });
   }
 
   setNone() {
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, false]));
+    store.dispatch({
+      type: "HIDE_CLEAR",
+      field: this.props.fld,
+      values: []
+    });
   }
 
   setFlip() {
@@ -53,8 +65,7 @@ class BitField extends Component {
   constructor() {
     super();
 
-    this.state = {
-    };
+    this.state = {};
 
     this.onChange = this.onChange.bind(this);
     this.setAll = this.setAll.bind(this);
@@ -91,17 +102,16 @@ class BitField extends Component {
 
     const footer = (
       <div>
-        <Lk label='All' onClick={this.setAll} /> -
-        <Lk label='None' onClick={this.setNone} /> -
-        <Lk label='Flip' onClick={this.setFlip} />
+        <Lk label="All" onClick={this.setAll} /> -
+        <Lk label="None" onClick={this.setNone} /> -
+        <Lk label="Flip" onClick={this.setFlip} />
       </div>
     );
 
     return (
       <div>
         {this.props.fld}
-          {this.state.data.map(([value, count, checked]) => {
-          // const [value, count, checked] = e;
+        {this.state.data.map(([value, count, checked]) => {
           return (
             <div key={value}>
               <label>

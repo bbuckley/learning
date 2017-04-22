@@ -1,6 +1,6 @@
 
 
-import { SET_PBC } from '../action/index'
+import { SET_PBC } from '../actions/index'
 
 export const pbc = (state = '', action) => {
   switch (action.type) {
