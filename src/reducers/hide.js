@@ -3,6 +3,7 @@ export const hide = (state = {}, { type, id, field, values, value }) => {
     case 'HIDE_CLEAR': //shows all
       return { ...state, [field]: [] };
     case 'HIDE_ALL':
+      console.log({ values });
       return { ...state, [field]: values };
     case 'HIDE_FLIP':
       const a = state[field] || [];

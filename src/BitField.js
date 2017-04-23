@@ -12,9 +12,10 @@ class BitField extends Component {
       field: this.props.fld,
       values: []
     });
+    console.log('setAll', []);
   }
 
-  setNone() {
+  setNone() { //mark them all
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, false]));
     const values = this.state.data.map(([keys]) => keys);
     store.dispatch({
@@ -22,10 +23,27 @@ class BitField extends Component {
       field: this.props.fld,
       values
     });
+    console.log('setNone', values);
   }
 
   setFlip() {
     this.setInternals(this.state.data.map(([v, ct, ch]) => [v, ct, !ch]));
+  }
+
+  onChange(e) {
+    const { data } = this.state;
+    const [value, label, checked] = data.find(([v]) => v === e.target.value);
+    const i = data.findIndex(([value]) => value === e.target.value);
+    this.setInternals([
+      ...data.slice(0, i),
+      [value, label, !checked],
+      ...data.slice(i + 1)
+    ]);
+    store.dispatch({
+      type: 'HIDE_FLIP',
+      field: this.props.fld,
+      value
+    });
   }
 
   componentWillMount() {
@@ -54,8 +72,6 @@ class BitField extends Component {
   }
 
   setInternals(data) {
-
-
     this.setState({
       data: data,
       count: data
@@ -77,22 +93,6 @@ class BitField extends Component {
     this.setNone = this.setNone.bind(this);
     this.setFlip = this.setFlip.bind(this);
     this.setInternals = this.setInternals.bind(this);
-  }
-
-  onChange(e) {
-    const { data } = this.state;
-    const [value, label, checked] = data.find(([v]) => v === e.target.value);
-    const i = data.findIndex(([value]) => value === e.target.value);
-    this.setInternals([
-      ...data.slice(0, i),
-      [value, label, !checked],
-      ...data.slice(i + 1)
-    ]);
-    store.dispatch({
-      type: 'HIDE_FLIP',
-      field: this.props.fld,
-      value
-    });
   }
 
   render() {
