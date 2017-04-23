@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import firebase from "./base";
-import PropTypes from "prop-types";
-
-import { store } from "./index";
+import React, { Component } from 'react';
+import firebase from './base';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { store } from './index';
 
 class BitField extends Component {
   setAll() {
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, true]));
     const values = this.state.data.map(([keys]) => keys);
     store.dispatch({
-      type: "HIDE_ALL",
+      type: 'HIDE_ALL',
       field: this.props.fld,
       values
     });
@@ -18,7 +18,7 @@ class BitField extends Component {
   setNone() {
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, false]));
     store.dispatch({
-      type: "HIDE_CLEAR",
+      type: 'HIDE_CLEAR',
       field: this.props.fld,
       values: []
     });
@@ -29,7 +29,7 @@ class BitField extends Component {
   }
 
   componentWillMount() {
-    firebase.database().ref("tcs").on("value", snapshot => {
+    firebase.database().ref('tcs').on('value', snapshot => {
       const o = snapshot.val();
       const tcs = Object.keys(o).map(k => {
         const v = o[k];
@@ -40,19 +40,22 @@ class BitField extends Component {
 
       let dat = tcs.reduce((total, tc) => {
         let key = tc[this.props.fld];
-        if (key === undefined || key === "") {
-          key = "<blank>";
+        if (key === undefined || key === '') {
+          key = '<blank>';
         }
         total[key] ? total[key]++ : (total[key] = 1);
         return total;
       }, {});
       const ks = Object.keys(dat).sort();
       let data = ks.map(k => [k, dat[k], true]);
+
       this.setState({ data });
     });
   }
 
   setInternals(data) {
+
+
     this.setState({
       data: data,
       count: data
@@ -62,10 +65,12 @@ class BitField extends Component {
     });
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {};
+
+    console.log(props.hide);
 
     this.onChange = this.onChange.bind(this);
     this.setAll = this.setAll.bind(this);
@@ -83,6 +88,11 @@ class BitField extends Component {
       [value, label, !checked],
       ...data.slice(i + 1)
     ]);
+    store.dispatch({
+      type: 'HIDE_FLIP',
+      field: this.props.fld,
+      value
+    });
   }
 
   render() {
@@ -111,6 +121,7 @@ class BitField extends Component {
     return (
       <div>
         {this.props.fld}
+
         {this.state.data.map(([value, count, checked]) => {
           return (
             <div key={value}>
@@ -142,4 +153,11 @@ BitField.propTypes = {
   fld: PropTypes.string.isRequired
 };
 
-export default BitField;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    hide: state.hide[ownProps.fld]
+  };
+};
+
+//export default BitField;
+export default connect(mapStateToProps)(BitField);

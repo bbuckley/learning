@@ -30,6 +30,6 @@ ReactDOM.render(
 );
 
 store.subscribe(() => {
-  console.log(NAME, "am writing to local");
+  console.log(NAME, "am writing to local", JSON.stringify(store.getState()));
   localStorage.setItem(NAME, JSON.stringify(store.getState()));
 });
