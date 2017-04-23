@@ -7,20 +7,20 @@ import { store } from './index';
 class BitField extends Component {
   setAll() {
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, true]));
-    const values = this.state.data.map(([keys]) => keys);
     store.dispatch({
       type: 'HIDE_ALL',
       field: this.props.fld,
-      values
+      values: []
     });
   }
 
   setNone() {
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, false]));
+    const values = this.state.data.map(([keys]) => keys);
     store.dispatch({
       type: 'HIDE_CLEAR',
       field: this.props.fld,
-      values: []
+      values
     });
   }
 
