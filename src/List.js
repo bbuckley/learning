@@ -1,18 +1,17 @@
-import React, { Component } from "react";
-import firebase from "./base";
-import "./list.css";
-import BitArray from "./BitArray";
-// import { Route } from "react-router-dom";
-// import { browserHistory } from "react-router";
-// import One from "./One";
+import React, { Component } from 'react';
+import firebase from './base';
+import './list.css';
+//import BitArray from './BitArray';
+import { filter } from './filter';
+import { connect } from 'react-redux';
 
 class List extends Component {
   state = {
-    tcs: []
+    tcs: [],
   };
 
   componentWillMount() {
-    firebase.database().ref("tcs").on("value", snapshot => {
+    firebase.database().ref('tcs').on('value', snapshot => {
       const o = snapshot.val();
       let tcs = Object.keys(o).map(k => {
         const v = o[k];
@@ -33,13 +32,18 @@ class List extends Component {
       // let data = ks.map(k => [k, dat[k], true]);
       // this.setState({ data });
       // console.log(this.state);
-
     });
   }
 
   render() {
-    const { tcs } = this.state;
-    const flds = ["id", "calc_type", "pbc", "dob", "doe", "crd", "completed"];
+    let { tcs } = this.state;
+    const flds = ['id', 'calc_type', 'pbc', 'dob', 'doe', 'crd', 'completed','ric'];
+
+    //console.log({hide: this.props.hide});
+    const tcount = tcs.length
+    tcs = filter(this.props.hide, tcs);
+    const pcount = tcs.length
+
 
     const rows = tcs.map(t => {
       const { id } = t;
@@ -74,21 +78,17 @@ class List extends Component {
     return (
       <div className="List">
 
-        <BitArray
-          data={[["aaa", 3, true], ["b", 2, false], ["ccc", 2, true]]}
+        {/* <BitArray
+          data={[['aaa', 3, true], ['b', 2, false], ['ccc', 2, true]]}
         />
 
-      <BitArray
-        data={[["here", 3, true]]}
-      />
+        <BitArray data={[['here', 3, true]]} />
 
-        <BitArray
-            data={[["here", 3, true], ["there", 2, true]]}
-        />
+        <BitArray data={[['here', 3, true], ['there', 2, true]]} /> */}
 
         <table>
           <caption>
-            {this.state.tcs.length}
+            {pcount} of {tcount}
           </caption>
           <tbody>
             {rows}
@@ -99,4 +99,10 @@ class List extends Component {
   }
 }
 
-export default List;
+const mapStateToProps = state => {
+  return {
+    hide: state.hide,
+  };
+};
+
+export default connect(mapStateToProps)(List);

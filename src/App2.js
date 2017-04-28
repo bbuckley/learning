@@ -11,6 +11,8 @@ import { Schedule } from "./team";
 import BitArray from "./BitArray";
 import BitField from "./BitField";
 
+import {store} from './index'
+
 const NotFound = () => <div>not found</div>;
 const Foo = () => <div style={{ padding: "20px" }}>this is foo</div>;
 const Bar = props => <div>Bar {props.name}</div>;
@@ -103,6 +105,12 @@ class App2 extends Component {
             path="/BitField"
             render={() => (
               <div>
+                <p>
+                  <a href='#' onClick={() => store.dispatch({type: 'HIDE_CLEAR'})}>Clear</a> -
+                  {/* <a href='#' onClick={() => console.log(store.getState())}>State</a> - */}
+                  <a href='#' onClick={() => console.log(store.getState().hide)}>hide-state</a>
+                </p>
+
                 <table>
                   <tbody>
                     <tr>
@@ -125,7 +133,7 @@ class App2 extends Component {
                   </tbody>
                 </table>
 
-                <ListOne />
+                <List />
               </div>
             )}
           />
@@ -157,6 +165,8 @@ class App2 extends Component {
             exact={true}
             path="/BitArray2"
             render={() => (
+
+
               <div>
 
                 <BitArray

@@ -17,7 +17,7 @@ class BitField extends Component {
 
   setNone() { //mark them all
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, false]));
-    const values = this.state.data.map(([keys]) => keys);
+    const values = this.state.data.map(([val]) => val);
     store.dispatch({
       type: 'HIDE_CLEAR',
       field: this.props.fld,
@@ -28,6 +28,11 @@ class BitField extends Component {
 
   setFlip() {
     this.setInternals(this.state.data.map(([v, ct, ch]) => [v, ct, !ch]));
+    store.dispatch({
+      type: 'HIDE_FLIP_ALL',
+      field: this.props.fld,
+    });
+
   }
 
   onChange(e) {
@@ -86,7 +91,7 @@ class BitField extends Component {
 
     this.state = {};
 
-    console.log(props.hide);
+    //console.log(props.hide);
 
     this.onChange = this.onChange.bind(this);
     this.setAll = this.setAll.bind(this);
