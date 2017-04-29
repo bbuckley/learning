@@ -5,7 +5,7 @@ import {sort} from './sort';
 import {pbc} from './pbc';
 import {hide} from './hide';
 
-export const index = combineReducers({
+const index = combineReducers({
   edit,
   pbc,
   sort,

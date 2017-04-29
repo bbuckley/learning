@@ -18,6 +18,7 @@ class BitField extends Component {
   setNone() { //mark them all
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, false]));
     const values = this.state.data.map(([val]) => val);
+  console.log({values});
     store.dispatch({
       type: 'HIDE_CLEAR',
       field: this.props.fld,
@@ -62,11 +63,9 @@ class BitField extends Component {
       this.setState({ tcs });
 
       let dat = tcs.reduce((total, tc) => {
-        let key = tc[this.props.fld];
-        if (key === undefined || key === '') {
-          key = '<blank>';
-        }
-        total[key] ? total[key]++ : (total[key] = 1);
+        let k = tc[this.props.fld];
+        if (!k || /^\s*$/.test(k)) {  k = '<blank>'}
+        total[k] ? total[k]++ : (total[k] = 1);
         return total;
       }, {});
       const ks = Object.keys(dat).sort();

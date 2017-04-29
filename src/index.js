@@ -1,15 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App2 from "./App2";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App2 from './App2';
+import './index.css';
 
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import index from "./reducers/index";
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import index from './reducers/index';
 
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from 'react-router-dom';
 
-const NAME = "learning";
+const NAME = 'learning';
 
 // if (!localStorage.getItem(NAME)) {
 //   localStorage.setItem(NAME, JSON.stringify({}));
@@ -17,7 +17,7 @@ const NAME = "learning";
 
 export const store = createStore(
   index,
-  //JSON.parse(localStorage.getItem(NAME))
+  //    JSON.parse(localStorage.getItem(NAME))
 );
 
 ReactDOM.render(
@@ -26,7 +26,7 @@ ReactDOM.render(
       <App2 />
     </Router>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 store.subscribe(() => {
