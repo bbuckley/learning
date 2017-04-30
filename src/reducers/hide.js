@@ -4,7 +4,8 @@ import { HIDE_FLIP_ALL, HIDE_FLIP, HIDE_CLEAR, HIDE_ALL } from '../actions/index
 export const hide = (state = {}, { type, id, field, values, value }) => {
   switch (type) {
     case HIDE_CLEAR: //shows all
-      return { ...state, [field]: [] };
+    //return { ...state, [field]: [] };
+    return {} //shows all
     case HIDE_ALL:
       console.log({values});
       return { ...state, [field]: values };
@@ -23,6 +24,7 @@ export const hide = (state = {}, { type, id, field, values, value }) => {
         ...state,
         [field]: Array.from(
           new Superset(values).subtract(new Superset(state[field] || []))
+          //new Superset(values).subtract(state[field] || [])
         )
       };
     default:

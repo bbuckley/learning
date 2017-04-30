@@ -129,6 +129,9 @@ class App2 extends Component {
                       <td style={style}>
                         <BitField fld="calc_type" />
                       </td>
+                      <td style={style}>
+                        <BitField fld="status" />
+                      </td>
                     </tr>
                   </tbody>
                 </table>
