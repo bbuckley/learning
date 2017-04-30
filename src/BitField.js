@@ -4,23 +4,24 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { store } from './index';
 
+import { HIDE_FLIP_ALL, HIDE_ALL, HIDE_CLEAR } from './actions/index';
+
 class BitField extends Component {
   setAll() {
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, true]));
     store.dispatch({
-      type: 'HIDE_ALL',
+      type: HIDE_ALL,
       field: this.props.fld,
       values: []
     });
     console.log('setAll', []);
   }
 
-  setNone() { //mark them all
+  setNone() {
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, false]));
     const values = this.state.data.map(([val]) => val);
-  console.log({values});
     store.dispatch({
-      type: 'HIDE_CLEAR',
+      type: HIDE_ALL,
       field: this.props.fld,
       values
     });
@@ -29,11 +30,12 @@ class BitField extends Component {
 
   setFlip() {
     this.setInternals(this.state.data.map(([v, ct, ch]) => [v, ct, !ch]));
+    const values = this.state.data.map(([val]) => val);
     store.dispatch({
-      type: 'HIDE_FLIP_ALL',
+      type: HIDE_FLIP_ALL,
       field: this.props.fld,
+      values
     });
-
   }
 
   onChange(e) {
@@ -64,7 +66,9 @@ class BitField extends Component {
 
       let dat = tcs.reduce((total, tc) => {
         let k = tc[this.props.fld];
-        if (!k || /^\s*$/.test(k)) {  k = '<blank>'}
+        if (!k || /^\s*$/.test(k)) {
+          k = '<blank>';
+        }
         total[k] ? total[k]++ : (total[k] = 1);
         return total;
       }, {});
