@@ -13,20 +13,49 @@ it('filter works', () => {
 });
 
 it('filter a blank ', () => {
-  const off = { pbc: [BL,'David'] };
-  const tcs = [{ pbc: '' }, {}, { pbc: ' ' }, { pbc: 'David' },{ pbc: 'Brian' }];
+  const off = { pbc: [BL, 'David'] };
+  const tcs = [
+    { pbc: '' },
+    {},
+    { pbc: ' ' },
+    { pbc: 'David' },
+    { pbc: 'Brian' }
+  ];
   expect(filter(off, tcs)).toEqual([{ pbc: 'Brian' }]);
 });
 
-it('filter with blank works on one', () => {
-  // const tcs = [
-  //   { id: 1, pbc: 'Brian' },
-  //   { id: 2, pbc: 'Karl' },
-  //   { id: 3, pbc: '' }
-  // ];
-  // const expected_filtered_tcs = [{ pbc: 'Karl' }];
-  // const actual_filtered_tcs = filter(off, tcs);
-  // expect(actual_filtered_tcs).toEqual(off, expected_filtered_tcs);
+const isBlank = str => !str || !/[^\s*$]/.test(str);
+
+export const tagParse = str => {
+  if (isBlank(str)) {
+    return [];
+  } else {
+    str = str.split(/\s*[, ]\s*/);
+    return str.filter(x => x !== '')
+  }
+};
+
+describe('tags', () => {
+  it('parse things correctly', () => {
+    let x = 'x, 444, 445';
+    x = tagParse(x);
+    expect(x).toEqual(['x', '444', '445']);
+    x = '   ';
+    x = tagParse(x);
+    expect(x).toEqual([]);
+    x = ' 444,77  ';
+    x = tagParse(x);
+    expect(x).toEqual(['444', '77']);
+    x = ' 444,,77  ';
+    x = tagParse(x);
+    expect(x).toEqual(['444', '77']);
+    x = ' 444,,77  ,';
+    x = tagParse(x);
+    expect(x).toEqual(['444', '77']);
+    x = 'nrd foo,  ';
+    x = tagParse(x);
+    expect(x).toEqual(['nrd', 'foo']);
+  });
 });
 
 // const doDel = (obj, prop) => {

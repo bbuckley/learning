@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 
 class List extends Component {
   state = {
-    tcs: [],
+    tcs: []
   };
 
   componentWillMount() {
@@ -37,13 +37,24 @@ class List extends Component {
 
   render() {
     let { tcs } = this.state;
-    const flds = ['id', 'calc_type', 'pbc', 'dob', 'doe', 'crd', 'completed','ric'];
+    const flds = [
+      // 'id',
+      'calc_type',
+      'pbc',
+      'dob',
+      'doe',
+      'crd',
+      'completed',
+      'ric',
+      'status',
+      'tags'
+    ];
 
-    //console.log({hide: this.props.hide});
-    const tcount = tcs.length
+    const tcount = tcs.length;
     tcs = filter(this.props.hide, tcs);
-    const pcount = tcs.length
+    const pcount = tcs.length;
 
+    const header = flds.map(fld => <td key={fld}>{fld}</td>);
 
     const rows = tcs.map(t => {
       const { id } = t;
@@ -63,34 +74,15 @@ class List extends Component {
       );
     });
 
-    // let dat = tcs.reduce((total, tc) => {
-    //   let key = tc["pbc"];
-    //   if (key === undefined || key === "") {
-    //     key = "blank";
-    //   }
-    //   total[key] ? total[key]++ : (total[key] = 1);
-    //   return total;
-    // }, {});
-    // const ks = Object.keys(dat);
-    // let data = ks.map(k => { return [k, dat[k], true]});
-    // console.log(ks, data);
-
     return (
       <div className="List">
-
-        {/* <BitArray
-          data={[['aaa', 3, true], ['b', 2, false], ['ccc', 2, true]]}
-        />
-
-        <BitArray data={[['here', 3, true]]} />
-
-        <BitArray data={[['here', 3, true], ['there', 2, true]]} /> */}
 
         <table>
           <caption>
             {pcount} of {tcount}
           </caption>
           <tbody>
+            <td />{header}
             {rows}
           </tbody>
         </table>
@@ -101,7 +93,7 @@ class List extends Component {
 
 const mapStateToProps = state => {
   return {
-    hide: state.hide,
+    hide: state.hide
   };
 };
 

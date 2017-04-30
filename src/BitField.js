@@ -6,15 +6,20 @@ import { store } from './index';
 
 import { HIDE_FLIP_ALL, HIDE_ALL, HIDE_CLEAR } from './actions/index';
 
+const tagParse = str => {
+  if (!str || !/[^\s*$]/.test(str)) {
+    return ['<blank>'];
+  } else {
+    str = str.split(/\s*[, ]\s*/);
+    return str.filter(x => x !== '');
+  }
+};
+
 class BitField extends Component {
   componentWillReceiveProps(nextProps) {
     //console.log('BitField props changed', { data: this.state.data, nextProps });
     const vs = nextProps.hide || [];
-    const data = this.state.data.map(([v, ct, ch]) => [
-      v,
-      ct,
-      !vs.includes(v)
-    ]);
+    const data = this.state.data.map(([v, ct, ch]) => [v, ct, !vs.includes(v)]);
     this.setState({ data });
   }
 
@@ -75,17 +80,31 @@ class BitField extends Component {
       });
       this.setState({ tcs });
 
-      let dat = tcs.reduce((total, tc) => {
-        let k = tc[this.props.fld];
-        if (!k || /^\s*$/.test(k)) {
-          k = '<blank>';
-        }
-        total[k] ? total[k]++ : (total[k] = 1);
-        return total;
-      }, {});
-      const ks = Object.keys(dat).sort();
-      let data = ks.map(k => [k, dat[k], true]);
-      this.setState({ data });
+      if (this.props.fld === 'tags') {
+        let dat = tcs.reduce((total, tc) => {
+          let k = tc['tags'];
+          k = tagParse(k);
+          k.forEach(k => {
+            total[k] ? total[k]++ : (total[k] = 1);
+          })
+          return total;
+        }, {});
+        const ks = Object.keys(dat).sort();
+        let data = ks.map(k => [k, dat[k], true]);
+        this.setState({ data });
+      } else {
+        let dat = tcs.reduce((total, tc) => {
+          let k = tc[this.props.fld];
+          if (!k || /^\s*$/.test(k)) {
+            k = '<blank>';
+          }
+          total[k] ? total[k]++ : (total[k] = 1);
+          return total;
+        }, {});
+        const ks = Object.keys(dat).sort();
+        let data = ks.map(k => [k, dat[k], true]);
+        this.setState({ data });
+      }
     });
   }
 
