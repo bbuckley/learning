@@ -7,6 +7,17 @@ import { store } from './index';
 import { HIDE_FLIP_ALL, HIDE_ALL, HIDE_CLEAR } from './actions/index';
 
 class BitField extends Component {
+  componentWillReceiveProps(nextProps) {
+    //console.log('BitField props changed', { data: this.state.data, nextProps });
+    const vs = nextProps.hide || [];
+    const data = this.state.data.map(([v, ct, ch]) => [
+      v,
+      ct,
+      !vs.includes(v)
+    ]);
+    this.setState({ data });
+  }
+
   setAll() {
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, true]));
     store.dispatch({
@@ -74,7 +85,6 @@ class BitField extends Component {
       }, {});
       const ks = Object.keys(dat).sort();
       let data = ks.map(k => [k, dat[k], true]);
-
       this.setState({ data });
     });
   }
