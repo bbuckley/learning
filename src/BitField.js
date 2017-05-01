@@ -3,6 +3,7 @@ import firebase from './base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { store } from './index';
+import "./BitField.css";
 
 import { HIDE_FLIP_ALL, HIDE_ALL, HIDE_CLEAR } from './actions/index';
 
@@ -86,7 +87,7 @@ class BitField extends Component {
           k = tagParse(k);
           k.forEach(k => {
             total[k] ? total[k]++ : (total[k] = 1);
-          })
+          });
           return total;
         }, {});
         const ks = Object.keys(dat).sort();
@@ -156,30 +157,40 @@ class BitField extends Component {
     );
 
     return (
-      <div>
-        {this.props.fld}
-
-        {this.state.data.map(([value, count, checked]) => {
-          return (
-            <div key={value}>
-              <label>
-                <input
-                  value={value}
-                  type="checkbox"
-                  checked={checked}
-                  onChange={this.onChange}
-                />
-                {value}, {count}
-              </label>
-            </div>
-          );
-        })}
-
-        <div>
-          {count} of {tcount}
-        </div>
-
-        {footer}
+      <div className='BitField'>
+        <table>
+          <caption>{this.props.fld}</caption>
+          <tbody>
+            {this.state.data.map(([value, count, checked]) => {
+              return (
+                <tr key={value}>
+                  <td>
+                    <div>
+                      <label>
+                        <input
+                          value={value}
+                          type="checkbox"
+                          checked={checked}
+                          onChange={this.onChange}
+                        />
+                        {value}
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    {count}
+                  </td>
+                </tr>
+              );
+            })}
+            <tr>
+              <td colSpan='2'>{count} of {tcount}</td>
+            </tr>
+            <tr>
+              <td colSpan='2'>{footer}</td>
+            </tr>
+          </tbody>
+        </table>
 
       </div>
     );

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import firebase from './base';
-import './list.css';
+import './List.css';
 //import BitArray from './BitArray';
 import { filter } from './filter';
 import { connect } from 'react-redux';
+import {store} from './index'
 
 class List extends Component {
   state = {
@@ -79,7 +80,13 @@ class List extends Component {
 
         <table>
           <caption>
-            {pcount} of {tcount}
+            {pcount}
+            {' '}
+            of
+            {' '}
+            <a href='#' onClick={() => store.dispatch({ type: 'HIDE_CLEAR' })}>
+              {tcount}
+            </a>
           </caption>
           <tbody>
             <td />{header}

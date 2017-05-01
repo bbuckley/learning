@@ -1,3 +1,10 @@
+
+.List table caption {
+  text-align: left;
+  padding: 5px;
+}
+
+
 .List table {
     border-collapse: collapse;
     border-style: hidden;
@@ -5,5 +12,5 @@
 
 .List table td, table th {
     border: 1px solid black;
-    padding: 4px;
+    padding: 5px;  
 }

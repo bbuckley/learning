@@ -106,9 +106,9 @@ class App2 extends Component {
             render={() => (
               <div>
                 <p>
-                  <a href='#' onClick={() => store.dispatch({type: 'HIDE_CLEAR'})}>Clear</a> -
-                  {/* <a href='#' onClick={() => console.log(store.getState())}>State</a> - */}
-                  <a href='#' onClick={() => console.log(store.getState().hide)}>hide-state</a>
+                  <a href='#' onClick={() => store.dispatch({type: 'HIDE_CLEAR'})}>All</a> -
+                  <a href='#' onClick={() => console.log(store.getState().hide)}>hide-state</a> -
+                  <a href='#' onClick={() => console.log(store.getState())}>state</a>
                 </p>
 
                 <table>
@@ -121,9 +121,6 @@ class App2 extends Component {
                         <BitField fld="ric" />
                       </td>
                       <td style={style}>
-                        <BitField fld="tags" />
-                      </td>
-                      <td style={style}>
                         <BitField fld="completed" />
                       </td>
                       <td style={style}>
@@ -131,6 +128,9 @@ class App2 extends Component {
                       </td>
                       <td style={style}>
                         <BitField fld="status" />
+                      </td>
+                      <td style={style}>
+                        <BitField fld="tags" />
                       </td>
                     </tr>
                   </tbody>
