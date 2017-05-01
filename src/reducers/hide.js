@@ -1,10 +1,16 @@
 import Superset from 'superset';
-import { HIDE_FLIP_ALL, HIDE_FLIP, HIDE_CLEAR, HIDE_ALL } from '../actions/index'
+import {
+  HIDE_FLIP_ALL,
+  HIDE_FLIP,
+  HIDE_CLEAR,
+  HIDE_ALL,
+  HIDE_ONLY,
+} from '../actions/index';
 
 export const hide = (state = {}, { type, id, field, values, value }) => {
   switch (type) {
     case HIDE_CLEAR:
-      return {} //shows all
+      return {}; //shows all
     case HIDE_ALL:
       return { ...state, [field]: values };
     case HIDE_FLIP:
@@ -19,9 +25,13 @@ export const hide = (state = {}, { type, id, field, values, value }) => {
       return {
         ...state,
         [field]: Array.from(
-          new Superset(values).subtract(new Superset(state[field] || []))
-        )
+          new Superset(values).subtract(new Superset(state[field] || [])),
+        ),
       };
+    case HIDE_ONLY:
+      console.log('here');
+      return { ...state, [field]: values.filter(x => x !== value) };
+
     default:
       return state;
   }
