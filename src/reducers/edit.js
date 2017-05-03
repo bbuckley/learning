@@ -1,10 +1,15 @@
+import { EDIT_PROMPT, EDIT_VALUE, EDIT_ID, EDIT_CLEAR } from '../actions/index';
 
-//import { SET_FIELD } from '../actions/index'
-
-export const edit = (state = { field: '' }, {type, id, field}) => {
+export const edit = (state = {}, { type, id, field, value }) => {
   switch (type) {
-    //case SET_FIELD:
-    //   return { id, field }:
+    case EDIT_PROMPT:
+      return { ...state, id, field };
+    case EDIT_VALUE:
+      return { ...state, id, field, value };
+    case EDIT_ID:
+      return { id };
+    case EDIT_CLEAR:
+      return {};
     default:
       return state;
   }
