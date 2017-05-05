@@ -14,3 +14,8 @@
     border: 1px solid black;
     padding: 5px;
 }
+
+.List table tr.ListSelected {
+    border: 1px solid red;
+    padding: 10px;
+}
