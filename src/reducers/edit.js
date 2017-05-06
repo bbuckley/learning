@@ -1,31 +1,20 @@
 import { EDIT_PROMPT, EDIT_VALUE, EDIT_ID, EDIT_CLEAR } from '../actions/index';
+import firebase from '../base';
 
-export const editx = (state = {}, { type, id, fld, value }) => {
-  console.log('here',{type, id, fld, value} );
+export const edit = (state = {}, { type, id, fld, value }) => {
 
   switch (type) {
     case EDIT_PROMPT:
-      return { ...state, id, fld };
+      return { ...state, id, fld: fld };
     case EDIT_VALUE:
+      console.log('save to firebase');
+      firebase
+        .database()
+        .ref('tcs/' + id + '/')
+        .update({ [fld]: value });
       return { ...state, id, fld, value };
     case EDIT_ID:
       return { id };
-    case EDIT_CLEAR:
-      return {};
-    default:
-      return state;
-  }
-};
-
-export const edit = (state = {}, action) => {
-
-  switch (action.type) {
-    case EDIT_PROMPT:
-      return { ...state, id: action.id, fld: action.fld };
-    case EDIT_VALUE:
-      return { ...state, id: action.id, fld: action.fld, value: action.value };
-    case EDIT_ID:
-      return { id: action.id };
     case EDIT_CLEAR:
       return {};
     default:
