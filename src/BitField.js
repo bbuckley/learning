@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { store } from './index';
 import './BitField.css';
 
-import { HIDE_FLIP_ALL, HIDE_ALL, HIDE_CLEAR, HIDE_ONLY } from './actions/index';
+import { HIDE_FLIP_ALL, HIDE_ALL,
+  /*HIDE_CLEAR,*/ HIDE_ONLY } from './actions/index';
 
 const tagParse = str => {
   if (!str || !/[^\s*$]/.test(str)) {
@@ -87,6 +88,7 @@ class BitField extends Component {
             let k = tc['tags'];
             k = tagParse(k);
             k.forEach(k => {
+              console.log(k);
               total[k] ? total[k]++ : (total[k] = 1);
             });
             return total;
@@ -189,7 +191,7 @@ class BitField extends Component {
                       onClick={() => {
                         const values = this.state.data.map(([val]) => val);
                         store.dispatch({ type: HIDE_ONLY, field: this.props.fld, value, values });
-                        console.log('only cicked', this.props.fld, value);
+                        //console.log('only cicked', this.props.fld, value);
                       }}
                     >
                       {count}

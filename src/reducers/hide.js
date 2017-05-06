@@ -29,7 +29,6 @@ export const hide = (state = {}, { type, id, field, values, value }) => {
         ),
       };
     case HIDE_ONLY:
-      console.log('here');
       return { ...state, [field]: values.filter(x => x !== value) };
 
     default:

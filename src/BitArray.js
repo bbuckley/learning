@@ -15,7 +15,7 @@ class BitArray extends Component {
   }
 
   componentWillMount() {
-    console.log('here');
+    //console.log('here');
     firebase.database().ref("tcs").on("value", snapshot => {
       const o = snapshot.val();
       let tcs = Object.keys(o).map(k => {

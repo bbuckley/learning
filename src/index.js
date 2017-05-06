@@ -9,8 +9,7 @@ import index from './reducers/index';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 
-const NAME = 'learning';
-
+//const NAME = 'learning';
 // if (!localStorage.getItem(NAME)) {
 //   localStorage.setItem(NAME, JSON.stringify({}));
 // }

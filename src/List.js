@@ -5,7 +5,7 @@ import './List.css';
 import { filter } from './filter';
 import { connect } from 'react-redux';
 import { store } from './index';
-import { EDIT_ID, EDIT_PROMPT, EDIT_VALUE } from './actions/index';
+import { /*EDIT_ID,*/ EDIT_PROMPT, EDIT_VALUE } from './actions/index';
 
 class List extends Component {
   state = {
@@ -29,7 +29,6 @@ class List extends Component {
     e.preventDefault();
     const { id, fld } = this.props.edit;
     const value = this.state.input[fld];
-    console.log({ id, fld, value });
     store.dispatch({ type: EDIT_VALUE, id, fld, value });
   }
 
@@ -85,7 +84,9 @@ class List extends Component {
     tcs = filter(this.props.hide, tcs);
     const pcount = tcs.length;
 
-    const header = flds.map(fld => <td key={fld}>{fld}</td>);
+    const header_row = (
+      <tr><td />{flds.map(fld => <td key={fld}>{fld}</td>)}</tr>
+    );
 
     const rows = tcs.map(t => {
       const { id } = t;
@@ -113,7 +114,7 @@ class List extends Component {
                 return (
                   <td
                     onClick={() => {
-                      console.log(EDIT_PROMPT, id, fld);
+                      //console.log(EDIT_PROMPT, id, fld);
                       store.dispatch({ type: EDIT_PROMPT, id, fld });
                     }}
                     key={fld}
@@ -151,7 +152,7 @@ class List extends Component {
             <td
               key={fld}
               onClick={() => {
-                console.log(EDIT_PROMPT, id, fld);
+                //console.log(EDIT_PROMPT, id, fld);
                 store.dispatch({ type: EDIT_PROMPT, id, fld });
               }}
             >
@@ -176,7 +177,7 @@ class List extends Component {
             </a>
           </caption>
           <tbody>
-            <td />{header}
+            {header_row}
             {rows}
           </tbody>
         </table>

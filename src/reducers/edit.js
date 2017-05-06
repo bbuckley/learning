@@ -7,7 +7,7 @@ export const edit = (state = {}, { type, id, fld, value }) => {
     case EDIT_PROMPT:
       return { ...state, id, fld: fld };
     case EDIT_VALUE:
-      console.log('save to firebase');
+      //console.log('save to firebase');
       firebase
         .database()
         .ref('tcs/' + id + '/')
