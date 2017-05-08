@@ -63,3 +63,80 @@ describe('edit', () => {
     expect(edit(state, action)).toEqual(state);
   });
 });
+
+import { filter } from '../filter';
+import Superset from 'superset';
+
+const tagParse = str => {
+  if (!str || !/[^\s*$]/.test(str)) {
+    return [];
+  } else {
+    str = str.split(/\s*[, ]\s*/);
+    return str.filter(x => x !== '');
+  }
+};
+
+//permitted tags may include <blank>
+const tagFilter = (tcs, permittedTags) => {
+  return tcs.filter(tc => {
+    const tags = tagParse(tc.tags);
+    if (!permittedTags.includes('<blank>') && tags === []) {
+      return false;
+    }
+    return tcs.filter(tc => !permittedTags.includes(tags));
+  });
+};
+
+describe('tags', () => {
+  const tcs1 = [{ tags: 'nrd' }, {}, { tags: 'svc, nrd' }, { tags: 'svc' }];
+
+  const tcs2 = tcs1.map(tc => {
+    let tags = tc.tags || [];
+    tags = tagParse(tags);
+    return { ...tc, tags };
+  });
+
+  const tcs = [
+    { tags: ['nrd'] },
+    {},
+    { tags: ['svc', 'nrd'] },
+    { tags: ['svc'] }
+  ];
+  const tcss = tcs.map(tc => {
+    return { ...tc, tags: tc.tags || [] };
+  });
+
+  it('should properly filter nothing', () => {
+    const off = {};
+    expect(filter(off, tcs).length).toEqual(4);
+  });
+
+  it('should properly filter nothing', () => {
+    const off = { tags: [] };
+    expect(filter(off, tcs).length).toEqual(4);
+  });
+
+  it('should properly filter <blank>', () => {
+    const off = { tags: ['<blank>'] };
+    expect(filter(off, tcs).length).toEqual(3);
+  });
+
+  it('should properly filter all', () => {
+    const off = { tags: ['nrd', '<blank>', 'svc'] };
+    const allTags = Array.from(
+      tcs2.reduce((a, b) => a.union(b['tags'] || []), new Superset())
+    );
+    const left = tagFilter(tcs1, off.tags)
+    expect(left.length).toEqual(4);
+    console.log({ allTags, tcs2, left });
+  });
+  it('should properly filter all', () => {
+    const off = { tags: ['nrd', '<blank>', 'svc'] };
+    const allTags = Array.from(
+      tcs2.reduce((a, b) => a.union(b['tags'] || []), new Superset())
+    );
+    const left = tagFilter(tcs1, off.tags)
+    expect(left.length).toEqual(4);
+    console.log({ allTags, tcs2, left });
+  });
+});

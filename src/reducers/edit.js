@@ -1,5 +1,5 @@
 import { EDIT_PROMPT, EDIT_VALUE, EDIT_ID, EDIT_CLEAR } from '../actions/index';
-import firebase from '../base';
+import firebase, { FIRE_NAME } from '../base';
 
 export const edit = (state = {}, { type, id, fld, value }) => {
 
@@ -10,7 +10,7 @@ export const edit = (state = {}, { type, id, fld, value }) => {
       //console.log('save to firebase');
       firebase
         .database()
-        .ref('tcs/' + id + '/')
+        .ref(FIRE_NAME + '/' + id + '/')
         .update({ [fld]: value });
       return { ...state, id, fld, value };
     case EDIT_ID:

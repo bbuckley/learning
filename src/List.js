@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import firebase from './base';
+import firebase, { FIRE_NAME } from './base';
 import './List.css';
 //import BitArray from './BitArray';
 import { filter } from './filter';
 import { connect } from 'react-redux';
 import { store } from './index';
-import { /*EDIT_ID,*/ EDIT_PROMPT, EDIT_VALUE } from './actions/index';
+import { /*EDIT_ID,*/ EDIT_PROMPT, EDIT_VALUE, EDIT_CLEAR } from './actions/index';
 
 class List extends Component {
   state = {
@@ -40,7 +40,7 @@ class List extends Component {
   }
 
   componentWillMount() {
-    firebase.database().ref('tcs').on('value', snapshot => {
+    firebase.database().ref(FIRE_NAME).on('value', snapshot => {
       const o = snapshot.val();
       let tcs = Object.keys(o).map(k => {
         const v = o[k];
@@ -106,6 +106,16 @@ class List extends Component {
                         name={fld}
                         value={this.state.input[fld]}
                         onChange={this.onChange.bind(this)}
+                      />
+                      <input
+                        type="button"
+                        value="cancel"
+                        onClick={() => store.dispatch({type: EDIT_CLEAR })}
+                      />
+                      <input
+                        type="button"
+                        value="submit"
+                        onClick={() => store.dispatch({type: EDIT_CLEAR })}
                       />
                     </form>
                   </td>
