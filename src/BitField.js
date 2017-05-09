@@ -90,8 +90,8 @@ class BitField extends Component {
         let dat = tcs.reduce((total, tc) => {
           let k = tc['tags'];
           k = tagParse(k);
-          if(k.length === 0){
-            total['<blank>'] ? total['<blank>']++ : (total['<blank>'] = 1)
+          if (k.length === 0) {
+            total['<blank>'] ? total['<blank>']++ : (total['<blank>'] = 1);
           }
           k.forEach(k => {
             //console.log(k);
@@ -165,12 +165,14 @@ class BitField extends Component {
       </div>
     );
 
-    let row_count
-    if(this.props.fld !== 'tags'){ row_count = (
-      <tr>
-        <td colSpan="2">{count} of {tcount}</td>
-      </tr>
-    )}
+    let row_count;
+    if (this.props.fld !== 'tags') {
+      row_count = (
+        <tr>
+          <td colSpan="2">{count} of {tcount}</td>
+        </tr>
+      );
+    }
 
     return (
       <div className="BitField">
@@ -180,19 +182,6 @@ class BitField extends Component {
             {this.state.data.map(([value, count, checked]) => {
               return (
                 <tr key={value}>
-                  <td>
-                    <div>
-                      <label>
-                        <input
-                          value={value}
-                          type="checkbox"
-                          checked={checked}
-                          onChange={this.onChange}
-                        />
-                        {value}
-                      </label>
-                    </div>
-                  </td>
                   <td>
                     <a
                       href="#"
@@ -210,6 +199,20 @@ class BitField extends Component {
                       {count}
                     </a>
                   </td>
+                  <td>
+                    <div>
+                      <label>
+                        <input
+                          value={value}
+                          type="checkbox"
+                          checked={checked}
+                          onChange={this.onChange}
+                        />
+                        {value}
+                      </label>
+                    </div>
+                  </td>
+
                 </tr>
               );
             })}

@@ -78,6 +78,7 @@ class App2 extends Component {
     return (
       <div style={{ padding: "15px" }}>
         <Link to="/">Home</Link>
+        - <Link to="/samples">Samples</Link>
         - <Link to="/BitField">BitField</Link>
         - <Link to="/BitArray">ArrayBit</Link>
         - <Link to="/BitArray2">ArrayBit2</Link>
@@ -106,6 +107,7 @@ class App2 extends Component {
             render={() => (
               <div>
                 <p>
+                  <a href='#' onClick={() => store.dispatch({type: 'SAMPLES'})}>Samples</a> -
                   <a href='#' onClick={() => store.dispatch({type: 'HIDE_CLEAR'})}>All</a> -
                   <a href='#' onClick={() => console.log(store.getState().hide)}>hide-state</a> -
                   <a href='#' onClick={() => console.log(store.getState())}>state</a>
@@ -114,6 +116,12 @@ class App2 extends Component {
                 <table>
                   <tbody>
                     <tr>
+                      <td style={style}>
+                        <BitField fld="dob" />
+                      </td>
+                      <td style={style}>
+                        <BitField fld="dot" />
+                      </td>
                       <td style={style}>
                         <BitField fld="pbc" />
                       </td>
@@ -209,7 +217,7 @@ class App2 extends Component {
             render={({ match }) => <One id={match.params.id} />}
           />
           <Route path="/xxx" component={Foo} />
-          <Route path="/RandomOne" component={ListOne} />
+            <Route path="/RandomOne" component={ListOne} />
           <Route component={NotFound} />
         </Switch>
 

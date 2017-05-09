@@ -6,7 +6,7 @@
     border-style: dashed;
 }
 
-.BitField table td:nth-child(2) {
+.BitField table td:nth-child(1) {
     text-align: right;
 }
 
