@@ -5,7 +5,13 @@ import './List.css';
 import { filter } from './filter';
 import { connect } from 'react-redux';
 import { store } from './index';
-import { /*EDIT_ID,*/ EDIT_PROMPT, EDIT_VALUE, EDIT_CLEAR, EDIT_DELETE, EDIT_ID } from './actions/index';
+import {
+  EDIT_PROMPT,
+  EDIT_VALUE,
+  EDIT_CLEAR,
+  EDIT_DELETE,
+  EDIT_ID,HIDE_FLIP
+} from './actions/index';
 
 class List extends Component {
   state = {
@@ -49,19 +55,6 @@ class List extends Component {
       });
 
       this.setState({ tcs });
-
-      // let dat = tcs.reduce((total, tc) => {
-      //   let key = tc["pbc"];
-      //   if (key === undefined || key === "") {
-      //     key = "blank";
-      //   }
-      //   total[key] ? total[key]++ : (total[key] = 1);
-      //   return total;
-      // }, {});
-      // const ks = Object.keys(dat);
-      // let data = ks.map(k => [k, dat[k], true]);
-      // this.setState({ data });
-      // console.log(this.state);
     });
   }
 
@@ -70,14 +63,14 @@ class List extends Component {
     const flds = [
       'id',
       'tc',
-      'calc_type',
       'pbc',
+      'ric',
+      'status',
+      'calc_type',
       'dob',
       'doe',
       'crd',
       'completed',
-      'ric',
-      'status',
       'tags'
     ];
 
@@ -111,7 +104,7 @@ class List extends Component {
                       <input
                         type="button"
                         value="cancel"
-                        onClick={() => store.dispatch({type: EDIT_ID, id })}
+                        onClick={() => store.dispatch({ type: EDIT_ID, id })}
                       />
                     </form>
                   </td>
@@ -135,10 +128,7 @@ class List extends Component {
       }
 
       return (
-        <tr
-          key={id}
-          className="ListSelected"
-        >
+        <tr key={id} className="ListSelected">
           <td>
             <input
               type="button"
@@ -146,15 +136,27 @@ class List extends Component {
                 console.log(id, EDIT_DELETE);
                 store.dispatch({ type: EDIT_DELETE, id });
               }}
-            />rrr
-          {/*
-          // <a href='#' onClick={store.dispatch({ type: EDIT_DELETE, id })}>Delete</a>
-          y
-          */}
+            />
+
+            <a
+              href="#"
+              onClick={() => store.dispatch({ type: EDIT_DELETE, id })}
+            >
+              Delete
+            </a>
+            -
+            <a
+              href="#"
+              onClick={() => store.dispatch({ type: HIDE_FLIP, fld: 'id', id })}
+            >
+              Hide
+            </a>
+
           </td>
 
           {flds.map(fld => (
-            <td className="ListSelected"
+            <td
+              className="ListSelected"
               key={fld}
               onClick={() => {
                 store.dispatch({ type: EDIT_ID, id, fld });
