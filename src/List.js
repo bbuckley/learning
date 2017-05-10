@@ -61,7 +61,8 @@ class List extends Component {
 
   render() {
     let { tcs } = this.state;
-    const flds = [
+
+    let flds1 = [
       'tc',
       'pbc',
       'ric',
@@ -73,6 +74,8 @@ class List extends Component {
       'completed',
       'tags'
     ];
+    const flds = this.props.flds || flds1
+
 
     const tcount = tcs.length;
     tcs = filter(this.props.hide, tcs);
