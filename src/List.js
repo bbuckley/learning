@@ -5,7 +5,7 @@ import './List.css';
 import { filter } from './filter';
 import { connect } from 'react-redux';
 import { store } from './index';
-import { /*EDIT_ID,*/ EDIT_PROMPT, EDIT_VALUE, EDIT_CLEAR } from './actions/index';
+import { /*EDIT_ID,*/ EDIT_PROMPT, EDIT_VALUE, EDIT_CLEAR, EDIT_DELETE } from './actions/index';
 
 class List extends Component {
   state = {
@@ -69,6 +69,7 @@ class List extends Component {
     let { tcs } = this.state;
     const flds = [
       'id',
+      'tc',
       'calc_type',
       'pbc',
       'dob',
@@ -115,7 +116,7 @@ class List extends Component {
                       <input
                         type="button"
                         value="submit"
-                        onClick={() => store.dispatch({type: EDIT_CLEAR })}
+                        onClick={() => this.onSubmit.bind(this)}
                       />
                     </form>
                   </td>
@@ -124,7 +125,6 @@ class List extends Component {
                 return (
                   <td
                     onClick={() => {
-                      //console.log(EDIT_PROMPT, id, fld);
                       store.dispatch({ type: EDIT_PROMPT, id, fld });
                     }}
                     key={fld}
@@ -142,27 +142,26 @@ class List extends Component {
       return (
         <tr
           key={id}
-          // className="ListSelected"
-          // onClick={() => {
-          //   console.log('ListSelected', EDIT_ID, id);
-          //   //store.dispatch({ type: EDIT_ID, id });
-          // }}
+          className="ListSelected"
         >
           <td>
             <input
               type="button"
               onClick={() => {
-                console.log(id);
-                //store.dispatch({ type: EDIT_ID, id });
+                console.log(id, EDIT_DELETE);
+                store.dispatch({ type: EDIT_DELETE, id });
               }}
-            />yyy
+            />rrr
+          {/*
+          // <a href='#' onClick={store.dispatch({ type: EDIT_DELETE, id })}>Delete</a>
+          y
+          */}
           </td>
 
           {flds.map(fld => (
-            <td
+            <td className="ListSelected"
               key={fld}
               onClick={() => {
-                //console.log(EDIT_PROMPT, id, fld);
                 store.dispatch({ type: EDIT_PROMPT, id, fld });
               }}
             >

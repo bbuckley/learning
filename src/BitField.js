@@ -86,7 +86,21 @@ class BitField extends Component {
       });
       this.setState({ tcs });
 
-      if (this.props.fld === 'tags') {
+      if (this.props.distribution) {
+        let dat = tcs.reduce((total, tc) => {
+          let k = tc[this.props.fld];
+          if (!k || /^\s*$/.test(k)) {
+            k = '<blank>';
+          } else {
+            k = this.props.distribution(k);
+          }
+          total[k] ? total[k]++ : (total[k] = 1);
+          return total;
+        }, {});
+        const ks = Object.keys(dat).sort();
+        let data = ks.map(k => [k, dat[k], true]);
+        this.setState({ data });
+      } else if (this.props.fld === 'tags') {
         let dat = tcs.reduce((total, tc) => {
           let k = tc['tags'];
           k = tagParse(k);

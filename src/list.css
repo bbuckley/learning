@@ -19,3 +19,7 @@
     border: 1px solid red;
     padding: 10px;
 }
+
+td.ListSelected {
+  background-color: pink;
+}

@@ -1,28 +1,28 @@
-import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
 
-import { Switch } from "react-router";
+import { Switch } from 'react-router';
 
-import Checkboxes from "./Checkboxes";
-import One from "./One";
-import List from "./List";
-import BasicExample from "./basic";
-import { Schedule } from "./team";
-import BitArray from "./BitArray";
-import BitField from "./BitField";
+import Checkboxes from './Checkboxes';
+import One from './One';
+import List from './List';
+import BasicExample from './basic';
+import { Schedule } from './team';
+import BitArray from './BitArray';
+import BitField from './BitField';
 
-import {store} from './index'
+import { store } from './index';
 
 const NotFound = () => <div>not found</div>;
-const Foo = () => <div style={{ padding: "20px" }}>this is foo</div>;
+const Foo = () => <div style={{ padding: '20px' }}>this is foo</div>;
 const Bar = props => <div>Bar {props.name}</div>;
 const Barp = ({ name, age }) => <div>Barp {name}, {age}</div>;
 
 const ListOne = () => {
   const ids = [
-    "-KeVt1dUDpeOTBKLK5uH",
-    "-KeY8FVZ5QFnFWth_SIe",
-    "-KeY8wPa0_TaQhSCcO-N"
+    '-KeVt1dUDpeOTBKLK5uH',
+    '-KeY8FVZ5QFnFWth_SIe',
+    '-KeY8wPa0_TaQhSCcO-N'
   ];
   const i = Math.floor(Math.random() * ids.length);
   const x = ids[i];
@@ -35,7 +35,7 @@ const ListOne = () => {
 };
 
 const randomBarp = () => {
-  const names = ["David", "Brian", "Karl"];
+  const names = ['David', 'Brian', 'Karl'];
   const i = Math.floor(Math.random() * names.length);
   const j = Math.floor(Math.random() * 44 + 21);
   const i2 = Math.floor(Math.random() * names.length);
@@ -55,7 +55,7 @@ class Count extends Component {
 
   render() {
     return (
-      <div style={{ padding: "20px" }}>
+      <div style={{ padding: '20px' }}>
         n {this.state.n}
         <input
           type="button"
@@ -73,10 +73,10 @@ class Count extends Component {
 
 class App2 extends Component {
   render() {
-    const style = { verticalAlign: "top" };
+    const style = { verticalAlign: 'top' };
 
     return (
-      <div style={{ padding: "15px" }}>
+      <div style={{ padding: '15px' }}>
         <Link to="/">Home</Link>
         - <Link to="/samples">Samples</Link>
         - <Link to="/BitField">BitField</Link>
@@ -107,17 +107,54 @@ class App2 extends Component {
             render={() => (
               <div>
                 <p>
-                  <a href='#' onClick={() => store.dispatch({type: 'SAMPLES'})}>Samples</a> -
-                  <a href='#' onClick={() => store.dispatch({type: 'HIDE_CLEAR'})}>All</a> -
-                  <a href='#' onClick={() => console.log(store.getState().hide)}>hide-state</a> -
-                  <a href='#' onClick={() => console.log(store.getState())}>state</a>
+                  <a
+                    href="#"
+                    onClick={() => store.dispatch({ type: 'EDIT_SAMPLE' })}
+                  >
+                    Samples
+                  </a>
+                  {' '}
+                  -
+                  <a
+                    href="#"
+                    onClick={() => store.dispatch({ type: 'HIDE_CLEAR' })}
+                  >
+                    All
+                  </a>
+                  {' '}
+                  -
+                  <a
+                    href="#"
+                    onClick={() => console.log(store.getState().hide)}
+                  >
+                    hide-state
+                  </a>
+                  {' '}
+                  -
+                  <a href="#" onClick={() => console.log(store.getState())}>
+                    state
+                  </a>
                 </p>
 
                 <table>
                   <tbody>
                     <tr>
                       <td style={style}>
-                        <BitField fld="dob" />
+                        <BitField
+                          fld="crd"
+                          distribution={x => {
+                            return new Date(x).getFullYear();
+                          }}
+                        />
+
+                        {/*   <BitField
+                          fld="crd"
+                          distribution={x => new Date(x).getMonth()}
+                        /> */}
+
+                      </td>
+                      <td style={style}>
+                        <BitField fld="tc" />
                       </td>
                       <td style={style}>
                         <BitField fld="dot" />
@@ -155,18 +192,18 @@ class App2 extends Component {
               <div>
                 <BitArray
                   data={[
-                    ["One", 4, true],
-                    ["Two", 0, true],
-                    ["Three", 4, false],
-                    ["Four", 4, true],
-                    ["Fourx", 0, false],
-                    ["Foury", 3, false],
-                    ["[blank]", 4, true]
+                    ['One', 4, true],
+                    ['Two', 0, true],
+                    ['Three', 4, false],
+                    ['Four', 4, true],
+                    ['Fourx', 0, false],
+                    ['Foury', 3, false],
+                    ['[blank]', 4, true]
                   ]}
                 />
 
                 <BitArray
-                  data={[["A", 4, true], ["B", 2, true], ["C", 15, false]]}
+                  data={[['A', 4, true], ['B', 2, true], ['C', 15, false]]}
                 />
 
               </div>
@@ -176,12 +213,10 @@ class App2 extends Component {
             exact={true}
             path="/BitArray2"
             render={() => (
-
-
               <div>
 
                 <BitArray
-                  data={[["A", 4, true], ["B", 2, true], ["C", 15, false]]}
+                  data={[['A', 4, true], ['B', 2, true], ['C', 15, false]]}
                 />
 
                 <List />
@@ -210,14 +245,14 @@ class App2 extends Component {
           <Route
             exact={true}
             path="/one"
-            render={() => <One id={"-KeY8wPa0_TaQhSCcO-N"} />}
+            render={() => <One id={'-KeY8wPa0_TaQhSCcO-N'} />}
           />
           <Route
             path="/one_id/:id"
             render={({ match }) => <One id={match.params.id} />}
           />
           <Route path="/xxx" component={Foo} />
-            <Route path="/RandomOne" component={ListOne} />
+          <Route path="/RandomOne" component={ListOne} />
           <Route component={NotFound} />
         </Switch>
 
