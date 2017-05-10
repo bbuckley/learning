@@ -14,7 +14,7 @@ import firebase, { FIRE_NAME } from '../base';
 export const edit = (state = {}, { type, id, fld, value }) => {
   switch (type) {
     case EDIT_SAMPLE:
-      const n = 10;
+      const n = 1;
       const s = samples(n);
       s.forEach(s => {
         console.log(s);
@@ -30,7 +30,6 @@ export const edit = (state = {}, { type, id, fld, value }) => {
         .ref(FIRE_NAME + '/' + id + '/')
         .update({ [fld]: value });
       return { id };
-    //return { ...state, id, fld, value };
     case EDIT_ID:
       return { id };
     case EDIT_CLEAR:

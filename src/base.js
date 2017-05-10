@@ -9,7 +9,7 @@ var config = {
 firebase.initializeApp(config);
 
 //export const FIRE_NAME = 'tcs';
-//export const FIRE_NAME = 'testerbkb';
-export const FIRE_NAME = 'bb';
+export const FIRE_NAME = 'testerbkb';
+//export const FIRE_NAME = 'bb';
 
 export default firebase;

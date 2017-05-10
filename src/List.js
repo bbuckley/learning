@@ -5,7 +5,7 @@ import './List.css';
 import { filter } from './filter';
 import { connect } from 'react-redux';
 import { store } from './index';
-import { /*EDIT_ID,*/ EDIT_PROMPT, EDIT_VALUE, EDIT_CLEAR, EDIT_DELETE } from './actions/index';
+import { /*EDIT_ID,*/ EDIT_PROMPT, EDIT_VALUE, EDIT_CLEAR, EDIT_DELETE, EDIT_ID } from './actions/index';
 
 class List extends Component {
   state = {
@@ -111,12 +111,7 @@ class List extends Component {
                       <input
                         type="button"
                         value="cancel"
-                        onClick={() => store.dispatch({type: EDIT_CLEAR })}
-                      />
-                      <input
-                        type="button"
-                        value="submit"
-                        onClick={() => this.onSubmit.bind(this)}
+                        onClick={() => store.dispatch({type: EDIT_ID, id })}
                       />
                     </form>
                   </td>
@@ -162,7 +157,7 @@ class List extends Component {
             <td className="ListSelected"
               key={fld}
               onClick={() => {
-                store.dispatch({ type: EDIT_PROMPT, id, fld });
+                store.dispatch({ type: EDIT_ID, id, fld });
               }}
             >
               {t[fld]}
@@ -181,7 +176,7 @@ class List extends Component {
             {' '}
             of
             {' '}
-            <a href="#" onClick={() => store.dispatch({ type: 'HIDE_CLEAR' })}>
+            <a href="#" onClick={() => store.dispatch({ type: 'HIDE_EDIT' })}>
               {tcount}
             </a>
           </caption>
