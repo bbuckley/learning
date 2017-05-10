@@ -10,7 +10,8 @@ import {
   EDIT_VALUE,
   EDIT_CLEAR,
   EDIT_DELETE,
-  EDIT_ID,HIDE_FLIP
+  EDIT_ID,
+  HIDE_FLIP
 } from './actions/index';
 
 class List extends Component {
@@ -61,7 +62,6 @@ class List extends Component {
   render() {
     let { tcs } = this.state;
     const flds = [
-      'id',
       'tc',
       'pbc',
       'ric',
@@ -130,14 +130,6 @@ class List extends Component {
       return (
         <tr key={id} className="ListSelected">
           <td>
-            <input
-              type="button"
-              onClick={() => {
-                console.log(id, EDIT_DELETE);
-                store.dispatch({ type: EDIT_DELETE, id });
-              }}
-            />
-
             <a
               href="#"
               onClick={() => store.dispatch({ type: EDIT_DELETE, id })}
@@ -147,7 +139,8 @@ class List extends Component {
             -
             <a
               href="#"
-              onClick={() => store.dispatch({ type: HIDE_FLIP, fld: 'id', id })}
+              onClick={() =>
+                store.dispatch({ type: HIDE_FLIP, field: 'id', value: id })}
             >
               Hide
             </a>
