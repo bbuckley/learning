@@ -43,6 +43,12 @@ const status = () => {
   return a[n]
 }
 
+const tc = () => {
+  const lowest =  1000;
+  const highest = 100000;
+  return lowest + Math.floor(Math.random() * 100).toString()
+}
+
 export const sample = () =>  {
   const dob = faker.date.between('1/1/1935','1/1/1999')
   const crd = faker.date.past(2)
@@ -61,7 +67,7 @@ export const sample = () =>  {
     text: faker.name.findName(),
     completed: String(faker.random.boolean()),
     crd: format(crd),
-    tc: '',
+    tc: tc(),
     pbc: pbc(),
     calc_type: calc_type(),
     doe: format(faker.date.between('1/1/1970','1/5/2017')),

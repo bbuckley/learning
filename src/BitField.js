@@ -69,11 +69,7 @@ class BitField extends Component {
       [value, label, !checked],
       ...data.slice(i + 1)
     ]);
-    store.dispatch({
-      type: 'HIDE_FLIP',
-      field: this.props.fld,
-      value
-    });
+    store.dispatch({ type: 'HIDE_FLIP', field: this.props.fld, value });
   }
 
   componentWillMount() {
@@ -191,7 +187,9 @@ class BitField extends Component {
     return (
       <div className="BitField">
         <table>
-          <caption>{this.props.fld}</caption>
+          <caption>
+            <Lk label={this.props.fld} onClick={this.setAll} />
+          </caption>
           <tbody>
             {this.state.data.map(([value, count, checked]) => {
               return (
