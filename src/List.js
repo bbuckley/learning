@@ -88,7 +88,22 @@ class List extends Component {
       if (this.props.edit.id === id) {
         return (
           <tr key={this.props.edit.id}>
-            <td>xxx</td>
+            <td>
+              <a
+                href="#"
+                onClick={() => store.dispatch({ type: EDIT_DELETE, id })}
+              >
+                Delete
+              </a>
+              -
+              <a
+                href="#"
+                onClick={() =>
+                  store.dispatch({ type: HIDE_FLIP, field: 'id', value: id })}
+              >
+                Hide
+              </a>
+            </td>
             {flds.map(fld => {
               if (this.props.edit.fld === fld) {
                 return (
