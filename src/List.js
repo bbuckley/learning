@@ -11,7 +11,8 @@ import {
   EDIT_CLEAR,
   EDIT_DELETE,
   EDIT_ID,
-  HIDE_FLIP
+  HIDE_FLIP,
+  HIDE_CLEAR
 } from './actions/index';
 
 class List extends Component {
@@ -189,7 +190,7 @@ class List extends Component {
             {' '}
             of
             {' '}
-            <a href="#" onClick={() => store.dispatch({ type: 'HIDE_EDIT' })}>
+            <a href="#" onClick={() => store.dispatch({ type: HIDE_CLEAR })}>
               {tcount}
             </a>
           </caption>

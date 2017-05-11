@@ -139,7 +139,10 @@ class App2 extends Component {
                 <table>
                   <tbody>
                     <tr>
+                    {/*
                       <td style={style}>
+
+
                         <BitField
                           fld="crd"
                           distribution={x => {
@@ -147,15 +150,16 @@ class App2 extends Component {
                           }}
                         />
 
-                        {/*   <BitField
+                           <BitField
                           fld="crd"
                           distribution={x => new Date(x).getMonth()}
-                        /> */}
+                        />
 
                       </td>
                       <td style={style}>
                         <BitField fld="tc" />
                       </td>
+                      */}
                       <td style={style}>
                         <BitField fld="dot" />
                       </td>

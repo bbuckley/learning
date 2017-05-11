@@ -4,9 +4,10 @@
     border: 1px solid black;
     padding: 2px;
     border-style: dashed;
+    background-color: #cce6ff;
 }
 
-.BitField table td:nth-child(1) {
+.BitField table td:nth-child(2) {
     text-align: right;
 }
 

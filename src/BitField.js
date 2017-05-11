@@ -195,6 +195,19 @@ class BitField extends Component {
               return (
                 <tr key={value}>
                   <td>
+                    <div>
+                      <label>
+                        <input
+                          value={value}
+                          type="checkbox"
+                          checked={checked}
+                          onChange={this.onChange}
+                        />
+                        {value}
+                      </label>
+                    </div>
+                  </td>
+                  <td>
                     <a
                       href="#"
                       onClick={() => {
@@ -211,27 +224,17 @@ class BitField extends Component {
                       {count}
                     </a>
                   </td>
-                  <td>
-                    <div>
-                      <label>
-                        <input
-                          value={value}
-                          type="checkbox"
-                          checked={checked}
-                          onChange={this.onChange}
-                        />
-                        {value}
-                      </label>
-                    </div>
-                  </td>
 
                 </tr>
               );
             })}
             {row_count}
+            {/*
             <tr>
               <td colSpan="2">{footer}</td>
             </tr>
+            */}
+
           </tbody>
         </table>
 
