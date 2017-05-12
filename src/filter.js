@@ -13,8 +13,6 @@ const tagParse = str => {
 import Superset from 'superset';
 
 const tagFilter = (tcs, permittedTags, off) => {
-  console.log('in tagFilter', off);
-  const s = new Superset(permittedTags);
   const ans = tcs.filter(tc => {
     const tags = tagParse(tc.tags);
     if (tags.length === 0) {
@@ -23,14 +21,12 @@ const tagFilter = (tcs, permittedTags, off) => {
 
     return tags.some(x => permittedTags.includes(x));
   });
-  console.log('at bottom of tagFilter', ans.length);
   return ans;
 };
 
 export const filter = (off, tcs) => {
   let ans = tcs;
   Object.keys(off).filter(off => off !== 'tags').forEach(key => {
-    console.log(key);
     ans = ans.filter(x => {
       const y = x[key];
       const z = off[key];

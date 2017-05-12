@@ -45,7 +45,7 @@ const status = () => {
 
 const tc = () => {
   const lowest =  1000;
-  const highest = 100000;
+  //const highest = 100000;
   return lowest + Math.floor(Math.random() * 100).toString()
 }
 
@@ -90,4 +90,4 @@ export const samples = (n = 1) => {
   return arr
 }
 
-console.log(samples);
+//console.log(samples);

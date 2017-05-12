@@ -8,7 +8,7 @@ import { store } from './index';
 import {
   EDIT_PROMPT,
   EDIT_VALUE,
-  EDIT_CLEAR,
+//  EDIT_CLEAR,
   EDIT_DELETE,
   EDIT_ID,
   HIDE_FLIP,

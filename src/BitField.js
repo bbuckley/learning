@@ -36,7 +36,7 @@ class BitField extends Component {
       field: this.props.fld,
       values: []
     });
-    console.log('setAll', []);
+    //console.log('setAll', []);
   }
 
   setNone() {
@@ -47,7 +47,7 @@ class BitField extends Component {
       field: this.props.fld,
       values
     });
-    console.log('setNone', values);
+    //console.log('setNone', values);
   }
 
   setFlip() {
@@ -73,6 +73,7 @@ class BitField extends Component {
   }
 
   componentWillMount() {
+    console.log('bitfields component will mount', this.props.fld);
     firebase.database().ref(FIRE_NAME).on('value', snapshot => {
       const o = snapshot.val();
       const tcs = Object.keys(o).map(k => {
@@ -83,6 +84,7 @@ class BitField extends Component {
       this.setState({ tcs });
 
       if (this.props.distribution) {
+        //console.log('here1');
         let dat = tcs.reduce((total, tc) => {
           let k = tc[this.props.fld];
           if (!k || /^\s*$/.test(k)) {
@@ -104,7 +106,6 @@ class BitField extends Component {
             total['<blank>'] ? total['<blank>']++ : (total['<blank>'] = 1);
           }
           k.forEach(k => {
-            //console.log(k);
             total[k] ? total[k]++ : (total[k] = 1);
           });
           return total;
@@ -122,6 +123,7 @@ class BitField extends Component {
           return total;
         }, {});
         const ks = Object.keys(dat).sort();
+        //console.log('here3!!', { state: this.state.data });
         let data = ks.map(k => [k, dat[k], true]);
         this.setState({ data });
       }
@@ -167,13 +169,13 @@ class BitField extends Component {
       <a href="#" onClick={onClick}>{label}</a>
     );
 
-    const footer = (
-      <div>
-        <Lk label="All" onClick={this.setAll} /> -
-        <Lk label="None" onClick={this.setNone} /> -
-        <Lk label="Flip" onClick={this.setFlip} />
-      </div>
-    );
+    // const footer = (
+    //   <div>
+    //     <Lk label="All" onClick={this.setAll} /> -
+    //     <Lk label="None" onClick={this.setNone} /> -
+    //     <Lk label="Flip" onClick={this.setFlip} />
+    //   </div>
+    // );
 
     let row_count;
     if (this.props.fld !== 'tags') {
@@ -248,6 +250,7 @@ BitField.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  console.log({ hide: state.hide[ownProps.fld], fld: ownProps.fld });
   return {
     hide: state.hide[ownProps.fld]
   };
