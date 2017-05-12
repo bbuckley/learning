@@ -103,7 +103,12 @@ class App2 extends Component {
           <Route
             exact={true}
             path="/testview"
-            render={() => <List flds={['id','pbc']} />}
+            render={() => (
+              <div>
+                <List flds={['id', 'pbc']} />
+                <List flds={['calc_type', 'pbc','ric']} />
+              </div>
+            )}
           />
           <Route exact={true} path="/" render={() => <p>Welcome</p>} />
           <Route exact={true} path="/team" component={Schedule} />
