@@ -123,8 +123,10 @@ class BitField extends Component {
           return total;
         }, {});
         const ks = Object.keys(dat).sort();
-        //console.log('here3!!', { state: this.state.data });
-        let data = ks.map(k => [k, dat[k], true]);
+        let data = ks.map(k => {
+          const x = (this.props.hide || []).includes(k) ? false : true
+          return [k, dat[k], x]}
+        );
         this.setState({ data });
       }
     });
@@ -188,6 +190,7 @@ class BitField extends Component {
 
     return (
       <div className="BitField">
+        
         <table>
           <caption>
             <Lk label={this.props.fld} onClick={this.setAll} />
@@ -250,7 +253,7 @@ BitField.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log({ hide: state.hide[ownProps.fld], fld: ownProps.fld });
+  console.log('!!!',{ state, hide: state.hide[ownProps.fld], fld: ownProps.fld });
   return {
     hide: state.hide[ownProps.fld]
   };
