@@ -73,7 +73,7 @@ class BitField extends Component {
   }
 
   componentWillMount() {
-    console.log('bitfields component will mount', this.props.fld);
+    //console.log('bitfields component will mount', this.props.fld);
     firebase.database().ref(FIRE_NAME).on('value', snapshot => {
       const o = snapshot.val();
       const tcs = Object.keys(o).map(k => {
@@ -122,10 +122,10 @@ class BitField extends Component {
           total[k] ? total[k]++ : (total[k] = 1);
           return total;
         }, {});
-        const ks = Object.keys(dat).sort();
-        let data = ks.map(k => {
-          const x = (this.props.hide || []).includes(k) ? false : true
-          return [k, dat[k], x]}
+        //const ks = Object.keys(dat).sort();
+        let data = Object.keys(dat).sort().map(k => {
+          const b = !(this.props.hide || []).includes(k)
+          return [k, dat[k], b]}
         );
         this.setState({ data });
       }
@@ -190,7 +190,7 @@ class BitField extends Component {
 
     return (
       <div className="BitField">
-        
+
         <table>
           <caption>
             <Lk label={this.props.fld} onClick={this.setAll} />
@@ -253,7 +253,6 @@ BitField.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log('!!!',{ state, hide: state.hide[ownProps.fld], fld: ownProps.fld });
   return {
     hide: state.hide[ownProps.fld]
   };

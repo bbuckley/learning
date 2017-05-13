@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 //import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Checkbox from './Checkbox'
 import './Checkboxes.css';
@@ -41,7 +42,7 @@ class Checkboxes0 extends Component {
 
   uncheckAll = () => {
      console.log('uncheck all');
-   
+
   }
 
   componentWillMount = () => {

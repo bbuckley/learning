@@ -10,6 +10,7 @@ import BasicExample from './basic';
 import { Schedule } from './team';
 import BitArray from './BitArray';
 import BitField from './BitField';
+import ListView from './ListView';
 
 import { store } from './index';
 
@@ -105,8 +106,7 @@ class App2 extends Component {
             path="/testview"
             render={() => (
               <div>
-                <List flds={['id', 'pbc']} />
-                <List flds={['calc_type', 'pbc','ric']} />
+                <ListView />  
               </div>
             )}
           />
@@ -122,7 +122,7 @@ class App2 extends Component {
                     href="#"
                     onClick={() => store.dispatch({ type: 'EDIT_SAMPLE' })}
                   >
-                    Samples
+                    Sample
                   </a>
                   {' '}
                   -

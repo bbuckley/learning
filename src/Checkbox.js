@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from "react";
-
-import "./Checkbox.css";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import './Checkbox.css';
 
 class Checkbox extends Component {
   manuallySetValue(value) {
@@ -49,7 +49,7 @@ Checkbox.propTypes = {
 };
 Checkbox.defaultProps = {
   handleCheckboxChange: () => {
-    console.log("handleCheckboxChange");
+    console.log('handleCheckboxChange');
   },
   isChecked: true
 };
