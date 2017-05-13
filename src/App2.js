@@ -106,7 +106,7 @@ class App2 extends Component {
             path="/testview"
             render={() => (
               <div>
-                <ListView />  
+                <ListView />
               </div>
             )}
           />
@@ -174,7 +174,7 @@ class App2 extends Component {
                       <td style={style}>
                         <BitField fld="dot" />
                       </td>
-                      <td style={style}>
+                      <td>
                         <BitField fld="pbc" />
                       </td>
                       <td style={style}>

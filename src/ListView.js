@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import List from './List';
+import Checkboxes from './Checkboxes';
 import { connect } from 'react-redux';
 import { store } from './index';
 import { VIEW_SET } from './actions/index';
@@ -12,10 +13,17 @@ class ListView extends Component {
     let x;
     switch (view) {
       case 'all':
-        x = <List flds={['calc_type','pbc', 'crd', 'dob', 'doe']} />;
+        x = (
+          <List
+            flds={['calc_type', 'pbc', 'status', 'crd', 'dob', 'doe', 'tags']}
+          />
+        );
         break;
       case 'dates':
         x = <List flds={['crd', 'dob', 'doe']} />;
+        break;
+      case 'full':
+        x = <Checkboxes/> ;
         break;
       default:
         x = <List />;
@@ -39,6 +47,12 @@ class ListView extends Component {
           onClick={() => store.dispatch({ type: VIEW_SET, value: 'dates' })}
         >
           dates
+        </a> -
+        <a
+          href="#"
+          onClick={() => store.dispatch({ type: VIEW_SET, value: 'full' })}
+        >
+          edit
         </a>
         {' '}
         -

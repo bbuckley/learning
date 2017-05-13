@@ -14,6 +14,7 @@ import {
   HIDE_FLIP,
   HIDE_CLEAR
 } from './actions/index';
+import BitField from './BitField'
 
 class List extends Component {
   state = {
@@ -84,6 +85,13 @@ class List extends Component {
 
     const header_row = (
       <tr><td />{flds.map(fld => <td key={fld}>{fld}</td>)}</tr>
+    );
+
+    const header_row2 = (
+      <tr><td />{flds.map(fld => {
+          if(['tc','dob','crd','doe'].includes(fld)) return <td key={fld}></td>
+          return <td key={fld}><BitField fld={fld}/></td>
+      })}</tr>
     );
 
     const rows = tcs.map(t => {
@@ -196,6 +204,7 @@ class List extends Component {
           </caption>
           <tbody>
             {header_row}
+            {header_row2}
             {rows}
           </tbody>
         </table>
