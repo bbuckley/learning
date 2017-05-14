@@ -8,18 +8,18 @@ import { store } from './index';
 import {
   EDIT_PROMPT,
   EDIT_VALUE,
-//  EDIT_CLEAR,
+  //  EDIT_CLEAR,
   EDIT_DELETE,
   EDIT_ID,
   HIDE_FLIP,
-  HIDE_CLEAR
+  HIDE_CLEAR,
 } from './actions/index';
-import BitField from './BitField'
+import BitField from './BitField';
 
 class List extends Component {
   state = {
     tcs: [],
-    input: {}
+    input: {},
   };
 
   componentWillReceiveProps(nextProps) {
@@ -74,26 +74,30 @@ class List extends Component {
       'doe',
       'crd',
       'completed',
-      'tags'
+      'tags',
     ];
-    const flds = this.props.flds || flds1
-
+    const flds = this.props.flds || flds1;
 
     const tcount = tcs.length;
     tcs = filter(this.props.hide, tcs);
     const pcount = tcs.length;
 
     const header_row = (
-      <tr><td />{flds.map(fld => <td key={fld}>{fld}</td>)}</tr>
+      <tr>
+        {pcount} of {tcount}<td />{flds.map(fld => <td key={fld}>{fld}</td>)}
+      </tr>
     );
 
-    const style = { verticalAlign: 'top' };
-    const header_row2 = (
-      <tr><td />{flds.map(fld => {
-          if(['tc','dob','crd','doe'].includes(fld)) return <td key={fld}></td>
-          return <td style={style} key={fld}><BitField fld={fld}/></td>
-      })}</tr>
-    );
+    // const style = { verticalAlign: 'top' };
+    // const header_row2 = (
+    //   <tr>
+    //     <td />{flds.map(fld => {
+    //       if (['tc', 'dob', 'crd', 'doe'].includes(fld))
+    //         return <td key={fld} />;
+    //       return <td style={style} key={fld}><BitField fld={fld} /></td>;
+    //     })}
+    //   </tr>
+    // );
 
     const rows = tcs.map(t => {
       const { id } = t;
@@ -191,6 +195,19 @@ class List extends Component {
       );
     });
 
+    let filters = Object.keys(this.props.hide)
+      .filter(k => {
+        const x = this.props.hide[k];
+        return !x || x.length !== 0;
+      })
+      .sort()
+      .join(', ');
+    if(filters === ''){ filters = 'no filters'}
+    // else{
+    //   filters = `filter: ${filters}`
+    // }
+
+
     return (
       <div className="List">
         <table>
@@ -202,10 +219,11 @@ class List extends Component {
             <a href="#" onClick={() => store.dispatch({ type: HIDE_CLEAR })}>
               {tcount}
             </a>
+            <span>, {filters}</span>
           </caption>
           <tbody>
             {header_row}
-            {header_row2}
+          
             {rows}
           </tbody>
         </table>
@@ -217,7 +235,7 @@ class List extends Component {
 const mapStateToProps = state => {
   return {
     hide: state.hide,
-    edit: state.edit
+    edit: state.edit,
   };
 };
 
