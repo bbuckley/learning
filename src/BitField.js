@@ -8,7 +8,7 @@ import './BitField.css';
 import {
   HIDE_FLIP_ALL,
   HIDE_ALL,
-  /*HIDE_CLEAR,*/ HIDE_ONLY
+  /*HIDE_CLEAR,*/ HIDE_ONLY,
 } from './actions/index';
 
 const tagParse = str => {
@@ -34,7 +34,7 @@ class BitField extends Component {
     store.dispatch({
       type: HIDE_ALL,
       field: this.props.fld,
-      values: []
+      values: [],
     });
     //console.log('setAll', []);
   }
@@ -45,7 +45,7 @@ class BitField extends Component {
     store.dispatch({
       type: HIDE_ALL,
       field: this.props.fld,
-      values
+      values,
     });
     //console.log('setNone', values);
   }
@@ -56,7 +56,7 @@ class BitField extends Component {
     store.dispatch({
       type: HIDE_FLIP_ALL,
       field: this.props.fld,
-      values
+      values,
     });
   }
 
@@ -67,7 +67,7 @@ class BitField extends Component {
     this.setInternals([
       ...data.slice(0, i),
       [value, label, !checked],
-      ...data.slice(i + 1)
+      ...data.slice(i + 1),
     ]);
     store.dispatch({ type: 'HIDE_FLIP', field: this.props.fld, value });
   }
@@ -124,9 +124,9 @@ class BitField extends Component {
         }, {});
         //const ks = Object.keys(dat).sort();
         let data = Object.keys(dat).sort().map(k => {
-          const b = !(this.props.hide || []).includes(k)
-          return [k, dat[k], b]}
-        );
+          const b = !(this.props.hide || []).includes(k);
+          return [k, dat[k], b];
+        });
         this.setState({ data });
       }
     });
@@ -138,7 +138,7 @@ class BitField extends Component {
       count: data
         .filter(([, , checked]) => checked)
         .reduce((total, [, count]) => total + count, 0),
-      tcount: data.reduce((total, [, count]) => total + count, 0)
+      tcount: data.reduce((total, [, count]) => total + count, 0),
     });
   }
 
@@ -183,7 +183,18 @@ class BitField extends Component {
     if (this.props.fld !== 'tags') {
       row_count = (
         <tr>
-          <td colSpan="2">{count} of {tcount}</td>
+          <td colSpan="2">
+            <a
+              href="#"
+              onClick={() =>
+                store.dispatch({
+                  type: 'HIDE_OTHER_FIELDS_CLEAR',
+                  field: this.props.fld,
+                })}
+            >
+              {count}
+            </a> of {tcount}
+          </td>
         </tr>
       );
     }
@@ -221,7 +232,7 @@ class BitField extends Component {
                           type: HIDE_ONLY,
                           field: this.props.fld,
                           value,
-                          values
+                          values,
                         });
                         //console.log('only cicked', this.props.fld, value);
                       }}
@@ -249,12 +260,12 @@ class BitField extends Component {
 }
 
 BitField.propTypes = {
-  fld: PropTypes.string.isRequired
+  fld: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    hide: state.hide[ownProps.fld]
+    hide: state.hide[ownProps.fld],
   };
 };
 

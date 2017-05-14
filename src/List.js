@@ -87,10 +87,11 @@ class List extends Component {
       <tr><td />{flds.map(fld => <td key={fld}>{fld}</td>)}</tr>
     );
 
+    const style = { verticalAlign: 'top' };
     const header_row2 = (
       <tr><td />{flds.map(fld => {
           if(['tc','dob','crd','doe'].includes(fld)) return <td key={fld}></td>
-          return <td key={fld}><BitField fld={fld}/></td>
+          return <td style={style} key={fld}><BitField fld={fld}/></td>
       })}</tr>
     );
 

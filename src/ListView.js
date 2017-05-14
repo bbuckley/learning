@@ -23,40 +23,76 @@ class ListView extends Component {
         x = <List flds={['crd', 'dob', 'doe']} />;
         break;
       case 'full':
-        x = <Checkboxes/> ;
+        x = <Checkboxes />;
         break;
       default:
         x = <List />;
     }
+
+    const SetView = value => {
+      return () => {
+        store.dispatch({ type: VIEW_SET, value });
+      };
+    };
+
+    // const Links = {array} => this.props.array.reduce((a, b) =>
+    //   <Link to="#" onClick={SetView(b)}>(b)</Link>)
 
     return (
       <div>
         <a href="#" onClick={() => console.log(store.getState())}>
           state
         </a>
-        <a
-          href="#"
-          onClick={() => {
-            store.dispatch({ type: VIEW_SET, value: 'all' });
-          }}
-        >
-          all
-        </a> -
-        <a
-          href="#"
-          onClick={() => store.dispatch({ type: VIEW_SET, value: 'dates' })}
-        >
-          dates
-        </a> -
-        <a
-          href="#"
-          onClick={() => store.dispatch({ type: VIEW_SET, value: 'full' })}
-        >
-          edit
-        </a>
-        {' '}
-        -
-        {x}
+
+        <p>
+          <p>
+            <Link
+              to="#"
+              onClick={() => {
+                store.dispatch({ type: VIEW_SET, value: 'all' });
+              }}
+            >
+              all
+            </Link> -
+            <Link
+              to="#"
+              onClick={() => {
+                store.dispatch({ type: VIEW_SET, value: 'dates' });
+              }}
+            >
+              dates
+            </Link> -
+
+            <Link to="#" onClick={SetView('dates')}>dates</Link> -
+            <Link to="#" onClick={SetView('all')}>all</Link> -
+            <Link to="#" onClick={SetView('full')}>full</Link>
+
+
+          </p>
+
+          <a
+            href="#"
+            onClick={() => {
+              store.dispatch({ type: VIEW_SET, value: 'all' });
+            }}
+          >
+            all
+          </a> -
+          <a
+            href="#"
+            onClick={() => store.dispatch({ type: VIEW_SET, value: 'dates' })}
+          >
+            dates
+          </a> -
+          <a
+            href="#"
+            onClick={() => store.dispatch({ type: VIEW_SET, value: 'full' })}
+          >
+            edit
+          </a>
+        </p>
+
+        <p>{x}</p>
       </div>
     );
   }

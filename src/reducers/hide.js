@@ -5,6 +5,7 @@ import {
   HIDE_CLEAR,
   HIDE_ALL,
   HIDE_ONLY,
+  HIDE_OTHER_FIELDS_CLEAR,
 } from '../actions/index';
 
 export const hide = (state = {}, { type, id, field, values, value }) => {
@@ -30,6 +31,8 @@ export const hide = (state = {}, { type, id, field, values, value }) => {
       };
     case HIDE_ONLY:
       return { ...state, [field]: values.filter(x => x !== value) };
+    case HIDE_OTHER_FIELDS_CLEAR:
+      return { [field]: state[field] };
 
     default:
       return state;

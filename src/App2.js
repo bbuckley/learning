@@ -196,7 +196,7 @@ class App2 extends Component {
                   </tbody>
                 </table>
 
-                <List flds={['id', 'tc', 'calc_type']} />
+
                 <List />
 
               </div>

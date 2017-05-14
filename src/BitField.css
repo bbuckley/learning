@@ -7,6 +7,10 @@
     background-color: #cce6ff;
 }
 
+.BitField table {
+    white-space: nowrap;
+}
+
 .BitField table td:nth-child(2) {
     text-align: right;
 }
