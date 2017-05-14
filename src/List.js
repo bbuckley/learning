@@ -75,6 +75,7 @@ class List extends Component {
       'crd',
       'completed',
       'tags',
+      'run',
     ];
     const flds = this.props.flds || flds1;
 
@@ -223,7 +224,7 @@ class List extends Component {
           </caption>
           <tbody>
             {header_row}
-          
+
             {rows}
           </tbody>
         </table>
