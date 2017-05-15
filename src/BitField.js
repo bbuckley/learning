@@ -8,7 +8,8 @@ import './BitField.css';
 import {
   HIDE_FLIP_ALL,
   HIDE_ALL,
-  HIDE_TOGGLE, HIDE_ONLY,
+  HIDE_TOGGLE,
+  HIDE_ONLY,
 } from './actions/index';
 
 const tagParse = str => {
@@ -110,8 +111,14 @@ class BitField extends Component {
           });
           return total;
         }, {});
-        const ks = Object.keys(dat).sort();
-        let data = ks.map(k => [k, dat[k], true]);
+        
+        //const ks = Object.keys(dat).sort();
+        let data = Object.keys(dat).sort().map(k => [
+          k,
+          dat[k],
+          !(this.props.hide || []).includes(k),
+        ]);
+
         this.setState({ data });
       } else {
         let dat = tcs.reduce((total, tc) => {
@@ -122,10 +129,9 @@ class BitField extends Component {
           total[k] ? total[k]++ : (total[k] = 1);
           return total;
         }, {});
-        //const ks = Object.keys(dat).sort();
+
         let data = Object.keys(dat).sort().map(k => {
-          const b = !(this.props.hide || []).includes(k);
-          return [k, dat[k], b];
+          return [k, dat[k], !(this.props.hide || []).includes(k)];
         });
         this.setState({ data });
       }
@@ -204,11 +210,15 @@ class BitField extends Component {
 
         <table>
           <caption>
-            <Lk label={this.props.fld} onClick={() => store.dispatch({
-              type: HIDE_TOGGLE,
-              field: this.props.fld,
-              values: this.state.data.map(([val]) => val)
-            })} />
+            <Lk
+              label={this.props.fld}
+              onClick={() =>
+                store.dispatch({
+                  type: HIDE_TOGGLE,
+                  field: this.props.fld,
+                  values: this.state.data.map(([val]) => val),
+                })}
+            />
           </caption>
           <tbody>
             {this.state.data.map(([value, count, checked]) => {
