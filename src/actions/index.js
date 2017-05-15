@@ -7,6 +7,7 @@ export const HIDE_ALL = 'HIDE_ALL'
 export const HIDE_CLEAR = 'HIDE_CLEAR'
 export const HIDE_ONLY = 'HIDE_ONLY'
 export const HIDE_OTHER_FIELDS_CLEAR = 'HIDE_OTHER_FIELDS_CLEAR'
+export const HIDE_TOGGLE = 'HIDE_TOGGLE'
 
 
 export const EDIT_PROMPT = 'EDIT_PROMPT'

@@ -8,7 +8,7 @@ import './BitField.css';
 import {
   HIDE_FLIP_ALL,
   HIDE_ALL,
-  /*HIDE_CLEAR,*/ HIDE_ONLY,
+  HIDE_TOGGLE, HIDE_ONLY,
 } from './actions/index';
 
 const tagParse = str => {
@@ -204,7 +204,11 @@ class BitField extends Component {
 
         <table>
           <caption>
-            <Lk label={this.props.fld} onClick={this.setAll} />
+            <Lk label={this.props.fld} onClick={() => store.dispatch({
+              type: HIDE_TOGGLE,
+              field: this.props.fld,
+              values: this.state.data.map(([val]) => val)
+            })} />
           </caption>
           <tbody>
             {this.state.data.map(([value, count, checked]) => {

@@ -6,10 +6,15 @@ import {
   HIDE_ALL,
   HIDE_ONLY,
   HIDE_OTHER_FIELDS_CLEAR,
+  HIDE_TOGGLE,
 } from '../actions/index';
 
 export const hide = (state = {}, { type, id, field, values, value }) => {
   switch (type) {
+    case HIDE_TOGGLE:
+      return (state[field] || []).length === 0
+        ? { ...state, [field]: values }
+        : { ...state, [field]: [] };
     case HIDE_CLEAR:
       return {}; //shows all
     case HIDE_ALL:

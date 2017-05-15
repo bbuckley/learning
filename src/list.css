@@ -11,8 +11,8 @@
 }
 
 .List table td, table th {
-    border: 1px solid black;
-    padding: 6px;
+    border: 1px solid blue;
+    padding: 8px;
 }
 
 .List table tr.ListSelected {

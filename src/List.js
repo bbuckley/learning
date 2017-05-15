@@ -14,7 +14,7 @@ import {
   HIDE_FLIP,
   HIDE_CLEAR,
 } from './actions/index';
-import BitField from './BitField';
+// import BitField from './BitField';
 
 class List extends Component {
   state = {
@@ -29,7 +29,7 @@ class List extends Component {
       const i = tcs.findIndex(t => t.id === id);
       if (i !== -1) {
         input[fld] = tcs[i][fld];
-        //this.setState({ input });
+         //this.setState({ input });
       }
     }
   }
@@ -85,7 +85,7 @@ class List extends Component {
 
     const header_row = (
       <tr>
-        {pcount} of {tcount}<td />{flds.map(fld => <td key={fld}>{fld}</td>)}
+        <td>{pcount} of {tcount}</td>{flds.map(fld => <td key={fld}>{fld}</td>)}
       </tr>
     );
 
@@ -154,6 +154,7 @@ class List extends Component {
 
                   </td>
                 );
+
               }
             })}
           </tr>
@@ -204,10 +205,6 @@ class List extends Component {
       .sort()
       .join(', ');
     if(filters === ''){ filters = 'no filters'}
-    // else{
-    //   filters = `filter: ${filters}`
-    // }
-
 
     return (
       <div className="List">
