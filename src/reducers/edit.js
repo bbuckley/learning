@@ -33,6 +33,7 @@ export const edit = (state = {}, { type, id, fld, value }) => {
     case EDIT_ID:
       return { id };
     case EDIT_CLEAR:
+      console.log('edit clear');
       return {};
     case EDIT_DELETE:
       // should remove ids in state...

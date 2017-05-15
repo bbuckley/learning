@@ -8,7 +8,7 @@ import { store } from './index';
 import {
   EDIT_PROMPT,
   EDIT_VALUE,
-  //  EDIT_CLEAR,
+  EDIT_CLEAR,
   EDIT_DELETE,
   EDIT_ID,
   HIDE_FLIP,
@@ -109,6 +109,13 @@ class List extends Component {
             <td>
               <a
                 href="#"
+                onClick={() => store.dispatch({ type: EDIT_CLEAR })}
+              >
+                Clear
+              </a>
+              -
+              <a
+                href="#"
                 onClick={() => store.dispatch({ type: EDIT_DELETE, id })}
               >
                 Delete
@@ -164,6 +171,13 @@ class List extends Component {
       return (
         <tr key={id} className="ListSelected">
           <td>
+            <a
+              href="#"
+              onClick={() => store.dispatch({ type: EDIT_CLEAR, id })}
+            >
+              Done
+            </a>
+            -
             <a
               href="#"
               onClick={() => store.dispatch({ type: EDIT_DELETE, id })}
