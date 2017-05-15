@@ -12,9 +12,9 @@ import {
 export const hide = (state = {}, { type, id, field, values, value }) => {
   switch (type) {
     case HIDE_TOGGLE:
-      return (state[field] || []).length === 0
-        ? { ...state, [field]: values }
-        : { ...state, [field]: [] };
+      return (state[field] || []).length === values.length
+        ? { ...state, [field]: [] }
+        : { ...state, [field]: values };
     case HIDE_CLEAR:
       return {}; //shows all
     case HIDE_ALL:
@@ -35,7 +35,9 @@ export const hide = (state = {}, { type, id, field, values, value }) => {
         ),
       };
     case HIDE_ONLY:
-      return { ...state, [field]: values.filter(x => x !== value) };
+      return { [field]: values.filter(x => x !== value) };
+      //return { ...state, [field]: values.filter(x => x !== value) };
+      //return { [field]: value };
     case HIDE_OTHER_FIELDS_CLEAR:
       return { [field]: state[field] };
 
