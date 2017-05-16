@@ -29,7 +29,7 @@ class List extends Component {
       const i = tcs.findIndex(t => t.id === id);
       if (i !== -1) {
         input[fld] = tcs[i][fld];
-         //this.setState({ input });
+        //this.setState({ input });
       }
     }
   }
@@ -107,10 +107,7 @@ class List extends Component {
         return (
           <tr key={this.props.edit.id}>
             <td>
-              <a
-                href="#"
-                onClick={() => store.dispatch({ type: EDIT_CLEAR })}
-              >
+              <a href="#" onClick={() => store.dispatch({ type: EDIT_CLEAR })}>
                 Clear
               </a>
               -
@@ -161,7 +158,6 @@ class List extends Component {
 
                   </td>
                 );
-
               }
             })}
           </tr>
@@ -218,7 +214,9 @@ class List extends Component {
       })
       .sort()
       .join(', ');
-    if(filters === ''){ filters = 'no filters'}
+    if (filters === '') {
+      filters = 'no filters';
+    }
 
     return (
       <div className="List">
