@@ -11,6 +11,7 @@ import { Schedule } from './team';
 import BitArray from './BitArray';
 import BitField from './BitField';
 import ListView from './ListView';
+import PgaTourView from './pgatourview';
 
 import { store } from './index';
 
@@ -80,7 +81,7 @@ class App2 extends Component {
       <div style={{ padding: '15px' }}>
         <Link to="/">Home</Link>
         - <Link to="/testview">TestView</Link>
-        - <Link to="/samples">Samples</Link>
+      - <Link to="/pgatour">PgaTour</Link>
         - <Link to="/BitField">BitField</Link>
         - <Link to="/BitArray">ArrayBit</Link>
         - <Link to="/BitArray2">ArrayBit2</Link>
@@ -112,6 +113,7 @@ class App2 extends Component {
           />
           <Route exact={true} path="/" render={() => <p>Welcome</p>} />
           <Route exact={true} path="/team" component={Schedule} />
+          <Route exact={true} path="/pgatour" component={PgaTourView} />
           <Route
             exact={true}
             path="/BitField"
