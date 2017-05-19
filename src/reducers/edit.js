@@ -4,7 +4,8 @@ import {
   EDIT_ID,
   EDIT_CLEAR,
   EDIT_DELETE,
-  EDIT_SAMPLE
+  EDIT_SAMPLE,
+  EDIT_ID_TOGGLE,
 } from '../actions/index';
 
 import { samples } from '../samples';
@@ -32,6 +33,14 @@ export const edit = (state = {}, { type, id, fld, value }) => {
       return { id };
     case EDIT_ID:
       return { id };
+    case EDIT_ID_TOGGLE:
+      if (state.id !== id) {
+        return { id };
+      } else {
+        return {};
+      }
+      //return Object.keys(state).length === 0 ? {id} : {}
+
     case EDIT_CLEAR:
       console.log('edit clear');
       return {};

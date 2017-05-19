@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 
 import { store } from './index';
-import { EDIT_ID } from './actions/index';
+import { EDIT_ID_TOGGLE } from './actions/index';
 
 const style1 = {
-  backgroundColor: 'red',
+  backgroundColor: 'tan',
 };
 const style2 = {
   backgroundColor: 'yellow',
@@ -16,13 +16,21 @@ const Tc11 = ({ tc }) => <div style={style1}>{tc.calc_type}</div>;
 
 const Tc1 = ({ tc }) => (
   <div style={style1}>
-    <table>
+    <table style={{ padding: '10px 15px 10px 15px' }}>
       <tbody>
         <tr>
-          <td style={{cursor:'pointer'}} onClick={() => store.dispatch({ type: EDIT_ID, id: tc.id })}>
+          <td
+            style={{ cursor: 'pointer' }}
+            onClick={() => store.dispatch({ type: EDIT_ID_TOGGLE, id: tc.id })}
+          >
             x
           </td>
-          <td>{tc.calc_type}</td>
+          <td
+            style={{ cursor: 'pointer' }}
+            onClick={() => store.dispatch({ type: EDIT_ID_TOGGLE, id: tc.id })}
+          >
+            {tc.calc_type}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -30,8 +38,9 @@ const Tc1 = ({ tc }) => (
 );
 
 const Tc2 = ({ tc }) => {
-  const { calc_type, pbc, ric } = tc;
-  return <div style={style2}>{calc_type} {pbc}, {ric} xxx</div>;
+  const flds = ['tc','calc_type', 'pbc', 'ric','crd','dob','doe'];
+  const fld_show = flds.map(f => <tr key={f}><td>{f}</td><td>{tc[f]}</td></tr>)
+return <div style={style2}><table><tbody>{fld_show}</tbody></table></div>;
 };
 
 class PgaTourView extends Component {

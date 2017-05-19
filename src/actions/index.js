@@ -14,6 +14,7 @@ export const EDIT_PROMPT = 'EDIT_PROMPT'
 export const EDIT_VALUE = 'EDIT_VALUE'
 export const EDIT_CLEAR = 'EDIT_CLEAR'
 export const EDIT_ID = 'EDIT_ID'
+export const EDIT_ID_TOGGLE = 'EDIT_ID_TOGGLE'
 export const EDIT_DELETE = 'EDIT_DELETE'
 export const EDIT_SAMPLE = 'EDIT_SAMPLE'
 
