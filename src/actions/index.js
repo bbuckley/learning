@@ -18,5 +18,7 @@ export const EDIT_ID_TOGGLE = 'EDIT_ID_TOGGLE'
 export const EDIT_DELETE = 'EDIT_DELETE'
 export const EDIT_SAMPLE = 'EDIT_SAMPLE'
 
+export const FAVORITES_ID_TOGGLE = 'FAVORITES_ID_TOGGLE'
+
 
 export const VIEW_SET = 'VIEW_SET'

@@ -3,31 +3,36 @@ import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 
 import { store } from './index';
-import { EDIT_ID_TOGGLE, EDIT_PROMPT } from './actions/index';
+import { EDIT_ID_TOGGLE, EDIT_PROMPT, FAVORITES_ID_TOGGLE } from './actions/index';
+
+import './PgaTourView.css';
+
 
 const style1 = {
   backgroundColor: 'tan',
 };
 const style2 = {
   backgroundColor: 'yellow',
+  padding: '10px 15px 10px 15px'
 };
 
 const Tc11 = ({ tc }) => <div style={style1}>{tc.calc_type}</div>;
 
 const Tc1 = ({ tc }) => (
   <div style={style1}>
-    <table style={{ padding: '10px 15px 10px 15px' }}>
+    <table style={{ padding: '10px 15px 10px 15px'}}>
       <tbody>
         <tr>
           <td
+            width='100px'
             style={{ cursor: 'pointer' }}
-            onClick={() => store.dispatch({ type: EDIT_ID_TOGGLE, id: tc.id })}
+            onClick={() => store.dispatch({ type: FAVORITES_ID_TOGGLE, id: tc.id })}
           >
-            x
+            {tc.ric}
           </td>
           <td
             style={{ cursor: 'pointer' }}
-            onClick={() => store.dispatch({ type: EDIT_ID_TOGGLE, id: tc.id })}
+            onClick={() => store.dispatch({ type: FAVORITES_ID_TOGGLE, id: tc.id })}
           >
             {tc.calc_type}
           </td>
@@ -76,27 +81,27 @@ class PgaTourView extends Component {
   render() {
     const { tcs } = this.state;
 
-    const rows = tcs.map(t => (
-      <div key={t.id}>
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <Tc1 tc={t} />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Tc2 tc={t} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    ));
+    // const rows = tcs.map(t => (
+    //   <div key={t.id}>
+    //     <table>
+    //       <tbody>
+    //         <tr>
+    //           <td>
+    //             <Tc1 tc={t} />
+    //           </td>
+    //         </tr>
+    //         <tr>
+    //           <td>
+    //             <Tc2 tc={t} />
+    //           </td>
+    //         </tr>
+    //       </tbody>
+    //     </table>
+    //   </div>
+    // ));
 
-    const rows1 = tcs.map(t => {
-      if (t.id === this.props.edit.id) {
+    const rows = tcs.map(t => {
+      if (this.props.favorites.includes(t.id)) {
         return (
           <div key={t.id}>
             <table>
@@ -131,12 +136,12 @@ class PgaTourView extends Component {
       );
     });
 
+
     return (
-      <div>
+      <div className='PgaTourView'>
         PgaTourView {tcs.length}
         <table>
-          <table><tbody><tr /></tbody></table>
-          {rows1}
+          {rows}
         </table>
       </div>
     );
@@ -146,6 +151,7 @@ class PgaTourView extends Component {
 const mapStateToProps = state => {
   return {
     edit: state.edit,
+    favorites: state.favorites,
   };
 };
 
