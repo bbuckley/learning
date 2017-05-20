@@ -36,6 +36,8 @@ const Tc1 = ({ tc }) => (
           >
             {tc.calc_type}
           </td>
+
+
         </tr>
       </tbody>
     </table>
@@ -53,6 +55,12 @@ const Tc2 = ({ tc }) => {
       >
         {tc[f]}
       </td>
+
+      <td>
+        {tc[f]}
+      </td>
+
+
     </tr>
   ));
   return <div style={style2}><table><tbody>{fld_show}</tbody></table></div>;
