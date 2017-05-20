@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 
 import { store } from './index';
-import { EDIT_ID_TOGGLE } from './actions/index';
+import { EDIT_ID_TOGGLE, EDIT_PROMPT } from './actions/index';
 
 const style1 = {
   backgroundColor: 'tan',
@@ -38,9 +38,19 @@ const Tc1 = ({ tc }) => (
 );
 
 const Tc2 = ({ tc }) => {
-  const flds = ['tc','calc_type', 'pbc', 'ric','crd','dob','doe'];
-  const fld_show = flds.map(f => <tr key={f}><td>{f}</td><td>{tc[f]}</td></tr>)
-return <div style={style2}><table><tbody>{fld_show}</tbody></table></div>;
+  const flds = ['tc', 'calc_type', 'pbc', 'ric', 'crd', 'dob', 'doe'];
+  const fld_show = flds.map(f => (
+    <tr key={f}>
+      <td>{f}</td>
+      <td
+        style={{ cursor: 'pointer' }}
+        onClick={() => store.dispatch({ type: EDIT_PROMPT, id: tc.id, fld: f })}
+      >
+        {tc[f]}
+      </td>
+    </tr>
+  ));
+  return <div style={style2}><table><tbody>{fld_show}</tbody></table></div>;
 };
 
 class PgaTourView extends Component {
@@ -65,26 +75,6 @@ class PgaTourView extends Component {
 
   render() {
     const { tcs } = this.state;
-
-    // const fn = id => {
-    //   const t = tcs.find(t => t.id === id);
-    // //   console.log(id===this.props.edit, t);
-    // //   if (id === this.props.edit) {
-    // //     return <Tc1 tc={t} />
-    // //   } else {
-    // //     return <Tc2 tc={t} />
-    // //   }
-    // };
-
-    // if (this.props.edit === tcs.id) {
-    // //   tc = <table><tbody><tr><td>{t.calc_type}</td></tr></tbody></table>;
-    // } else {
-    // //   tc = (
-    // //     <table>
-    // //       <tbody><tr><td>{t.calc_type} {t.pbc}, {t.ric}</td></tr></tbody>
-    // //     </table>
-    // //   );
-    // }
 
     const rows = tcs.map(t => (
       <div key={t.id}>
@@ -145,6 +135,7 @@ class PgaTourView extends Component {
       <div>
         PgaTourView {tcs.length}
         <table>
+          <table><tbody><tr /></tbody></table>
           {rows1}
         </table>
       </div>
