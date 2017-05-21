@@ -121,7 +121,7 @@ class PgaTourView extends Component {
                 </tr>
                 <tr>
                   <td>
-                    <Tc2 tc={t} />
+                  {/*  <Tc2 tc={t} />*/}
                     <One id={t.id}/>
                   </td>
                 </tr>

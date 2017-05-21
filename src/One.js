@@ -16,7 +16,6 @@ class One extends Component {
       'dot',
       'crd',
       'completed',
-      'id',
     ];
     this.state = {
       tc: null,
@@ -32,6 +31,8 @@ class One extends Component {
       this.flds.forEach(f => {
         edit[f] = tc[f] === undefined ? '' : tc[f];
       });
+
+      edit['notes'] = tc['notes'] === undefined ? '' : tc['notes'];
 
       this.setState({ tc, edit });
     });
@@ -76,28 +77,48 @@ class One extends Component {
     const rows = this.flds.map(fld => (
       <tr key={fld}>
         <td>{fld}</td>
-        <td>{tc[fld]}</td>
         {/* <td><input value={tc[fld]} /></td>  */}
         <td>
           <input
+            style={{ fontFamily: 'Courier New' }}
             name={fld}
             value={this.state.edit[fld]}
             onChange={this.onChange.bind(this)}
           />
         </td>
+        <td>{tc[fld]}</td>
       </tr>
     ));
 
     const form = (
       <form onSubmit={this.onSubmit.bind(this)}>
-        <table>
+        <table
+          style={{ width: '100%', height: '200px', fontFamily: 'Courier New' }}
+        >
+          <caption>{tc.id}</caption>
           <tbody>
             {header}
             {rows}
             <tr>
-              <td /><td />
-              <td>
+              <td>notes</td>
+              <td colSpan="2">
+                <textarea
+                  placeholder='describe test case'
+                  style={{
+                    width: '100%',
+                    height: '200px',
+                    fontFamily: 'Courier New',
+                    fontSize: 20,
+                  }}
+                  name='notes'
+                  onChange={this.onChange.bind(this)}
+                >{this.state.edit['notes']}</textarea>
+              </td>
+            </tr>
+            <tr>
+              <td colSpan="3">
                 <input type="submit" value="submit" />
+                <input type="button" value="cancel" />
               </td>
             </tr>
           </tbody>
