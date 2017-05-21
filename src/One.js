@@ -1,34 +1,36 @@
-import React, { Component } from "react";
-import firebase from "./base";
-import "./One.css";
+import React, { Component } from 'react';
+import firebase, { FIRE_NAME } from './base';
+import './One.css';
 
 class One extends Component {
   constructor() {
     super();
     this.flds = [
-      "pbc",
-      "tc",
-      "calc_type",
-      "dob",
-      "doe",
-      "dot",
-      "crd",
-      "completed",
-      "id"
+      'pbc',
+      'ric',
+      'tags',
+      'tc',
+      'calc_type',
+      'dob',
+      'doe',
+      'dot',
+      'crd',
+      'completed',
+      'id',
     ];
     this.state = {
       tc: null,
-      edit: {}
+      edit: {},
     };
   }
 
   update(id) {
-    firebase.database().ref("tcs/" + id).on("value", snapshot => {
+    firebase.database().ref(FIRE_NAME + '/' + id).on('value', snapshot => {
       const tc = snapshot.val();
 
       const edit = {};
       this.flds.forEach(f => {
-        edit[f] = tc[f] === undefined ? "" : tc[f];
+        edit[f] = tc[f] === undefined ? '' : tc[f];
       });
 
       this.setState({ tc, edit });
@@ -52,9 +54,9 @@ class One extends Component {
     e.preventDefault();
     firebase
       .database()
-      .ref("tcs/" + this.props.id + "/")
+      .ref(FIRE_NAME + '/' + this.props.id + '/')
       .update({ ...this.state.edit });
-    console.log("saved");
+    console.log('saved');
   }
 
   render() {
@@ -62,7 +64,7 @@ class One extends Component {
 
     // const isEditing = true;
 
-    if (tc === null || this.props.id === "") return <p>no tc</p>;
+    if (tc === null || this.props.id === '') return <p>no tc</p>;
 
     const header = (
       <tr>

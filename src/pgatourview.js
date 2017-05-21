@@ -5,6 +5,8 @@ import firebase, { FIRE_NAME } from './base';
 import { store } from './index';
 import { EDIT_ID_TOGGLE, EDIT_PROMPT, FAVORITES_ID_TOGGLE } from './actions/index';
 
+import One from './One'
+
 import './PgaTourView.css';
 
 
@@ -59,8 +61,6 @@ const Tc2 = ({ tc }) => {
       <td>
         {tc[f]}
       </td>
-
-
     </tr>
   ));
   return <div style={style2}><table><tbody>{fld_show}</tbody></table></div>;
@@ -122,6 +122,7 @@ class PgaTourView extends Component {
                 <tr>
                   <td>
                     <Tc2 tc={t} />
+                    <One id={t.id}/>
                   </td>
                 </tr>
               </tbody>

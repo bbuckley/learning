@@ -95,7 +95,7 @@ class App2 extends Component {
         - <Link to="/count2">count2</Link>
         - <Link to="/one_s">one_s</Link>
         - <Link to="/one">one</Link>
-        - <Link to="/one_id/-KeY8wPlmmU9VkwCoQjG">brian </Link>
+        - <Link to="/one_id/-Kjr-Z-ZS88_5m9VTlCv">brian </Link>
         - <Link to="/one_id/-KeY8wPngcOzIF7X8vmg">karl</Link>
         - <Link to="/one_id/-KeY8wPngcO">no tc</Link>
         - <Link to="/list">List</Link>
