@@ -2,9 +2,38 @@
 .One table {
     border-collapse: collapse;
     border-style: hidden;
+    background-color: pink
 }
 
 .One table td, table th {
-    border: 1px dotted black;
-    padding: 5px;
+    vertical-align: top;
+    border: 1px dotted blue;
+    padding: 8px;
 }
+
+.One table caption {
+    text-align: left;
+    background: pink;
+}
+
+.One table form {
+  width: '100%';
+}
+
+.One input, textarea {
+  margin: 0 0 10px 0;
+  background: rgba(255,255,255,0.5);
+  margin: 0;
+  font-size: 14px;
+  width: 200px;
+  box-shadow:
+      inset 0 0 8px  rgba(0,0,0,0.1),
+            0 0 16px rgba(0,0,0,0.1);
+}
+
+/*.One input[type="text"] {
+  margin: 10;
+  transition: box-shadow 0.3s, border 0.3s;
+
+
+}*/

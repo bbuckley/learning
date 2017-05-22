@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import firebase, { FIRE_NAME } from './base';
 import './One.css';
 
+const dates = ['crd', 'doe', 'dot', 'dob'];
+
 class One extends Component {
   constructor() {
     super();
     this.flds = [
+      'tc',
       'pbc',
       'ric',
       'tags',
-      'tc',
       'calc_type',
       'dob',
       'doe',
@@ -57,7 +59,7 @@ class One extends Component {
       .database()
       .ref(FIRE_NAME + '/' + this.props.id + '/')
       .update({ ...this.state.edit });
-    console.log('saved');
+    // console.log('saved');
   }
 
   render() {
@@ -74,26 +76,30 @@ class One extends Component {
       </tr>
     );
 
-    const rows = this.flds.map(fld => (
-      <tr key={fld}>
-        <td>{fld}</td>
-        {/* <td><input value={tc[fld]} /></td>  */}
-        <td>
-          <input
-            style={{ fontFamily: 'Courier New' }}
-            name={fld}
-            value={this.state.edit[fld]}
-            onChange={this.onChange.bind(this)}
-          />
-        </td>
-        <td>{tc[fld]}</td>
-      </tr>
-    ));
+    const rows = this.flds.map(fld => {
+      return (
+        <tr key={fld}>
+          <td>{fld}</td>
+          {/* <td><input value={tc[fld]} /></td>  */}
+          <td>
+            <input
+              style={{ fontFamily: 'Courier New' }}
+              name={fld}
+              value={this.state.edit[fld]}
+              onChange={this.onChange.bind(this)}
+              type="text"
+              placeholder={dates.includes(fld) ? 'mm/dd/yyyy' : 'enter value'}
+            />
+          </td>
+          <td>{tc[fld]}</td>
+        </tr>
+      );
+    });
 
     const form = (
       <form onSubmit={this.onSubmit.bind(this)}>
         <table
-          style={{ width: '100%', height: '200px', fontFamily: 'Courier New' }}
+          style={{ height: '200px', fontFamily: 'Courier New', fontSize: 16 }}
         >
           <caption>{tc.id}</caption>
           <tbody>
@@ -103,16 +109,17 @@ class One extends Component {
               <td>notes</td>
               <td colSpan="2">
                 <textarea
-                  placeholder='describe test case'
+                  placeholder="describe test case"
                   style={{
                     width: '100%',
                     height: '200px',
                     fontFamily: 'Courier New',
-                    fontSize: 20,
+                    fontSize: 14,
                   }}
-                  name='notes'
+                  name="notes"
                   onChange={this.onChange.bind(this)}
-                >{this.state.edit['notes']}</textarea>
+                  value={this.state.edit['notes']}
+                />
               </td>
             </tr>
             <tr>

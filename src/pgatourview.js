@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 
 import { store } from './index';
-import { EDIT_ID_TOGGLE, EDIT_PROMPT, FAVORITES_ID_TOGGLE } from './actions/index';
+import { /*EDIT_ID_TOGGLE, EDIT_PROMPT ,*/ FAVORITES_ID_TOGGLE } from './actions/index';
 
 import One from './One'
 
@@ -13,12 +13,12 @@ import './PgaTourView.css';
 const style1 = {
   backgroundColor: 'tan',
 };
-const style2 = {
-  backgroundColor: 'yellow',
-  padding: '10px 15px 10px 15px'
-};
-
-const Tc11 = ({ tc }) => <div style={style1}>{tc.calc_type}</div>;
+// const style2 = {
+//   backgroundColor: 'yellow',
+//   padding: '10px 15px 10px 15px'
+// };
+//
+// const Tc11 = ({ tc }) => <div style={style1}>{tc.calc_type}</div>;
 
 const Tc1 = ({ tc }) => (
   <div style={style1}>
@@ -46,25 +46,25 @@ const Tc1 = ({ tc }) => (
   </div>
 );
 
-const Tc2 = ({ tc }) => {
-  const flds = ['tc', 'calc_type', 'pbc', 'ric', 'crd', 'dob', 'doe'];
-  const fld_show = flds.map(f => (
-    <tr key={f}>
-      <td>{f}</td>
-      <td
-        style={{ cursor: 'pointer' }}
-        onClick={() => store.dispatch({ type: EDIT_PROMPT, id: tc.id, fld: f })}
-      >
-        {tc[f]}
-      </td>
-
-      <td>
-        {tc[f]}
-      </td>
-    </tr>
-  ));
-  return <div style={style2}><table><tbody>{fld_show}</tbody></table></div>;
-};
+// const Tc2 = ({ tc }) => {
+//   const flds = ['tc', 'calc_type', 'pbc', 'ric', 'crd', 'dob', 'doe'];
+//   const fld_show = flds.map(f => (
+//     <tr key={f}>
+//       <td>{f}</td>
+//       <td
+//         style={{ cursor: 'pointer' }}
+//         onClick={() => store.dispatch({ type: EDIT_PROMPT, id: tc.id, fld: f })}
+//       >
+//         {tc[f]}
+//       </td>
+//
+//       <td>
+//         {tc[f]}
+//       </td>
+//     </tr>
+//   ));
+//   return <div style={style2}><table><tbody>{fld_show}</tbody></table></div>;
+// };
 
 class PgaTourView extends Component {
   constructor() {
