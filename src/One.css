@@ -1,4 +1,10 @@
 
+
+.One {
+  animation: 2s;
+}
+
+
 .One table {
     border-collapse: collapse;
     border-style: hidden;
@@ -25,7 +31,7 @@
   background: rgba(255,255,255,0.5);
   margin: 0;
   font-size: 14px;
-  width: 200px;
+  width: 240px;
   box-shadow:
       inset 0 0 8px  rgba(0,0,0,0.1),
             0 0 16px rgba(0,0,0,0.1);

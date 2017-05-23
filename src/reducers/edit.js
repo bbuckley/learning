@@ -18,12 +18,14 @@ export const edit = (state = {}, { type, id, fld, value }) => {
       const n = 1;
       const s = samples(n);
       s.forEach(s => {
-        console.log(s);
+        //console.log(s);
         firebase.database().ref(FIRE_NAME).push(s);
       });
       return state;
     case EDIT_PROMPT:
       return { ...state, id, fld: fld };
+    case EDIT_PVALUE:
+      return state;
     case EDIT_VALUE:
       //console.log('save to firebase');
       firebase
@@ -39,7 +41,8 @@ export const edit = (state = {}, { type, id, fld, value }) => {
       } else {
         return {};
       }
-      //return Object.keys(state).length === 0 ? {id} : {}
+    //return Object.keys(state).length === 0 ? {id} : {}
+
 
     case EDIT_CLEAR:
       console.log('edit clear');

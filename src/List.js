@@ -75,6 +75,7 @@ class List extends Component {
       'crd',
       'completed',
       'tags',
+      'ptags',
       'run',
     ];
     const flds = this.props.flds || flds1;
