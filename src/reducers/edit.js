@@ -6,6 +6,7 @@ import {
   EDIT_DELETE,
   EDIT_SAMPLE,
   EDIT_ID_TOGGLE,
+  EDIT_PVALUE,
 } from '../actions/index';
 
 import { samples } from '../samples';
