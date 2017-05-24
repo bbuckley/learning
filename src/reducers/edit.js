@@ -6,7 +6,6 @@ import {
   EDIT_DELETE,
   EDIT_SAMPLE,
   EDIT_ID_TOGGLE,
-  EDIT_PVALUE,
 } from '../actions/index';
 
 import { samples } from '../samples';
@@ -25,8 +24,6 @@ export const edit = (state = {}, { type, id, fld, value }) => {
       return state;
     case EDIT_PROMPT:
       return { ...state, id, fld: fld };
-    case EDIT_PVALUE:
-      return state;
     case EDIT_VALUE:
       //console.log('save to firebase');
       firebase

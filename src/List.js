@@ -13,6 +13,7 @@ import {
   EDIT_ID,
   HIDE_FLIP,
   HIDE_CLEAR,
+  PERSONAL_EDIT,
 } from './actions/index';
 // import BitField from './BitField';
 
@@ -38,7 +39,12 @@ class List extends Component {
     e.preventDefault();
     const { id, fld } = this.props.edit;
     const value = this.state.input[fld];
-    store.dispatch({ type: EDIT_VALUE, id, fld, value });
+    if(['ptags','pnotes'].includes(fld)){
+      store.dispatch({ type: PERSONAL_EDIT, id, fld, value })
+      store.dispatch({ type: EDIT_ID, id })
+    }else{
+      store.dispatch({ type: EDIT_VALUE, id, fld, value });
+    }
   }
 
   onChange(e) {
@@ -83,6 +89,14 @@ class List extends Component {
     const tcount = tcs.length;
     tcs = filter(this.props.hide, tcs);
     const pcount = tcs.length;
+
+    this.props.personal.forEach(p =>{
+      const i = tcs.findIndex(t => t.id === p.id)
+      if(i !== -1) tcs[i]['ptags'] = p['ptags']
+    })
+
+
+
 
     const header_row = (
       <tr>
@@ -247,6 +261,7 @@ const mapStateToProps = state => {
   return {
     hide: state.hide,
     edit: state.edit,
+    personal: state.personal,
   };
 };
 

@@ -22,3 +22,5 @@ export const FAVORITES_ID_TOGGLE = 'FAVORITES_ID_TOGGLE'
 
 
 export const VIEW_SET = 'VIEW_SET'
+
+export const PERSONAL_EDIT = "PERSONAL_EDIT"

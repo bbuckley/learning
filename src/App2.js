@@ -74,6 +74,10 @@ class Count extends Component {
 }
 
 class App2 extends Component {
+  storeit(){
+    return store;
+  }
+
   render() {
     const style = { verticalAlign: 'top' };
 
