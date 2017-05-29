@@ -111,7 +111,7 @@ class BitField extends Component {
           });
           return total;
         }, {});
-        
+
         //const ks = Object.keys(dat).sort();
         let data = Object.keys(dat).sort().map(k => [
           k,

@@ -39,10 +39,10 @@ class List extends Component {
     e.preventDefault();
     const { id, fld } = this.props.edit;
     const value = this.state.input[fld];
-    if(['ptags','pnotes'].includes(fld)){
-      store.dispatch({ type: PERSONAL_EDIT, id, fld, value })
-      store.dispatch({ type: EDIT_ID, id })
-    }else{
+    if (['ptags', 'pnotes'].includes(fld)) {
+      store.dispatch({ type: PERSONAL_EDIT, id, fld, value });
+      store.dispatch({ type: EDIT_ID, id });
+    } else {
       store.dispatch({ type: EDIT_VALUE, id, fld, value });
     }
   }
@@ -62,6 +62,21 @@ class List extends Component {
         v.id = k;
         return v;
       });
+
+      tcs = tcs.map(tc => {
+        const b = new Date(tc.dob).getFullYear();
+        const h = new Date(tc.doe).getFullYear();
+        const e = new Date(tc.crd).getFullYear();
+        const hir_age = h - b;
+        const calc_age = e - b;
+        return { ...tc, hir_age, calc_age };
+      });
+
+      this.props.personal.forEach(p => {
+        const i = tcs.findIndex(t => t.id === p.id);
+        if (i !== -1) tcs[i]['ptags'] = p['ptags'];
+      });
+
 
       this.setState({ tcs });
     });
@@ -83,6 +98,8 @@ class List extends Component {
       'tags',
       'ptags',
       'run',
+      'hir_age',
+      'calc_age',
     ];
     const flds = this.props.flds || flds1;
 
@@ -90,13 +107,10 @@ class List extends Component {
     tcs = filter(this.props.hide, tcs);
     const pcount = tcs.length;
 
-    this.props.personal.forEach(p =>{
-      const i = tcs.findIndex(t => t.id === p.id)
-      if(i !== -1) tcs[i]['ptags'] = p['ptags']
-    })
-
-
-
+    // this.props.personal.forEach(p => {
+    //   const i = tcs.findIndex(t => t.id === p.id);
+    //   if (i !== -1) tcs[i]['ptags'] = p['ptags'];
+    // });
 
     const header_row = (
       <tr>

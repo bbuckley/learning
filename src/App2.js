@@ -180,7 +180,7 @@ class App2 extends Component {
                       <td style={style}>
                         <BitField fld="dot" />
                       </td>
-                      <td>
+                      <td style={style}>
                         <BitField fld="pbc" />
                       </td>
                       <td style={style}>
