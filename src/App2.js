@@ -12,11 +12,12 @@ import BitArray from './BitArray';
 import BitField from './BitField';
 import ListView from './ListView';
 import PgaTourView from './pgatourview';
+import Foo from './Foo';
 
 import { store } from './index';
 
 const NotFound = () => <div>not found</div>;
-const Foo = () => <div style={{ padding: '20px' }}>this is foo</div>;
+// const Foo = () => <div style={{ padding: '20px' }}>this is foo</div>;
 const Bar = props => <div>Bar {props.name}</div>;
 const Barp = ({ name, age }) => <div>Barp {name}, {age}</div>;
 
@@ -84,8 +85,8 @@ class App2 extends Component {
     return (
       <div style={{ padding: '15px' }}>
         <Link to="/">Home</Link>
-        - <Link to="/testview">TestView</Link>
-      - <Link to="/pgatour">PgaTour</Link>
+          - <Link to="/testview">TestView</Link>
+        - <Link to="/pgatour">PgaTour!</Link>
         - <Link to="/BitField">BitField</Link>
         - <Link to="/BitArray">ArrayBit</Link>
         - <Link to="/BitArray2">ArrayBit2</Link>
