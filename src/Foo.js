@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 
 class Foo extends Component {
-  constructor(){
-    super()
+  constructor() {
+    super();
     this.state = {
-      tcs: []
-    }
+      tcs: [],
+    };
   }
 
   componentDidMount() {
@@ -23,6 +23,7 @@ class Foo extends Component {
         const b = new Date(tc.dob).getFullYear();
         const h = new Date(tc.doe).getFullYear();
         const e = new Date(tc.crd).getFullYear();
+
         const hir_age = h - b;
         const calc_age = e - b;
         return { ...tc, hir_age, calc_age };
@@ -33,22 +34,20 @@ class Foo extends Component {
         if (i !== -1) tcs[i]['ptags'] = p['ptags'];
       });
 
-      this.setState({
-        tcs: tcs
-      });
+      this.setState({ tcs });
     });
   }
 
   render() {
-    const flds=['id','pbc','hir_age']
-    const header = <tr>{flds.map(fld=> <th>{fld}</th>)}</tr>
+    //const flds = ['id', 'status','dob', 'doe', 'pbc', 'hir_age', 'ptags'];
+    const flds = this.props.flds;
+    const header = <tr>{flds.map(fld => <th key={fld}>{fld}</th>)}</tr>;
 
-    const rows = this.state.tcs.map(tc =>
-    <tr>
-      <td>{tc['id']}</td>
-      <td>{tc['pbc']}</td>
-      <td>{tc['hir_age']}</td>
-    </tr>)
+    const rows = this.state.tcs.map(tc => (
+      <tr key={tc['id']}>
+        {flds.map(fld => <td key={fld}>{tc[fld]}</td>)}
+      </tr>
+    ));
 
     return (
       <div>
@@ -81,14 +80,13 @@ class Foo extends Component {
 //   });
 // };
 
-
 const mapStateToProps = state => {
-   return {
-//     hide: state.hide,
-//     edit: state.edit,
-     personal: state.personal,
-   };
- };
+  return {
+    //     hide: state.hide,
+    //     edit: state.edit,
+    personal: state.personal,
+  };
+};
 export default connect(mapStateToProps)(Foo);
 //
 //export connect(mapStateToProps)(Foo);

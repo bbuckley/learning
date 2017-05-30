@@ -255,7 +255,7 @@ class App2 extends Component {
             render={({ name }) => <Barp name={name} />}
           />
           <Route exact={true} path="/ch" component={Checkboxes} />
-          <Route exact={true} path="/foo" component={Foo} />
+          <Route exact={true} path="/foo" render={() => <Foo flds={['id','dob','status']} />} />
           <Route exact={true} path="/rand" render={randomBarp} />
           <Route exact={true} path="/bar" render={() => <Bar name="Joe" />} />
           <Route exact={true} path="/count" render={() => <Count />} />
