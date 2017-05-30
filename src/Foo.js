@@ -13,30 +13,58 @@ class Foo extends Component {
   componentDidMount() {
     firebase.database().ref(FIRE_NAME).on('value', snapshot => {
       const o = snapshot.val();
-      const tcs = Object.keys(o).map(k => {
+      let tcs = Object.keys(o).map(k => {
         const v = o[k];
         v.id = k;
         return v;
       });
 
+      tcs = tcs.map(tc => {
+        const b = new Date(tc.dob).getFullYear();
+        const h = new Date(tc.doe).getFullYear();
+        const e = new Date(tc.crd).getFullYear();
+        const hir_age = h - b;
+        const calc_age = e - b;
+        return { ...tc, hir_age, calc_age };
+      });
+
+      this.props.personal.forEach(p => {
+        const i = tcs.findIndex(t => t.id === p.id);
+        if (i !== -1) tcs[i]['ptags'] = p['ptags'];
+      });
 
       this.setState({
-        //tcs: [1,6,9,223,3]
         tcs: tcs
       });
     });
   }
 
   render() {
+    const flds=['id','pbc','hir_age']
+    const header = <tr>{flds.map(fld=> <th>{fld}</th>)}</tr>
+
+    const rows = this.state.tcs.map(tc =>
+    <tr>
+      <td>{tc['id']}</td>
+      <td>{tc['pbc']}</td>
+      <td>{tc['hir_age']}</td>
+    </tr>)
+
     return (
       <div>
         <p>Fooooo!{this.state.tcs.length}!</p>
+        <table>
+          <tbody>
+            {header}
+            {rows}
+          </tbody>
+        </table>
       </div>
     );
   }
 }
 
-export default Foo;
+//export default Foo;
 
 // const mapStateToProps = state => {
 //   let tcs;
@@ -53,15 +81,15 @@ export default Foo;
 //   });
 // };
 
-//export default connect(mapStateToProps)(Foo);
 
-// const mapStateToProps = state => {
-//   return {
+const mapStateToProps = state => {
+   return {
 //     hide: state.hide,
 //     edit: state.edit,
-//     personal: state.personal,
-//   };
-// };
+     personal: state.personal,
+   };
+ };
+export default connect(mapStateToProps)(Foo);
 //
-// export default connect(mapStateToProps)(List);
+//export connect(mapStateToProps)(Foo);
 //
