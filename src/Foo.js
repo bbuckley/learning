@@ -2,7 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 
-const Header = ({flds}) => (
+const field = {
+  id: { editable: true },
+  status: { editable: true },
+  calc_type: { editable: true },
+  tags: { editable: true },
+  ptags: { editable: true },
+  doe: { editable: true },
+  dot: { editable: true },
+  dob: { editable: true },
+  pbc: { editable: true },
+  hir_age: { editable: false },
+  calc_age: { editable: false },
+};
+
+const Header = ({ flds }) => (
   <thead>
     <tr>
       {flds.map(fld => <th key={fld}>{fld}</th>)}
@@ -10,17 +24,29 @@ const Header = ({flds}) => (
   </thead>
 );
 
-const Row = ({flds, tc}) => (
-   <tr>
-      {flds.map(fld => <td key={fld}>{tc[fld]}</td>)}
-   </tr>
+const Row = ({ flds, tc }) => (
+  <tr>
+    {flds.map(fld => <Field tc={tc} fld={fld} key={fld} />)}
+  </tr>
 );
+// {flds.map(fld => <td key={fld}>{tc[fld]}</td>)}
 
-const Rows = ({tcs, flds}) => (
+const Field = ({ tc, fld, onClick }) => {
+  let style = { cursor: 'pointer' };
+  if (!field[fld].editable) style = { cursor: 'default' };
+
+  return (
+    <td style={style} key={fld} onClick={() => console.log({ fld, tc,style })}>
+      {tc[fld]}
+    </td>
+  );
+};
+
+const Rows = ({ tcs, flds }) => (
   <tbody>
-    {tcs.map(tc => <Row key={tc.id} tc={tc} flds={flds}/>)}
+    {tcs.map(tc => <Row key={tc.id} tc={tc} flds={flds} />)}
   </tbody>
-)
+);
 
 class Foo extends Component {
   constructor() {
@@ -59,15 +85,15 @@ class Foo extends Component {
   }
 
   render() {
-    const {flds} = this.props;
-    const {tcs} = this.state;
+    const { flds } = this.props;
+    const { tcs } = this.state;
     return (
       <div>
         <p>Foo {tcs.length}!</p>
-          <table>
-              <Header flds={flds}/>
-              <Rows flds={flds} tcs={tcs} />
-          </table>
+        <table>
+          <Header flds={flds} />
+          <Rows flds={flds} tcs={tcs} />
+        </table>
       </div>
     );
   }

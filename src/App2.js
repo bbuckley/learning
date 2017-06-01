@@ -199,6 +199,7 @@ class App2 extends Component {
                       <td style={style}>
                         <BitField fld="tags" />
                       </td>
+
                     </tr>
                   </tbody>
                 </table>

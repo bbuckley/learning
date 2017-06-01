@@ -73,15 +73,31 @@ class BitField extends Component {
     store.dispatch({ type: 'HIDE_FLIP', field: this.props.fld, value });
   }
 
+
   componentWillMount() {
     //console.log('bitfields component will mount', this.props.fld);
     firebase.database().ref(FIRE_NAME).on('value', snapshot => {
       const o = snapshot.val();
-      const tcs = Object.keys(o).map(k => {
+      let tcs = Object.keys(o).map(k => {
         const v = o[k];
         v.id = k;
         return v;
       });
+      tcs = tcs.map(tc => {
+        const b = new Date(tc.dob).getFullYear();
+        const h = new Date(tc.doe).getFullYear();
+        const e = new Date(tc.crd).getFullYear();
+
+        const hir_age = h - b;
+        const calc_age = e - b;
+        return { ...tc, hir_age, calc_age };
+      });
+
+      // this.props.personal.forEach(p => {
+      //   const i = tcs.findIndex(t => t.id === p.id);
+      //   if (i !== -1) tcs[i]['ptags'] = p['ptags'];
+      // });
+
       this.setState({ tcs });
 
       if (this.props.distribution) {
