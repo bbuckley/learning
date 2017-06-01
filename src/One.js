@@ -13,11 +13,13 @@ class One extends Component {
       'ric',
       'tags',
       'calc_type',
-      'dob',
-      'doe',
+      // 'dob',
+      // 'doe',
       'dot',
       'crd',
       'completed',
+      'notes',
+      'calc_age',
     ];
     this.state = {
       tc: null,
@@ -107,20 +109,37 @@ class One extends Component {
             {rows}
             <tr>
               <td>notes</td>
-              <td colSpan="2">
-                <textarea
-                  placeholder="describe test case"
-                  style={{
-                    width: '100%',
-                    height: '200px',
-                    fontFamily: 'Courier New',
-                    fontSize: 14,
-                  }}
-                  name="notes"
-                  onChange={this.onChange.bind(this)}
-                  value={this.state.edit['notes']}
-                />
-              </td>
+                <td colSpan="2">
+                  <textarea
+                    placeholder="describe test case"
+                    style={{
+                      width: '100%',
+                      height: '200px',
+                      fontFamily: 'Courier New',
+                      fontSize: 14,
+                    }}
+                    name="notes"
+                    onChange={this.onChange.bind(this)}
+                    value={this.state.edit['notes']}
+                  />
+                </td>
+            </tr>
+            <tr>
+              <td>personal notes</td>
+                <td colSpan="2">
+                  <textarea
+                    placeholder="personal notes"
+                    style={{
+                      width: '100%',
+                      height: '200px',
+                      fontFamily: 'Courier New',
+                      fontSize: 14,
+                    }}
+                    name="notes"
+                    onChange={this.onChange.bind(this)}
+                    value={this.state.edit['notes']}
+                  />
+                </td>
             </tr>
             <tr>
               <td colSpan="3">

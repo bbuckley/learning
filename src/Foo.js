@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 
 const field = {
-  id: { editable: true },
-  status: { editable: true },
-  calc_type: { editable: true },
+  id: { sortable: false, editable: true },
+  status: { sortable: true, editable: true },
+  calc_type: { sortable: true, editable: true },
   tags: { editable: true },
   ptags: { editable: true },
   doe: { editable: true },
