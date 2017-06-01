@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 
 const field = {
-  id: { sortable: false, editable: true },
+  id: { sortable: false, editable: false },
   status: { sortable: true, editable: true },
   calc_type: { sortable: true, editable: true },
   tags: { editable: true },
@@ -29,14 +29,18 @@ const Row = ({ flds, tc }) => (
     {flds.map(fld => <Field tc={tc} fld={fld} key={fld} />)}
   </tr>
 );
-// {flds.map(fld => <td key={fld}>{tc[fld]}</td>)}
 
 const Field = ({ tc, fld, onClick }) => {
-  let style = { cursor: 'pointer' };
-  if (!field[fld].editable) style = { cursor: 'default' };
+  const style = field[fld].editable
+    ? { cursor: 'pointer' }
+    : { cursor: 'not-allowed' };
+
+  const fClick = field[fld].editable
+    ? () => console.log({ fld, tc, style })
+    : null;
 
   return (
-    <td style={style} key={fld} onClick={() => console.log({ fld, tc,style })}>
+    <td style={style} key={fld} onClick={fClick}>
       {tc[fld]}
     </td>
   );
@@ -89,8 +93,8 @@ class Foo extends Component {
     const { tcs } = this.state;
     return (
       <div>
-        <p>Foo {tcs.length}!</p>
         <table>
+          <caption>Foo {tcs.length}!</caption>
           <Header flds={flds} />
           <Rows flds={flds} tcs={tcs} />
         </table>
