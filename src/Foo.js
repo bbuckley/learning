@@ -2,6 +2,26 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 
+const Header = ({flds}) => (
+  <thead>
+    <tr>
+      {flds.map(fld => <th key={fld}>{fld}</th>)}
+    </tr>
+  </thead>
+);
+
+const Row = ({flds, tc}) => (
+   <tr>
+      {flds.map(fld => <td key={fld}>{tc[fld]}</td>)}
+   </tr>
+);
+
+const Rows = ({tcs, flds}) => (
+  <tbody>
+    {tcs.map(tc => <Row key={tc.id} tc={tc} flds={flds}/>)}
+  </tbody>
+)
+
 class Foo extends Component {
   constructor() {
     super();
@@ -39,55 +59,24 @@ class Foo extends Component {
   }
 
   render() {
-    //const flds = ['id', 'status','dob', 'doe', 'pbc', 'hir_age', 'ptags'];
-    const flds = this.props.flds;
-    const header = <tr>{flds.map(fld => <th key={fld}>{fld}</th>)}</tr>;
-
-    const rows = this.state.tcs.map(tc => (
-      <tr key={tc['id']}>
-        {flds.map(fld => <td key={fld}>{tc[fld]}</td>)}
-      </tr>
-    ));
-
+    const {flds} = this.props;
+    const {tcs} = this.state;
     return (
       <div>
-        <p>Fooooo!{this.state.tcs.length}!</p>
-        <table>
-          <tbody>
-            {header}
-            {rows}
-          </tbody>
-        </table>
+        <p>Foo {tcs.length}!</p>
+          <table>
+              <Header flds={flds}/>
+              <Rows flds={flds} tcs={tcs} />
+          </table>
       </div>
     );
   }
 }
 
-//export default Foo;
-
-// const mapStateToProps = state => {
-//   let tcs;
-//   firebase.database().ref(FIRE_NAME).on('value', snapshot => {
-//     const o = snapshot.val();
-//     tcs = Object.keys(o).map(k => {
-//       const v = o[k];
-//       v.id = k;
-//       return v;
-//     });
-//     return {
-//       foos: 'testing...'
-//     }
-//   });
-// };
-
 const mapStateToProps = state => {
   return {
-    //     hide: state.hide,
-    //     edit: state.edit,
     personal: state.personal,
   };
 };
+
 export default connect(mapStateToProps)(Foo);
-//
-//export connect(mapStateToProps)(Foo);
-//
