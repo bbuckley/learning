@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
+import { store } from './index';
+import { SORT_TOGGLE } from './actions/index';
 
 const field = {
   id: { sortable: false, editable: false },
@@ -8,7 +10,7 @@ const field = {
   calc_type: { sortable: true, editable: true },
   tags: { editable: true },
   ptags: { editable: true },
-  doe: { editable: true },
+  doe: { sortable: true, editable: true },
   dot: { editable: true },
   dob: { editable: true },
   pbc: { editable: true },
@@ -16,13 +18,32 @@ const field = {
   calc_age: { editable: false },
 };
 
-const Header = ({ flds }) => (
-  <thead>
-    <tr>
-      {flds.map(fld => <th key={fld}>{fld}</th>)}
-    </tr>
-  </thead>
-);
+
+const HeadLink = ({ fld, isLive }) => {
+  // console.log({isLive});
+  if(!isLive) return (<th>{fld}</th>)
+  return (
+    <th>
+      <a
+        href="#"
+        onClick={() => {
+          store.dispatch({ type: SORT_TOGGLE, fld });
+        }}
+      >
+        {fld}
+      </a>
+    </th>
+  );
+};
+
+
+const Header = ({ flds, sort }) =>  (
+    <thead>
+      <tr>
+        {flds.map(fld => <HeadLink key={fld} fld={fld} isLive={field[fld].sortable} />)}
+      </tr>
+    </thead>
+  );
 
 const Row = ({ flds, tc }) => (
   <tr>
@@ -106,6 +127,7 @@ class Foo extends Component {
 const mapStateToProps = state => {
   return {
     personal: state.personal,
+    // sort: state.sort,
   };
 };
 
