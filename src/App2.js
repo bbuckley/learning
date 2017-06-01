@@ -25,7 +25,7 @@ const ListOne = () => {
   const ids = [
     '-KeVt1dUDpeOTBKLK5uH',
     '-KeY8FVZ5QFnFWth_SIe',
-    '-KeY8wPa0_TaQhSCcO-N'
+    '-KeY8wPa0_TaQhSCcO-N',
   ];
   const i = Math.floor(Math.random() * ids.length);
   const x = ids[i];
@@ -53,7 +53,7 @@ const randomBarp = () => {
 
 class Count extends Component {
   state = {
-    n: 0
+    n: 0,
   };
 
   render() {
@@ -75,7 +75,7 @@ class Count extends Component {
 }
 
 class App2 extends Component {
-  storeit(){
+  storeit() {
     return store;
   }
 
@@ -85,7 +85,7 @@ class App2 extends Component {
     return (
       <div style={{ padding: '15px' }}>
         <Link to="/">Home</Link>
-          - <Link to="/testview">TestView</Link>
+        - <Link to="/testview">TestView</Link>
         - <Link to="/pgatour">PgaTour!</Link>
         - <Link to="/BitField">BitField</Link>
         - <Link to="/BitArray">ArrayBit</Link>
@@ -203,7 +203,6 @@ class App2 extends Component {
                   </tbody>
                 </table>
 
-
                 <List />
 
               </div>
@@ -222,7 +221,7 @@ class App2 extends Component {
                     ['Four', 4, true],
                     ['Fourx', 0, false],
                     ['Foury', 3, false],
-                    ['[blank]', 4, true]
+                    ['[blank]', 4, true],
                   ]}
                 />
 
@@ -255,7 +254,11 @@ class App2 extends Component {
             render={({ name }) => <Barp name={name} />}
           />
           <Route exact={true} path="/ch" component={Checkboxes} />
-          <Route exact={true} path="/foo" render={() => <Foo flds={['id','dob','status']} />} />
+          <Route
+            exact={true}
+            path="/foo"
+            render={() => <Foo flds={['id', 'hir_age','calc_type','dob', 'doe','status','tags','ptags']} />}
+          />
           <Route exact={true} path="/rand" render={randomBarp} />
           <Route exact={true} path="/bar" render={() => <Bar name="Joe" />} />
           <Route exact={true} path="/count" render={() => <Count />} />
