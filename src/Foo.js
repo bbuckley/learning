@@ -4,6 +4,7 @@ import firebase, { FIRE_NAME } from './base';
 import { store } from './index';
 import { SORT_TOGGLE } from './actions/index';
 
+
 const field = {
   id: { sortable: false, editable: false },
   status: { sortable: true, editable: true },
