@@ -18,10 +18,8 @@ const field = {
   calc_age: { sortable: true, editable: false },
 };
 
-
 const HeadLink = ({ fld, isLive }) => {
-  // console.log({isLive});
-  if(!isLive) return (<th>{fld}</th>)
+  if (!isLive) return <th>{fld}</th>;
   return (
     <th>
       <a
@@ -36,14 +34,15 @@ const HeadLink = ({ fld, isLive }) => {
   );
 };
 
-
-const Header = ({ flds, sort }) =>  (
-    <thead>
-      <tr>
-        {flds.map(fld => <HeadLink key={fld} fld={fld} isLive={field[fld].sortable} />)}
-      </tr>
-    </thead>
-  );
+const Header = ({ flds, sort }) => (
+  <thead>
+    <tr>
+      {flds.map(fld => (
+        <HeadLink key={fld} fld={fld} isLive={field[fld].sortable} />
+      ))}
+    </tr>
+  </thead>
+);
 
 const Row = ({ flds, tc }) => (
   <tr>
