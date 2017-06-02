@@ -8,7 +8,7 @@ export const sort = (state = {}, { type, fld }) => {
       } else {
         return { fld, order: true };
       }
-      break;
+      //break;
     default:
       return state;
   }

@@ -3,23 +3,12 @@ import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 import { store } from './index';
 import { SORT_TOGGLE } from './actions/index';
-import { sorter } from './sort'
+import { sorter, symbol } from './sort';
 
-const field = {
-  id: { sortable: false, editable: false },
-  status: { sortable: true, editable: true },
-  calc_type: { sortable: true, editable: true },
-  tags: { isTag: true, sortable: false, editable: true },
-  ptags: { isTag: true, sortable: false, editable: true },
-  doe: { sortable: true, editable: true },
-  dot: { sortable: true, editable: true },
-  dob: { sortable: true, editable: true },
-  pbc: { sortable: true, editable: true },
-  hir_age: { sortable: true, editable: false },
-  calc_age: { sortable: true, editable: false },
-};
+import { fields } from './fields'
 
-const HeadLink = ({ fld, isLive }) => {
+
+const HeadLink = ({ fld, isLive, value }) => {
   if (!isLive) return <th>{fld}</th>;
   return (
     <th>
@@ -29,7 +18,7 @@ const HeadLink = ({ fld, isLive }) => {
           store.dispatch({ type: SORT_TOGGLE, fld });
         }}
       >
-        {fld}
+        {value}
       </a>
     </th>
   );
@@ -38,9 +27,16 @@ const HeadLink = ({ fld, isLive }) => {
 const Header = ({ flds, sort }) => (
   <thead>
     <tr>
-      {flds.map(fld => (
-        <HeadLink key={fld} fld={fld} isLive={field[fld].sortable} />
-      ))}
+      {flds.map(fld => {
+        return (
+          <HeadLink
+            key={fld}
+            fld={fld}
+            value={symbol(fld, sort)}
+            isLive={fields[fld].sortable}
+          />
+        );
+      })}
     </tr>
   </thead>
 );
@@ -52,11 +48,11 @@ const Row = ({ flds, tc }) => (
 );
 
 const Field = ({ tc, fld, onClick }) => {
-  const style = field[fld].editable
+  const style = fields[fld].editable
     ? { cursor: 'pointer' }
     : { cursor: 'not-allowed' };
 
-  const fClick = field[fld].editable
+  const fClick = fields[fld].editable
     ? () => console.log({ fld, tc, style })
     : null;
 
@@ -112,13 +108,13 @@ class Foo extends Component {
   render() {
     const { flds, sort } = this.props;
     let { tcs } = this.state;
-    
+
     tcs = sorter(tcs, sort);
     return (
       <div>
         <table>
           <caption>Foo {tcs.length}!</caption>
-          <Header flds={flds} />
+          <Header flds={flds} sort={sort} />
           <Rows flds={flds} tcs={tcs} />
         </table>
       </div>
