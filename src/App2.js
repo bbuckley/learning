@@ -258,7 +258,7 @@ class App2 extends Component {
           <Route
             exact={true}
             path="/foo"
-            render={() => <Foo flds={['pbc','hir_age','calc_type','dob', 'doe','status','tags','ptags']} />}
+            render={() => <Foo flds={['id','pbc','hir_age','calc_type','dob', 'doe','status','tags','ptags']} />}
           />
           <Route exact={true} path="/rand" render={randomBarp} />
           <Route exact={true} path="/bar" render={() => <Bar name="Joe" />} />

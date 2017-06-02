@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 import { store } from './index';
 import { SORT_TOGGLE } from './actions/index';
-
+import { sorter } from './sort'
 
 const field = {
   id: { sortable: false, editable: false },
@@ -11,7 +11,7 @@ const field = {
   calc_type: { sortable: true, editable: true },
   tags: { isTag: true, sortable: false, editable: true },
   ptags: { isTag: true, sortable: false, editable: true },
-  doe: { sortable: true, sortable: true, editable: true },
+  doe: { sortable: true, editable: true },
   dot: { sortable: true, editable: true },
   dob: { sortable: true, editable: true },
   pbc: { sortable: true, editable: true },
@@ -110,8 +110,10 @@ class Foo extends Component {
   }
 
   render() {
-    const { flds } = this.props;
-    const { tcs } = this.state;
+    const { flds, sort } = this.props;
+    let { tcs } = this.state;
+    
+    tcs = sorter(tcs, sort);
     return (
       <div>
         <table>
@@ -127,7 +129,7 @@ class Foo extends Component {
 const mapStateToProps = state => {
   return {
     personal: state.personal,
-    // sort: state.sort,
+    sort: state.sort,
   };
 };
 

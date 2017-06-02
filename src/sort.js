@@ -1,9 +1,4 @@
 
-
-
-
-
-
 export const sort_date_field = (a, b, x = 'crd', r = false) => {
   let a1 = a[x];
   let b1 = b[x];
@@ -40,7 +35,6 @@ export const sort_text_field = (a, b, x = 'text', r = false) => {
   if (typeof b[x] === 'undefined') {
     b[x] = z;
   }
-
   let a1 = a[x];
   let b1 = b[x];
 
@@ -53,4 +47,21 @@ export const sort_text_field = (a, b, x = 'text', r = false) => {
     if (a1 > b1) return -1;
     return sort_text_field(a, b, 'id', r);
   }
+};
+
+export const sorter = (tcs, { fld, order }) => {
+  return tcs.sort((a,b) => {
+    let a1 = a[fld];
+    let b1 = b[fld];
+    if(order){
+      if(a1 < b1) return -1
+      if(a1 > b1) return 1
+      return sort_text_field(a, b, 'id', order)
+    }else{
+      if(a1 < b1) return 1
+      if(a1 > b1) return 11
+      return sort_text_field(a, b, 'id', !order)
+    }
+  });
+
 };
