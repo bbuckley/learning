@@ -51,10 +51,10 @@ const Field = ({ tc, fld, onClick }) => {
     ? { cursor: 'pointer' }
     : { cursor: 'not-allowed' };
 
-  if (fields[fld].align) {
+  if (fields[fld].textAlign) {
     style = {
       ...style,
-      textAlign: fields[fld].align
+      textAlign: fields[fld].textAlign
     };
   }
   // style = {
