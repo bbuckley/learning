@@ -57,11 +57,6 @@ const Field = ({ tc, fld, onClick }) => {
       textAlign: fields[fld].textAlign
     };
   }
-  // style = {
-  //   ...style,
-  //   textAlign: fields[fld].align ? fields[fld].align : 'left',
-  // };
-
   const fClick = fields[fld].editable ? () => console.log({ fld, tc }) : null;
 
   return (
