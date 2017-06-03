@@ -50,10 +50,17 @@ const Field = ({ tc, fld, onClick }) => {
   let style = fields[fld].editable
     ? { cursor: 'pointer' }
     : { cursor: 'not-allowed' };
-  style = {
-    ...style,
-    textAlign: fields[fld].align ? fields[fld].align : 'left',
-  };
+
+  if (fields[fld].align) {
+    style = {
+      ...style,
+      textAlign: fields[fld].align
+    };
+  }
+  // style = {
+  //   ...style,
+  //   textAlign: fields[fld].align ? fields[fld].align : 'left',
+  // };
 
   const fClick = fields[fld].editable ? () => console.log({ fld, tc }) : null;
 
