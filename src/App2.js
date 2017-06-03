@@ -13,6 +13,7 @@ import BitField from './BitField';
 import ListView from './ListView';
 import PgaTourView from './pgatourview';
 import Foo from './Foo';
+import FooFilter from './FooFilter';
 
 import { store } from './index';
 
@@ -94,6 +95,7 @@ class App2 extends Component {
         - <Link to="/basic">Basic</Link>
         - <Link to="/barp">Barp</Link>
         - <Link to="/foo">Foo</Link>
+      - <Link to="/foo_filter">FooFilter</Link>
         - <Link to="/rand">Rand</Link>
         - <Link to="/ch">ch</Link>
         - <Link to="/count">count</Link>
@@ -255,11 +257,16 @@ class App2 extends Component {
             render={({ name }) => <Barp name={name} />}
           />
           <Route exact={true} path="/ch" component={Checkboxes} />
-          <Route
-            exact={true}
-            path="/foo"
-            render={() => <Foo flds={['tc','pbc','hir_age','calc_age','calc_type','dob', 'doe','dot','bcd','status','tags','ptags']} />}
-          />
+            <Route
+              exact={true}
+              path="/foo"
+              render={() => <Foo flds={['tc','pbc','hir_age','calc_age','calc_type','dob', 'doe','dot','bcd','status','tags','ptags']} />}
+            />
+            <Route
+              exact={true}
+              path="/foo_filter"
+              render={() => <FooFilter />}
+            />
           <Route exact={true} path="/rand" render={randomBarp} />
           <Route exact={true} path="/bar" render={() => <Bar name="Joe" />} />
           <Route exact={true} path="/count" render={() => <Count />} />

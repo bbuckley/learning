@@ -8,7 +8,7 @@
 .One table {
     border-collapse: collapse;
     border-style: hidden;
-    background-color: pink
+    background-color: grey
 }
 
 .One table td, table th {
@@ -19,7 +19,7 @@
 
 .One table caption {
     text-align: left;
-    background: pink;
+    /*background: pink;*/
 }
 
 .One table form {

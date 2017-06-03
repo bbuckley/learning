@@ -6,9 +6,21 @@ import { SORT_TOGGLE } from './actions/index';
 import { sorter, symbol } from './sort';
 
 import { fields } from './fields';
+// import ReactTooltip from 'react-tooltip';
 
 const HeadLink = ({ fld, isLive, value }) => {
+  // let display
+  // if(fields[fld].tooltip){
+  //   display =
+  //   <span>
+  //   <p data-tip={fields[fld].tooltip}>{fld}</p>
+  //   <ReactTooltip />
+  //   </span>
+  // }else{
+  //   display = fld
+  // }
   if (!isLive) return <th>{fld}</th>;
+
   return (
     <th>
       <a
@@ -54,9 +66,10 @@ const Field = ({ tc, fld, onClick }) => {
   if (fields[fld].textAlign) {
     style = {
       ...style,
-      textAlign: fields[fld].textAlign
+      textAlign: fields[fld].textAlign,
     };
   }
+
   const fClick = fields[fld].editable ? () => console.log({ fld, tc }) : null;
 
   return (
