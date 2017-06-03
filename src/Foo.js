@@ -5,8 +5,7 @@ import { store } from './index';
 import { SORT_TOGGLE } from './actions/index';
 import { sorter, symbol } from './sort';
 
-import { fields } from './fields'
-
+import { fields } from './fields';
 
 const HeadLink = ({ fld, isLive, value }) => {
   if (!isLive) return <th>{fld}</th>;
@@ -48,13 +47,15 @@ const Row = ({ flds, tc }) => (
 );
 
 const Field = ({ tc, fld, onClick }) => {
-  const style = fields[fld].editable
+  let style = fields[fld].editable
     ? { cursor: 'pointer' }
     : { cursor: 'not-allowed' };
+  style = {
+    ...style,
+    textAlign: fields[fld].align ? fields[fld].align : 'left',
+  };
 
-  const fClick = fields[fld].editable
-    ? () => console.log({ fld, tc, style })
-    : null;
+  const fClick = fields[fld].editable ? () => console.log({ fld, tc }) : null;
 
   return (
     <td style={style} key={fld} onClick={fClick}>
