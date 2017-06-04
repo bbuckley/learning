@@ -24,6 +24,8 @@ const attr = ['alignText', 'editable', 'sort_type', 'sortable', 'tooltip'];
 
 console.log({all,calculated, personal, attr});
 
+
+
 export const fields = {
   id: { sort_type: 'text', sortable: false, editable: false },
   tc: { sort_type: 'number', sortable: true, editable: false },
