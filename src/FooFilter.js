@@ -63,4 +63,3 @@ const mapStateToProps = state => {
    };
  };
 export default connect(mapStateToProps)(FooFilter);
-//export default FooFilter;
