@@ -4,11 +4,16 @@ const all = [
   'doe',
   'dot',
   'pbc',
+  'ric',
+  'rics',
   'completed',
   'certed',
   'run',
   'status',
+  'ssn',
+  'origngal_ssn',
   'tc',
+  'tags',
   'ptags',
 ];
 
@@ -16,6 +21,8 @@ const calculated = ['calc_age', 'hir_age'];
 const personal = ['ptags', 'pnotes'];
 
 const attr = ['alignText', 'editable', 'sort_type', 'sortable', 'tooltip'];
+
+console.log({all,calculated, personal, attr});
 
 export const fields = {
   id: { sort_type: 'text', sortable: false, editable: false },

@@ -3,8 +3,15 @@ import { connect } from 'react-redux';
 import  Foo from './Foo';
 import  BitField from './BitField';
 import firebase, { FIRE_NAME } from './base';
+import { filter} from './filter'
 
 class FooFilter extends Component {
+  constructor(){
+    super()
+    this.state = {
+      tcs: []
+    }
+  }
   componentDidMount() {
     firebase.database().ref(FIRE_NAME).on('value', snapshot => {
       const o = snapshot.val();
@@ -34,12 +41,15 @@ class FooFilter extends Component {
   }
 
   render() {
+    let orig = this.state.tcs
+    let tcs = filter(this.props.hide, orig);
+
     return (
       <div>
-        <p>FooFilter</p>
+        <p>FooFilter {`${tcs.length} of ${orig.length}`}</p>
 
         <BitField fld='pbc' />
-        <Foo flds={['pbc','calc_type']} />
+        <Foo tcs={tcs} flds={['tc','pbc','calc_type']} />
       </div>
     );
   }
@@ -48,6 +58,7 @@ class FooFilter extends Component {
 }
 const mapStateToProps = state => {
    return {
+     hide: state.hide,
      personal: state.personal
    };
  };

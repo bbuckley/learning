@@ -123,7 +123,7 @@ class Foo extends Component {
 
   render() {
     const { flds, sort } = this.props;
-    let { tcs } = this.state;
+    let { tcs } = this.props;
 
     tcs = sorter(tcs, sort);
     return (
