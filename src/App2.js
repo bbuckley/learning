@@ -17,6 +17,9 @@ import FooFilter from './FooFilter';
 
 import { store } from './index';
 
+import { connect } from 'react-redux';
+import firebase, { FIRE_NAME } from './base';
+
 const NotFound = () => <div>not found</div>;
 // const Foo = () => <div style={{ padding: '20px' }}>this is foo</div>;
 const Bar = props => <div>Bar {props.name}</div>;
@@ -76,8 +79,38 @@ class Count extends Component {
 }
 
 class App2 extends Component {
-  storeit() {
-    return store;
+  constructor() {
+    super();
+    this.state = {
+      tcs: [],
+    };
+  }
+
+  componentWillMount() {
+    firebase.database().ref(FIRE_NAME).on('value', snapshot => {
+      const o = snapshot.val();
+      let tcs = Object.keys(o).map(k => {
+        const v = o[k];
+        v.id = k;
+        return v;
+      });
+
+      tcs = tcs.map(tc => {
+        const b = new Date(tc.dob).getFullYear();
+        const h = new Date(tc.doe).getFullYear();
+        const e = new Date(tc.crd).getFullYear();
+        const hir_age = h - b;
+        const calc_age = e - b;
+        return { ...tc, hir_age, calc_age };
+      });
+
+      this.props.personal.forEach(p => {
+        const i = tcs.findIndex(t => t.id === p.id);
+        if (i !== -1) tcs[i]['ptags'] = p['ptags'];
+      });
+
+      this.setState({ tcs });
+    });
   }
 
   render() {
@@ -95,7 +128,7 @@ class App2 extends Component {
         - <Link to="/basic">Basic</Link>
         - <Link to="/barp">Barp</Link>
         - <Link to="/foo">Foo</Link>
-      - <Link to="/foo_filter">FooFilter</Link>
+        - <Link to="/foo_filter">FooFilter</Link>
         - <Link to="/rand">Rand</Link>
         - <Link to="/ch">ch</Link>
         - <Link to="/count">count</Link>
@@ -257,16 +290,33 @@ class App2 extends Component {
             render={({ name }) => <Barp name={name} />}
           />
           <Route exact={true} path="/ch" component={Checkboxes} />
-            <Route
-              exact={true}
-              path="/foo"
-              render={() => <Foo flds={['tc','pbc','hir_age','calc_age','calc_type','dob', 'doe','dot','bcd','status','tags','ptags']} />}
-            />
-            <Route
-              exact={true}
-              path="/foo_filter"
-              render={() => <FooFilter />}
-            />
+          <Route
+            exact={true}
+            path="/foo"
+            render={() => (
+              <Foo
+                flds={[
+                  'tc',
+                  'pbc',
+                  'hir_age',
+                  'calc_age',
+                  'calc_type',
+                  'dob',
+                  'doe',
+                  'dot',
+                  'bcd',
+                  'status',
+                  'tags',
+                  'ptags',
+                ]}
+              />
+            )}
+          />
+          <Route
+            exact={true}
+            path="/foo_filter"
+            render={() => <FooFilter tcs={this.state.tcs} />}
+          />
           <Route exact={true} path="/rand" render={randomBarp} />
           <Route exact={true} path="/bar" render={() => <Bar name="Joe" />} />
           <Route exact={true} path="/count" render={() => <Count />} />
@@ -296,5 +346,18 @@ class App2 extends Component {
   }
 }
 
-// export default App2;
+App2.defaultProps = {
+  personal: [],
+};
+
 export default App2;
+//export default App2;
+
+const mapStateToProps = state => {
+  return {
+    personal: state.personal,
+  };
+};
+//
+//export default connect(mapStateToProps)(App2);
+connect(mapStateToProps)(App2);
