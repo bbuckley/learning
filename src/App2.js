@@ -10,6 +10,7 @@ import BasicExample from './basic';
 import { Schedule } from './team';
 import BitArray from './BitArray';
 import BitField from './BitField';
+import BitField2 from './BitField2';
 import ListView from './ListView';
 import PgaTourView from './pgatourview';
 import Foo from './Foo';
@@ -234,12 +235,15 @@ class App2 extends Component {
                       <td style={style}>
                         <BitField fld="tags" />
                       </td>
+                      <td style={style}>
+                        <BitField2 tcs={this.state.tcs} fld="pbc" />
+                      </td>
 
                     </tr>
                   </tbody>
                 </table>
 
-                <List />
+                <List tcs={this.state.tcs}/>
 
               </div>
             )}
