@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import  Foo from './Foo';
-import  BitField from './BitField';
-import firebase, { FIRE_NAME } from './base';
+import  BitField2 from './BitField2';
 import { filter} from './filter'
 
 class FooFilter extends Component {
@@ -15,14 +14,31 @@ class FooFilter extends Component {
       <div>
         <p>FooFilter {`${tcs.length} of ${orig.length}`}</p>
 
-        <BitField fld='pbc' />
-        <Foo tcs={tcs} flds={['tc','pbc','calc_type']} />
+        <div>
+          <table>
+            <tbody>
+              <tr><td>
+                <BitField2 tcs={orig} fld='pbc' />
+                <BitField2 tcs={tcs} fld='calc_type' />
+              </td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <Foo tcs={tcs} flds={this.props.flds} />
       </div>
     );
   }
 
 
 }
+
+
+FooFilter.defaultProps = {
+  tcs: [],
+  flds: ['tc','pbc','calc_type','hir_age', 'calc_age']
+};
+
 const mapStateToProps = state => {
    return {
      hide: state.hide,

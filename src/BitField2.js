@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import firebase, { FIRE_NAME } from './base';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { store } from './index';
@@ -23,12 +22,12 @@ const tagParse = str => {
 };
 
 class BitField2 extends Component {
-  componentWillReceiveProps(nextProps) {
-    //console.log('BitField props changed', { data: this.state.data, nextProps });
-    const vs = nextProps.hide || [];
-    const data = this.state.data.map(([v, ct, ch]) => [v, ct, !vs.includes(v)]);
-    this.setState({ data });
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   //console.log('BitField props changed', { data: this.state.data, nextProps });
+  //   const vs = nextProps.hide || [];
+  //   const data = this.state.data.map(([v, ct, ch]) => [v, ct, !vs.includes(v)]);
+  //   this.setState({ data });
+  // }
 
   setAll() {
     this.setInternals(this.state.data.map(([val, ct]) => [val, ct, true]));

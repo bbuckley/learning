@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import firebase, { FIRE_NAME } from './base';
 import { store } from './index';
 import { SORT_TOGGLE } from './actions/index';
 import { sorter, symbol } from './sort';
@@ -86,44 +85,10 @@ const Rows = ({ tcs, flds }) => (
 );
 
 class Foo extends Component {
-  constructor() {
-    super();
-    this.state = {
-      tcs: [],
-    };
-  }
-
-  componentDidMount() {
-    firebase.database().ref(FIRE_NAME).on('value', snapshot => {
-      const o = snapshot.val();
-      let tcs = Object.keys(o).map(k => {
-        const v = o[k];
-        v.id = k;
-        return v;
-      });
-
-      tcs = tcs.map(tc => {
-        const b = new Date(tc.dob).getFullYear();
-        const h = new Date(tc.doe).getFullYear();
-        const e = new Date(tc.crd).getFullYear();
-
-        const hir_age = h - b;
-        const calc_age = e - b;
-        return { ...tc, hir_age, calc_age };
-      });
-
-      this.props.personal.forEach(p => {
-        const i = tcs.findIndex(t => t.id === p.id);
-        if (i !== -1) tcs[i]['ptags'] = p['ptags'];
-      });
-
-      this.setState({ tcs });
-    });
-  }
 
   render() {
     const { flds, sort } = this.props;
-    let { tcs } = this.state;
+    let { tcs } = this.props;
 
     tcs = sorter(tcs, sort);
     return (
@@ -144,5 +109,11 @@ const mapStateToProps = state => {
     sort: state.sort,
   };
 };
+
+Foo.defaultProps = {
+  flds: ['tc','pbc','calc_type'],
+  tcs: []
+};
+
 
 export default connect(mapStateToProps)(Foo);

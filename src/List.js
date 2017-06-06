@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase, { FIRE_NAME } from './base';
+//import firebase, { FIRE_NAME } from './base';
 import './List.css';
 //import BitArray from './BitArray';
 import { filter } from './filter';
@@ -85,23 +85,23 @@ class List extends Component {
   render() {
     let { tcs } = this.props;
 
-    let flds1 = [
-      'tc',
-      'pbc',
-      'ric',
-      'status',
-      'calc_type',
-      'dob',
-      'doe',
-      'crd',
-      'completed',
-      'tags',
-      'ptags',
-      'run',
-      'hir_age',
-      'calc_age',
-    ];
-    const flds = this.props.flds || flds1;
+    // let flds1 = [
+    //   'tc',
+    //   'pbc',
+    //   'ric',
+    //   'status',
+    //   'calc_type',
+    //   'dob',
+    //   'doe',
+    //   'crd',
+    //   'completed',
+    //   'tags',
+    //   'ptags',
+    //   'run',
+    //   'hir_age',
+    //   'calc_age',
+    // ];
+    const flds = this.props.flds; //|| flds1;
 
     const tcount = tcs.length;
     tcs = filter(this.props.hide, tcs);
@@ -272,7 +272,23 @@ class List extends Component {
 }
 
 List.defaultProps = {
-  tcs: []
+  tcs: [],
+  flds: [
+    'tc',
+    'pbc',
+    'ric',
+    'status',
+    'calc_type',
+    'dob',
+    'doe',
+    'crd',
+    'completed',
+    'tags',
+    'ptags',
+    'run',
+    'hir_age',
+    'calc_age',
+  ],
 };
 
 const mapStateToProps = state => {

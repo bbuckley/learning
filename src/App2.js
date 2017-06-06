@@ -243,7 +243,7 @@ class App2 extends Component {
                   </tbody>
                 </table>
 
-                <List tcs={this.state.tcs}/>
+                <List tcs={this.state.tcs} />
 
               </div>
             )}
@@ -298,22 +298,26 @@ class App2 extends Component {
             exact={true}
             path="/foo"
             render={() => (
-              <Foo
-                flds={[
-                  'tc',
-                  'pbc',
-                  'hir_age',
-                  'calc_age',
-                  'calc_type',
-                  'dob',
-                  'doe',
-                  'dot',
-                  'bcd',
-                  'status',
-                  'tags',
-                  'ptags',
-                ]}
-              />
+              <div>
+                <Foo
+                  tcs={this.state.tcs}
+                  flds={[
+                    'tc',
+                    'pbc',
+                    'hir_age',
+                    'calc_age',
+                    'calc_type',
+                    'dob',
+                    'doe',
+                    'dot',
+                    'bcd',
+                    'status',
+                    'tags',
+                    'ptags',
+                  ]}
+                />
+              <Foo />
+              </div>
             )}
           />
           <Route
