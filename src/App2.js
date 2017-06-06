@@ -15,6 +15,7 @@ import ListView from './ListView';
 import PgaTourView from './pgatourview';
 import Foo from './Foo';
 import FooFilter from './FooFilter';
+import A from './A';
 
 import { store } from './index';
 
@@ -141,6 +142,7 @@ class App2 extends Component {
         - <Link to="/one_id/-KeY8wPngcO">no tc</Link>
         - <Link to="/list">List</Link>
         - <Link to="/RandomOne">RandomOne</Link>
+      - <Link to="/a">A</Link>
 
         <Switch>
           <Route
@@ -153,6 +155,7 @@ class App2 extends Component {
             )}
           />
           <Route exact={true} path="/" render={() => <p>Welcome</p>} />
+          <Route exact={true} path="/a" render={() => <div><A/></div>} />
           <Route exact={true} path="/team" component={Schedule} />
           <Route exact={true} path="/pgatour" component={PgaTourView} />
           <Route
