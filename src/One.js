@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import firebase, { FIRE_NAME } from './base';
 import './One.css';
+import {fields} from './fields'
 
 const dates = ['crd', 'doe', 'dot', 'dob'];
 
@@ -78,6 +79,23 @@ class One extends Component {
       </tr>
     );
 
+    const Field = ({ fld }) => {
+      if(!(fields[fld] && fields[fld].editable)) return <td>{tc[fld]}xxx</td>
+      return (
+        <div>
+          {' '}
+          <input
+            style={{ fontFamily: 'Courier New' }}
+            name={fld}
+            value={this.state.edit[fld]}
+            onChange={this.onChange.bind(this)}
+            type="text"
+            placeholder={dates.includes(fld) ? 'mm/dd/yyyy' : 'enter value'}
+          />
+        </div>
+      );
+    };
+
     const rows = this.flds.map(fld => {
       return (
         <tr key={fld}>
@@ -92,6 +110,7 @@ class One extends Component {
               type="text"
               placeholder={dates.includes(fld) ? 'mm/dd/yyyy' : 'enter value'}
             />
+          <Field fld={fld} />
           </td>
           <td>{tc[fld]}</td>
         </tr>
@@ -109,37 +128,37 @@ class One extends Component {
             {rows}
             <tr>
               <td>notes</td>
-                <td colSpan="2">
-                  <textarea
-                    placeholder="describe test case"
-                    style={{
-                      width: '100%',
-                      height: '200px',
-                      fontFamily: 'Courier New',
-                      fontSize: 14,
-                    }}
-                    name="notes"
-                    onChange={this.onChange.bind(this)}
-                    value={this.state.edit['notes']}
-                  />
-                </td>
+              <td colSpan="2">
+                <textarea
+                  placeholder="describe test case"
+                  style={{
+                    width: '100%',
+                    height: '200px',
+                    fontFamily: 'Courier New',
+                    fontSize: 14,
+                  }}
+                  name="notes"
+                  onChange={this.onChange.bind(this)}
+                  value={this.state.edit['notes']}
+                />
+              </td>
             </tr>
             <tr>
               <td>personal notes</td>
-                <td colSpan="2">
-                  <textarea
-                    placeholder="personal notes"
-                    style={{
-                      width: '100%',
-                      height: '200px',
-                      fontFamily: 'Courier New',
-                      fontSize: 14,
-                    }}
-                    name="notes"
-                    onChange={this.onChange.bind(this)}
-                    value={this.state.edit['notes']}
-                  />
-                </td>
+              <td colSpan="2">
+                <textarea
+                  placeholder="personal notes"
+                  style={{
+                    width: '100%',
+                    height: '200px',
+                    fontFamily: 'Courier New',
+                    fontSize: 14,
+                  }}
+                  name="notes"
+                  onChange={this.onChange.bind(this)}
+                  value={this.state.edit['notes']}
+                />
+              </td>
             </tr>
             <tr>
               <td colSpan="3">
