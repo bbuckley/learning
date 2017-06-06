@@ -74,6 +74,7 @@ class BitField2 extends Component {
 
   //componentWillMount() {
 componentWillReceiveProps(nextProps){
+    console.log('in componentWillRecieveProps');
 
      const tcs = nextProps.tcs
 
@@ -159,6 +160,7 @@ componentWillReceiveProps(nextProps){
   render() {
     const { data } = this.state;
     if (data === undefined) {
+    //if (this.props.tcs === []) {
       return <div>no data</div>;
     }
 
