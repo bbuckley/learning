@@ -142,7 +142,7 @@ class App2 extends Component {
         - <Link to="/one_id/-KeY8wPngcO">no tc</Link>
         - <Link to="/list">List</Link>
         - <Link to="/RandomOne">RandomOne</Link>
-      - <Link to="/a">A</Link>
+        - <Link to="/aaa">A</Link>
 
         <Switch>
           <Route
@@ -155,7 +155,11 @@ class App2 extends Component {
             )}
           />
           <Route exact={true} path="/" render={() => <p>Welcome</p>} />
-          <Route exact={true} path="/a" render={() => <div><A/></div>} />
+          <Route
+            exact={true}
+            path="/aaa"
+            render={() => <A foo="1" bar="2" tcs={this.state.tcs} />}
+          />
           <Route exact={true} path="/team" component={Schedule} />
           <Route exact={true} path="/pgatour" component={PgaTourView} />
           <Route
@@ -319,7 +323,7 @@ class App2 extends Component {
                     'ptags',
                   ]}
                 />
-              <Foo />
+                <Foo />
               </div>
             )}
           />
