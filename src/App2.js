@@ -89,12 +89,12 @@ class App2 extends Component {
   }
 
   componentDidMount() {
-    console.log('App 2componentDidMount');
-    console.log(this.props);
+    //console.log('App 2componentDidMount');
+    //console.log(this.props);
     this.prepareTcs(this.props);
   }
   componentWillMount() {
-    console.log('App 2componentWillMount');
+    //console.log('App 2componentWillMount');
     this.prepareTcs();
   }
 
