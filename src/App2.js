@@ -84,11 +84,22 @@ class App2 extends Component {
   constructor() {
     super();
     this.state = {
-      tcs: [],
+      tcs: [{ id: '1' }, { id: '2' }], //two fake starter tc
     };
   }
 
+  componentDidMount() {
+    console.log('App 2componentDidMount');
+    console.log(this.props);
+    this.prepareTcs(this.props);
+  }
   componentWillMount() {
+    console.log('App 2componentWillMount');
+    this.prepareTcs();
+  }
+
+  prepareTcs(props) {
+    const usedProps = this.props || props;
     firebase.database().ref(FIRE_NAME).on('value', snapshot => {
       const o = snapshot.val();
       let tcs = Object.keys(o).map(k => {
@@ -96,7 +107,6 @@ class App2 extends Component {
         v.id = k;
         return v;
       });
-
       tcs = tcs.map(tc => {
         const b = new Date(tc.dob).getFullYear();
         const h = new Date(tc.doe).getFullYear();
@@ -105,12 +115,10 @@ class App2 extends Component {
         const calc_age = e - b;
         return { ...tc, hir_age, calc_age };
       });
-
-      this.props.personal.forEach(p => {
+      usedProps.personal.forEach(p => {
         const i = tcs.findIndex(t => t.id === p.id);
         if (i !== -1) tcs[i]['ptags'] = p['ptags'];
       });
-
       this.setState({ tcs });
     });
   }
@@ -158,7 +166,27 @@ class App2 extends Component {
           <Route
             exact={true}
             path="/aaa"
-            render={() => <A foo="1" bar="2" tcs={this.state.tcs} />}
+            render={() => (
+              <div>
+                <A fld="calc_type" tcs={this.state.tcs} />
+                <A
+                  fld="calc_age"
+                  tcs={this.state.tcs}
+                  f={(fld, tc) => {
+                    return tc[fld] % 5 * 5;
+                  }}
+                />
+                <A
+                  fld="doe"
+                  tcs={this.state.tcs}
+                  f={(fld, tc) => {
+                    return new Date(tc[fld]).getFullYear();
+                  }}
+                />
+                <A fld="pbc" tcs={this.state.tcs} />
+
+              </div>
+            )}
           />
           <Route exact={true} path="/team" component={Schedule} />
           <Route exact={true} path="/pgatour" component={PgaTourView} />
