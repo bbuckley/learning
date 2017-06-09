@@ -151,6 +151,7 @@ class App2 extends Component {
         - <Link to="/list">List</Link>
         - <Link to="/RandomOne">RandomOne</Link>
         - <Link to="/aaa">A</Link>
+        <a href="#" onClick={() => console.log(store.getState())}>state </a>
 
         <Switch>
           <Route
@@ -158,7 +159,7 @@ class App2 extends Component {
             path="/testview"
             render={() => (
               <div>
-                <ListView />
+                <ListView tcs={this.state.tcs} />
               </div>
             )}
           />

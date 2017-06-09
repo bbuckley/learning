@@ -6,6 +6,8 @@ import { store } from './index';
 import { VIEW_SET } from './actions/index';
 import { Link } from 'react-router-dom';
 
+import { allFields as all } from './fields'
+
 class ListView extends Component {
   render() {
     const { view } = this.props;
@@ -14,26 +16,25 @@ class ListView extends Component {
     switch (view) {
       case 'all':
         x = (
-          <List
-            flds={['calc_type', 'pbc', 'status', 'crd', 'dob', 'doe', 'tags']}
+          <List {...this.props} flds={all}
           />
         );
         break;
       case 'dates':
-        x = <List flds={['crd', 'dob', 'doe']} />;
+        x = <List {...this.props} flds={['crd', 'dob', 'doe']} />;
         break;
       case 'full':
         x = <Checkboxes />;
         break;
       default:
-        x = <List />;
+        x = <List {...this.props}/>;
     }
 
-    const SetView = value => {
-      return () => {
-        store.dispatch({ type: VIEW_SET, value });
-      };
-    };
+    // const SetView = value => {
+    //   return () => {
+    //     store.dispatch({ type: VIEW_SET, value });
+    //   };
+    // };
 
     // const Links = {array} => this.props.array.reduce((a, b) =>
     //   <Link to="#" onClick={SetView(b)}>(b)</Link>)
@@ -61,15 +62,11 @@ class ListView extends Component {
               }}
             >
               dates
-            </Link> -
-
-            <Link to="#" onClick={SetView('dates')}>dates</Link> -
-            <Link to="#" onClick={SetView('all')}>all</Link> -
-            <Link to="#" onClick={SetView('full')}>full</Link>
-
+            </Link>
 
           </p>
 
+{/*
           <a
             href="#"
             onClick={() => {
@@ -90,6 +87,8 @@ class ListView extends Component {
           >
             edit
           </a>
+          */}
+
         </p>
 
         <p>{x}</p>

@@ -1,4 +1,4 @@
-const all = [
+export const allFields = [
   'id',
   'bcd',
   'doe',
@@ -22,7 +22,7 @@ const personal = ['ptags', 'pnotes'];
 
 const attr = ['alignText', 'editable', 'sort_type', 'sortable', 'tooltip'];
 
-console.log({all,calculated, personal, attr});
+console.log({allFields,calculated, personal, attr});
 
 
 
