@@ -17,14 +17,13 @@ export const allFields = [
   'ptags',
 ];
 
+export const dates = ['crd', 'dob', 'doe', 'dot', 'bcd'];
 const calculated = ['calc_age', 'hir_age'];
 const personal = ['ptags', 'pnotes'];
 
 const attr = ['alignText', 'editable', 'sort_type', 'sortable', 'tooltip'];
 
-console.log({allFields,calculated, personal, attr});
-
-
+console.log({ allFields, calculated, personal, attr });
 
 export const fields = {
   id: { sort_type: 'text', sortable: false, editable: false },
@@ -36,6 +35,7 @@ export const fields = {
     editable: true,
   },
   calc_type: { sort_type: 'text', sortable: true, editable: true },
+  crd: { editable: true },
   tags: { tooltip: 'shared tag', isTag: true, sortable: false, editable: true },
   ptags: {
     tooltip: 'personal tag',

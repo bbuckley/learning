@@ -38,7 +38,6 @@ const ListOne = () => {
   return (
     <div>
       <One id={x} />
-      <List />
     </div>
   );
 };

@@ -16,6 +16,7 @@ import {
   PERSONAL_EDIT,
 } from './actions/index';
 // import BitField from './BitField';
+import {fields} from './fields'
 
 class List extends Component {
   state = {
@@ -54,53 +55,8 @@ class List extends Component {
     this.setState({ input });
   }
 
-  // componentWillMount() {
-  //   firebase.database().ref(FIRE_NAME).on('value', snapshot => {
-  //     const o = snapshot.val();
-  //     let tcs = Object.keys(o).map(k => {
-  //       const v = o[k];
-  //       v.id = k;
-  //       return v;
-  //     });
-  //
-  //     tcs = tcs.map(tc => {
-  //       const b = new Date(tc.dob).getFullYear();
-  //       const h = new Date(tc.doe).getFullYear();
-  //       const e = new Date(tc.crd).getFullYear();
-  //       const hir_age = h - b;
-  //       const calc_age = e - b;
-  //       return { ...tc, hir_age, calc_age };
-  //     });
-  //
-  //     this.props.personal.forEach(p => {
-  //       const i = tcs.findIndex(t => t.id === p.id);
-  //       if (i !== -1) tcs[i]['ptags'] = p['ptags'];
-  //     });
-  //
-  //
-  //     this.setState({ tcs });
-  //   });
-  // }
-
   render() {
     let { tcs } = this.props;
-
-    // let flds1 = [
-    //   'tc',
-    //   'pbc',
-    //   'ric',
-    //   'status',
-    //   'calc_type',
-    //   'dob',
-    //   'doe',
-    //   'crd',
-    //   'completed',
-    //   'tags',
-    //   'ptags',
-    //   'run',
-    //   'hir_age',
-    //   'calc_age',
-    // ];
     const flds = this.props.flds; //|| flds1;
 
     const tcount = tcs.length;
@@ -156,7 +112,7 @@ class List extends Component {
               </a>
             </td>
             {flds.map(fld => {
-              if (this.props.edit.fld === fld) {
+              if (this.props.edit.fld === fld && fields[fld].editable) {
                 return (
                   <td key={fld}>
                     {t[fld]}
