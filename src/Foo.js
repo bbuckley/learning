@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { store } from './index';
-import { SORT_TOGGLE } from './actions/index';
+import { SORT_TOGGLE, HIDE_VALUE} from './actions/index';
 import { sorter, symbol } from './sort';
 
 import { fields } from './fields';
+import { filter } from './filter';
 // import ReactTooltip from 'react-tooltip';
 
 const HeadLink = ({ fld, isLive, value }) => {
@@ -68,8 +69,8 @@ const Field = ({ tc, fld, onClick }) => {
       textAlign: fields[fld].textAlign,
     };
   }
-
-  const fClick = fields[fld].editable ? () => console.log({ fld, tc }) : null;
+//const fClick = fields[fld].editable ? () => console.log({ fld, tc }) : null;
+  const fClick = () => store.dispatch({ type: HIDE_VALUE, field: fld, value: tc[fld] });
 
   return (
     <td style={style} key={fld} onClick={fClick}>
@@ -78,25 +79,28 @@ const Field = ({ tc, fld, onClick }) => {
   );
 };
 
-const Rows = ({ tcs, flds }) => (
-  <tbody>
-    {tcs.map(tc => <Row key={tc.id} tc={tc} flds={flds} />)}
-  </tbody>
-);
+const Rows = ({ tcs, flds }) => {
+  return (
+    <tbody>
+      {tcs.map(tc => <Row key={tc.id} tc={tc} flds={flds} />)}
+    </tbody>
+  );
+};
+
+const NofM = ({fcs, tcs}) => <div>{fcs.length} of {tcs.length}</div>
 
 class Foo extends Component {
-
   render() {
     const { flds, sort } = this.props;
     let { tcs } = this.props;
-
+    const fcs = filter(this.props.hide, tcs);
     tcs = sorter(tcs, sort);
     return (
       <div>
         <table>
-          <caption>Foo {tcs.length}!</caption>
+          <caption><NofM fcs={fcs} tcs={tcs} /></caption>
           <Header flds={flds} sort={sort} />
-          <Rows flds={flds} tcs={tcs} />
+          <Rows flds={flds} tcs={fcs} />
         </table>
       </div>
     );
@@ -106,14 +110,14 @@ class Foo extends Component {
 const mapStateToProps = state => {
   return {
     personal: state.personal,
+    hide: state.hide,
     sort: state.sort,
   };
 };
 
 Foo.defaultProps = {
-  flds: ['tc','pbc','calc_type'],
-  tcs: []
+  flds: ['tc', 'pbc', 'calc_type'],
+  tcs: [],
 };
-
 
 export default connect(mapStateToProps)(Foo);

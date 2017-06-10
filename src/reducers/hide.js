@@ -7,10 +7,13 @@ import {
   HIDE_ONLY,
   HIDE_OTHER_FIELDS_CLEAR,
   HIDE_TOGGLE,
+  HIDE_VALUE,
 } from '../actions/index';
 
 export const hide = (state = {}, { type, id, field, values, value }) => {
   switch (type) {
+    case HIDE_VALUE:
+      return { ...state, [field]: [value, ...(state[field] || [])] };
     case HIDE_TOGGLE:
       return (state[field] || []).length === values.length
         ? { ...state, [field]: [] }
@@ -36,8 +39,8 @@ export const hide = (state = {}, { type, id, field, values, value }) => {
       };
     case HIDE_ONLY:
       return { [field]: values.filter(x => x !== value) };
-      //return { ...state, [field]: values.filter(x => x !== value) };
-      //return { [field]: value };
+    //return { ...state, [field]: values.filter(x => x !== value) };
+    //return { [field]: value };
     case HIDE_OTHER_FIELDS_CLEAR:
       return { [field]: state[field] };
 
