@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { store } from './index';
-import { SORT_TOGGLE, HIDE_VALUE} from './actions/index';
+import { SORT_TOGGLE, HIDE_VALUE, HIDE_CLEAR } from './actions/index';
 import { sorter, symbol } from './sort';
 
 import { fields } from './fields';
@@ -69,8 +69,9 @@ const Field = ({ tc, fld, onClick }) => {
       textAlign: fields[fld].textAlign,
     };
   }
-//const fClick = fields[fld].editable ? () => console.log({ fld, tc }) : null;
-  const fClick = () => store.dispatch({ type: HIDE_VALUE, field: fld, value: tc[fld] });
+  //const fClick = fields[fld].editable ? () => console.log({ fld, tc }) : null;
+  const fClick = () =>
+    store.dispatch({ type: HIDE_VALUE, field: fld, value: tc[fld] });
 
   return (
     <td style={style} key={fld} onClick={fClick}>
@@ -87,7 +88,16 @@ const Rows = ({ tcs, flds }) => {
   );
 };
 
-const NofM = ({fcs, tcs}) => <div>{fcs.length} of {tcs.length}</div>
+//const NofM = ({ fcs, tcs }) => <div>{fcs.length} of {tcs.length}</div>;
+
+const NofM = ({ fcs, tcs, click }) => (
+  <div>{fcs.length} of <a href="#" onClick={click}>{tcs.length}</a></div>
+);
+
+NofM.defaultProps = {
+  click: () => store.dispatch({type: HIDE_CLEAR})
+}
+
 
 class Foo extends Component {
   render() {
