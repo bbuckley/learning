@@ -8,10 +8,13 @@ import {
   HIDE_OTHER_FIELDS_CLEAR,
   HIDE_TOGGLE,
   HIDE_VALUE,
+  HIDE_REMOVE_FILTER,
 } from '../actions/index';
 
 export const hide = (state = {}, { type, id, field, values, value }) => {
   switch (type) {
+    case HIDE_REMOVE_FILTER:
+      return { ...state, [field]: [] };
     case HIDE_VALUE:
       return { ...state, [field]: [value, ...(state[field] || [])] };
     case HIDE_TOGGLE:

@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { store } from './index';
-import { SORT_TOGGLE, HIDE_VALUE, HIDE_CLEAR } from './actions/index';
+import {
+  SORT_TOGGLE,
+  HIDE_VALUE,
+  HIDE_CLEAR,
+  HIDE_REMOVE_FILTER,
+} from './actions/index';
 import { sorter, symbol } from './sort';
 
 import { fields } from './fields';
@@ -90,25 +95,50 @@ const Rows = ({ tcs, flds }) => {
 
 //const NofM = ({ fcs, tcs }) => <div>{fcs.length} of {tcs.length}</div>;
 
-const NofM = ({ fcs, tcs, click }) => (
-  <div>{fcs.length} of <a href="#" onClick={click}>{tcs.length}</a></div>
-);
+const NofM = ({ fcs, tcs, click, hide }) => {
+  let links = Object.keys(hide)
+    .filter(k => {
+      const x = hide[k];
+      return !x || x.length !== 0;
+    })
+    .sort()
+    .map(field => (
+      <span key={field}>
+        {' '}
+        <a
+          href="#"
+          onClick={() => store.dispatch({ type: HIDE_REMOVE_FILTER, field })}
+        >
+          {field}
+        </a>
+        {' '}
+      </span>
+    ));
+  const pre = links.length === 0 ? ' - No filters' : ' - Filters '
+  return (
+    <div>
+      {fcs.length} of <a href="#" onClick={click}>{tcs.length}</a>
+      <span>
+        {pre}{links}
+      </span>
+    </div>
+  );
+};
 
 NofM.defaultProps = {
-  click: () => store.dispatch({type: HIDE_CLEAR})
-}
-
+  click: () => store.dispatch({ type: HIDE_CLEAR }),
+};
 
 class Foo extends Component {
   render() {
-    const { flds, sort } = this.props;
+    const { flds, sort, hide } = this.props;
     let { tcs } = this.props;
-    const fcs = filter(this.props.hide, tcs);
+    const fcs = filter(hide, tcs);
     tcs = sorter(tcs, sort);
     return (
       <div>
         <table>
-          <caption><NofM fcs={fcs} tcs={tcs} /></caption>
+          <caption><NofM fcs={fcs} tcs={tcs} hide={hide} /></caption>
           <Header flds={flds} sort={sort} />
           <Rows flds={flds} tcs={fcs} />
         </table>
@@ -131,3 +161,11 @@ Foo.defaultProps = {
 };
 
 export default connect(mapStateToProps)(Foo);
+
+const mapStateToPropsNofM = state => {
+  return {
+    hide: state.hide,
+  };
+};
+
+connect(mapStateToPropsNofM)(NofM);
