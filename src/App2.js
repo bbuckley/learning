@@ -25,7 +25,9 @@ import firebase, { FIRE_NAME } from './base';
 const NotFound = () => <div>not found</div>;
 // const Foo = () => <div style={{ padding: '20px' }}>this is foo</div>;
 const Bar = props => <div>Bar {props.name}</div>;
-const Barp = ({ name, age }) => <div>Barp {name}, {age}</div>;
+const Barp = ({ name, age }) => <div><h1>Barp</h1> <p>{name}, {age}</p></div>;
+
+
 
 const ListOne = () => {
   const ids = [
@@ -156,17 +158,16 @@ class App2 extends Component {
           <Route
             exact={true}
             path="/testview"
-            render={() => (
+            render={() =>
               <div>
                 <ListView tcs={this.state.tcs} />
-              </div>
-            )}
+              </div>}
           />
           <Route exact={true} path="/" render={() => <p>Welcome</p>} />
           <Route
             exact={true}
             path="/aaa"
-            render={() => (
+            render={() =>
               <div>
                 <A fld="calc_type" tcs={this.state.tcs} />
                 <A
@@ -185,15 +186,14 @@ class App2 extends Component {
                 />
                 <A fld="pbc" tcs={this.state.tcs} />
 
-              </div>
-            )}
+              </div>}
           />
           <Route exact={true} path="/team" component={Schedule} />
           <Route exact={true} path="/pgatour" component={PgaTourView} />
           <Route
             exact={true}
             path="/BitField"
-            render={() => (
+            render={() =>
               <div>
                 <p>
                   <a
@@ -280,13 +280,12 @@ class App2 extends Component {
 
                 <List tcs={this.state.tcs} />
 
-              </div>
-            )}
+              </div>}
           />
           <Route
             exact={true}
             path="/BitArray"
-            render={() => (
+            render={() =>
               <div>
                 <BitArray
                   data={[
@@ -304,13 +303,12 @@ class App2 extends Component {
                   data={[['A', 4, true], ['B', 2, true], ['C', 15, false]]}
                 />
 
-              </div>
-            )}
+              </div>}
           />
           <Route
             exact={true}
             path="/BitArray2"
-            render={() => (
+            render={() =>
               <div>
 
                 <BitArray
@@ -318,20 +316,23 @@ class App2 extends Component {
                 />
                 <List />
 
-              </div>
-            )}
+              </div>}
           />
           <Route exact={true} path="/basic" component={BasicExample} />
           <Route
             exact={true}
             path="/barp"
-            render={({ name }) => <Barp name={name} />}
+            render={({ name }) =>
+              <div>
+                <Barp name="Sam" age="33" />
+
+              </div>}
           />
           <Route exact={true} path="/ch" component={Checkboxes} />
           <Route
             exact={true}
             path="/foo"
-            render={() => (
+            render={() =>
               <div>
                 <Foo
                   tcs={this.state.tcs}
@@ -351,8 +352,7 @@ class App2 extends Component {
                   ]}
                 />
                 <Foo />
-              </div>
-            )}
+              </div>}
           />
           <Route
             exact={true}
