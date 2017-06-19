@@ -22,12 +22,13 @@ import { store } from './index';
 import { connect } from 'react-redux';
 import firebase, { FIRE_NAME } from './base';
 
+import Example from './branch';
+import Presentation from './Presentation';
+
 const NotFound = () => <div>not found</div>;
 // const Foo = () => <div style={{ padding: '20px' }}>this is foo</div>;
 const Bar = props => <div>Bar {props.name}</div>;
 const Barp = ({ name, age }) => <div><h1>Barp</h1> <p>{name}, {age}</p></div>;
-
-
 
 const ListOne = () => {
   const ids = [
@@ -325,6 +326,13 @@ class App2 extends Component {
             render={({ name }) =>
               <div>
                 <Barp name="Sam" age="33" />
+                <Example isReady={true} />
+                <Example isReady={false} />
+                <Example isReady="true" />
+                <Example isReady="true" />
+
+                <Presentation />
+                <Presentation />
 
               </div>}
           />

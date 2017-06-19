@@ -13,34 +13,27 @@ import { fields } from './fields';
 import { filter } from './filter';
 // import ReactTooltip from 'react-tooltip';
 
-const HeadLink = ({ fld, isLive, value }) => {
-  // let display
-  // if(fields[fld].tooltip){
-  //   display =
-  //   <span>
-  //   <p data-tip={fields[fld].tooltip}>{fld}</p>
-  //   <ReactTooltip />
-  //   </span>
-  // }else{
-  //   display = fld
-  // }
-  if (!isLive) return <th>{fld}</th>;
+import { compose, withHandlers } from 'recompose';
 
+const enhance = compose(
+  withHandlers({
+    onClick: props => () =>
+      store.dispatch({ type: SORT_TOGGLE, fld: props.fld }),
+  }),
+);
+
+const HeadLink = enhance(({ fld, isLive, value, onClick }) => {
+  if (!isLive) return <th>{fld}</th>;
   return (
     <th>
-      <a
-        href="#"
-        onClick={() => {
-          store.dispatch({ type: SORT_TOGGLE, fld });
-        }}
-      >
+      <a href="#" onClick={onClick}>
         {value}
       </a>
     </th>
   );
-};
+});
 
-const Header = ({ flds, sort }) => (
+const Header = ({ flds, sort }) =>
   <thead>
     <tr>
       {flds.map(fld => {
@@ -54,14 +47,12 @@ const Header = ({ flds, sort }) => (
         );
       })}
     </tr>
-  </thead>
-);
+  </thead>;
 
-const Row = ({ flds, tc }) => (
+const Row = ({ flds, tc }) =>
   <tr>
     {flds.map(fld => <Field tc={tc} fld={fld} key={fld} />)}
-  </tr>
-);
+  </tr>;
 
 const Field = ({ tc, fld, onClick }) => {
   let style = fields[fld].editable
@@ -102,7 +93,7 @@ const NofM = ({ fcs, tcs, click, hide }) => {
       return !x || x.length !== 0;
     })
     .sort()
-    .map(field => (
+    .map(field =>
       <span key={field}>
         {' '}
         <a
@@ -112,9 +103,9 @@ const NofM = ({ fcs, tcs, click, hide }) => {
           {field}
         </a>
         {' '}
-      </span>
-    ));
-  const pre = links.length === 0 ? ' - No filters' : ' - Filters '
+      </span>,
+    );
+  const pre = links.length === 0 ? ' - No filters' : ' - Filters ';
   return (
     <div>
       {fcs.length} of <a href="#" onClick={click}>{tcs.length}</a>
