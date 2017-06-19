@@ -13,14 +13,23 @@ import { fields } from './fields';
 import { filter } from './filter';
 // import ReactTooltip from 'react-tooltip';
 
-import { compose, withHandlers } from 'recompose';
+import { compose, withHandlers, branch } from 'recompose';
 
 const enhance = compose(
+  //branch(() => true, IsLive, HeadLink),
+  // branch(
+  //   props => ({ isLive }) => {
+  //     return !!isLive;
+  //   },
+  //   isLive,
+  //   HeadLink,
+  // ),
   withHandlers({
     onClick: props => () =>
       store.dispatch({ type: SORT_TOGGLE, fld: props.fld }),
   }),
 );
+const IsLive = ({ fld }) => <th>{fld}</th>;
 
 const HeadLink = enhance(({ fld, isLive, value, onClick }) => {
   if (!isLive) return <th>{fld}</th>;
