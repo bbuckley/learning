@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { store } from './index';
+import './Foo.css';
+
 import {
   SORT_TOGGLE,
   HIDE_VALUE,
@@ -16,23 +18,14 @@ import { filter } from './filter';
 import { compose, withHandlers, branch } from 'recompose';
 
 const enhance = compose(
-  //branch(() => true, IsLive, HeadLink),
-  // branch(
-  //   props => ({ isLive }) => {
-  //     return !!isLive;
-  //   },
-  //   isLive,
-  //   HeadLink,
-  // ),
   withHandlers({
     onClick: props => () =>
       store.dispatch({ type: SORT_TOGGLE, fld: props.fld }),
   }),
 );
-const IsLive = ({ fld }) => <th>{fld}</th>;
-
+const NotLive = ({ fld }) => <th>{fld}</th>;
 const HeadLink = enhance(({ fld, isLive, value, onClick }) => {
-  if (!isLive) return <th>{fld}</th>;
+  if (!isLive) return <NotLive fld={fld} />;
   return (
     <th>
       <a href="#" onClick={onClick}>
@@ -132,13 +125,14 @@ NofM.defaultProps = {
 class Foo extends Component {
   render() {
     const { flds, sort, hide } = this.props;
-    let { tcs } = this.props;
-    const fcs = filter(hide, tcs);
-    tcs = sorter(tcs, sort);
+    const fcs = filter(hide, this.props.tcs);
+    const tcs = sorter(this.props.tcs, sort);
     return (
-      <div>
+      <div className="Foo">
         <table>
-          <caption><NofM fcs={fcs} tcs={tcs} hide={hide} /></caption>
+          <caption>
+            <NofM fcs={fcs} tcs={tcs} hide={hide} />
+          </caption>
           <Header flds={flds} sort={sort} />
           <Rows flds={flds} tcs={fcs} />
         </table>
