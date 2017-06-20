@@ -1,6 +1,6 @@
-import { PERSONAL_EDIT } from '../actions/index';
+import { PERSONAL_EDIT, PERSONAL_PTAG_ALL } from '../actions/index';
 
-export const personal = (state = [], { type, id, fld, value }) => {
+export const personal = (state = [], { type, fld, id, ids, value }) => {
   switch (type) {
     case PERSONAL_EDIT:
       const i = state.findIndex(x => x.id === id);
@@ -13,6 +13,8 @@ export const personal = (state = [], { type, id, fld, value }) => {
           ...state.slice(i + 1),
         ];
       }
+    case PERSONAL_PTAG_ALL:
+      return state;
     default:
       return state;
   }

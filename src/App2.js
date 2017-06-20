@@ -153,7 +153,12 @@ class App2 extends Component {
         - <Link to="/list">List</Link>
         - <Link to="/RandomOne">RandomOne</Link>
         - <Link to="/aaa">A</Link>
-        <a href="#" onClick={() => console.log(store.getState())}>state </a>
+
+        <p>
+          <a href="#" onClick={() => console.log(store.getState())}>state</a>
+          -
+          <a href="#" onClick={() => console.log(store.getState())}>x</a>
+        </p>
 
         <Switch>
           <Route
