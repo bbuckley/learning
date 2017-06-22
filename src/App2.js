@@ -157,7 +157,15 @@ class App2 extends Component {
         <p>
           <a href="#" onClick={() => console.log(store.getState())}>state</a>
           -
-          <a href="#" onClick={() => console.log(store.getState())}>x</a>
+          <a
+            href="#"
+            onClick={() => {
+              console.log('here');
+              console.log(Foo.setPtagAll());
+            }}
+          >
+            x
+          </a>
         </p>
 
         <Switch>

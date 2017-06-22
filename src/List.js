@@ -16,7 +16,7 @@ import {
   PERSONAL_EDIT,
 } from './actions/index';
 // import BitField from './BitField';
-import {fields} from './fields'
+import { fields } from './fields';
 
 class List extends Component {
   state = {
@@ -25,11 +25,16 @@ class List extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps', nextProps.edit.id);
     if (nextProps.edit.id && nextProps.edit.fld) {
       const { id, fld } = nextProps.edit;
-      const { input, tcs } = this.state;
+      const { input } = this.state;
+      const { tcs } = this.props;
+      console.log(tcs.length);
       const i = tcs.findIndex(t => t.id === id);
+      //console.log({ i, id });
       if (i !== -1) {
+        //console.log('here', tcs[i][fld]);
         input[fld] = tcs[i][fld];
         //this.setState({ input });
       }
@@ -52,6 +57,7 @@ class List extends Component {
     const input = {};
     input[e.target.name] = e.target.value;
     //console.log({input, value: e.target.value, name: e.target.name});
+    //console.log('onChange');
     this.setState({ input });
   }
 
@@ -113,6 +119,7 @@ class List extends Component {
             </td>
             {flds.map(fld => {
               if (this.props.edit.fld === fld && fields[fld].editable) {
+                console.log(this.state.input[fld]);
                 return (
                   <td key={fld}>
                     {t[fld]}
@@ -176,7 +183,7 @@ class List extends Component {
 
           </td>
 
-          {flds.map(fld => (
+          {flds.map(fld =>
             <td
               className="ListSelected"
               key={fld}
@@ -185,8 +192,8 @@ class List extends Component {
               }}
             >
               {t[fld]}
-            </td>
-          ))}
+            </td>,
+          )}
 
         </tr>
       );
@@ -230,6 +237,7 @@ class List extends Component {
 List.defaultProps = {
   tcs: [],
   flds: [
+    'id',
     'tc',
     'pbc',
     'ric',

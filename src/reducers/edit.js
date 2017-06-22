@@ -9,6 +9,7 @@ import {
 } from '../actions/index';
 
 import { samples } from '../samples';
+import { fields } from '../fields';
 
 import firebase, { FIRE_NAME } from '../base';
 
@@ -26,6 +27,10 @@ export const edit = (state = {}, { type, id, fld, value }) => {
       return { ...state, id, fld: fld };
     case EDIT_VALUE:
       //console.log('save to firebase');
+      if (fields[fld].personal) {
+        console.log('fld is personal');
+        return state;
+      }
       firebase
         .database()
         .ref(FIRE_NAME + '/' + id + '/')
@@ -40,7 +45,6 @@ export const edit = (state = {}, { type, id, fld, value }) => {
         return {};
       }
     //return Object.keys(state).length === 0 ? {id} : {}
-
 
     case EDIT_CLEAR:
       console.log('edit clear');

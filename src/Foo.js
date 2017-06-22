@@ -8,6 +8,7 @@ import {
   HIDE_VALUE,
   HIDE_CLEAR,
   HIDE_REMOVE_FILTER,
+  EDIT_VALUE,
 } from './actions/index';
 import { sorter, symbol } from './sort';
 
@@ -123,12 +124,27 @@ NofM.defaultProps = {
 };
 
 class Foo extends Component {
+  setAll(tcs) {
+    console.log('this is setAll' + tcs.length);
+    tcs.forEach(tc => {
+      console.log('ptags is ' + tc['ptags']);
+      store.dispatch({
+        type: EDIT_VALUE,
+        id: tc.id,
+        fld: 'ptags',
+        value: '01/01/2024',
+      });
+    });
+  }
+
   render() {
     const { flds, sort, hide } = this.props;
     const fcs = filter(hide, this.props.tcs);
     const tcs = sorter(this.props.tcs, sort);
+
     return (
       <div className="Foo">
+        <a href="#" onClick={() => this.setAll(fcs)}>x</a>
         <table>
           <caption>
             <NofM fcs={fcs} tcs={tcs} hide={hide} />
@@ -152,6 +168,9 @@ const mapStateToProps = state => {
 Foo.defaultProps = {
   flds: ['tc', 'pbc', 'calc_type'],
   tcs: [],
+  setPtagAll: () => {
+    console.log('setPtagAll');
+  },
 };
 
 export default connect(mapStateToProps)(Foo);

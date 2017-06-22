@@ -23,7 +23,7 @@ const personal = ['ptags', 'pnotes'];
 
 const attr = ['alignText', 'editable', 'sort_type', 'sortable', 'tooltip'];
 
-console.log({ allFields, calculated, personal, attr });
+//console.log({ allFields, calculated, personal, attr });
 
 export const fields = {
   id: { sort_type: 'text', sortable: false, editable: false },
@@ -42,6 +42,10 @@ export const fields = {
     isTag: true,
     sortable: false,
     editable: true,
+    personal: true,
+  },
+  pnotes: {
+    personal: true,
   },
   bcd: {
     tooltip: 'age at bcd',
@@ -82,4 +86,5 @@ export const fields = {
     sortable: true,
     editable: false,
   },
+  ric: { editable: true },
 };
