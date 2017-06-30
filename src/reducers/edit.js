@@ -29,7 +29,6 @@ export const edit = (state = {}, { type, id, fld, value }) => {
       //console.log('save to firebase');
       if (fields[fld].personal) {
         console.log('fld is personal');
-        return state;
       }
       firebase
         .database()

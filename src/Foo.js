@@ -9,6 +9,7 @@ import {
   HIDE_CLEAR,
   HIDE_REMOVE_FILTER,
   EDIT_VALUE,
+  PERSONAL_EDIT,
 } from './actions/index';
 import { sorter, symbol } from './sort';
 
@@ -126,13 +127,23 @@ NofM.defaultProps = {
 class Foo extends Component {
   setAll(tcs) {
     console.log('this is setAll' + tcs.length);
+    // tcs.forEach(tc => {
+    //   console.log('ptags is ' + tc['ptags']);
+    //   store.dispatch({
+    //     type: EDIT_VALUE,
+    //     id: tc.id,
+    //     fld: 'bcd',
+    //     value: '01/01/2024',
+    //   });
+    // });
+
     tcs.forEach(tc => {
-      console.log('ptags is ' + tc['ptags']);
+      //console.log('ptags is ' + tc['ptags']);
       store.dispatch({
-        type: EDIT_VALUE,
+        type: PERSONAL_EDIT,
         id: tc.id,
         fld: 'ptags',
-        value: '01/01/2024',
+        value: 'x',
       });
     });
   }

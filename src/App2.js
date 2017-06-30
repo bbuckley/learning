@@ -86,8 +86,14 @@ class App2 extends Component {
   constructor() {
     super();
     this.state = {
-      tcs: [{ id: '1' }, { id: '2' }], //two fake starter tc
+      //tcs: [{ id: '1' }, { id: '2' }], //two fake starter tc
+      tcs: [],
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('componentWillReceiveProps');
+    //this.prepareTcs(nextProps);
   }
 
   componentDidMount() {
@@ -117,10 +123,14 @@ class App2 extends Component {
         const calc_age = e - b;
         return { ...tc, hir_age, calc_age };
       });
+
       usedProps.personal.forEach(p => {
         const i = tcs.findIndex(t => t.id === p.id);
+        console.log({ i });
         if (i !== -1) tcs[i]['ptags'] = p['ptags'];
+        //if (i !== -1) tcs[i]['ptags'] = 'x';
       });
+
       this.setState({ tcs });
     });
   }
@@ -283,6 +293,9 @@ class App2 extends Component {
                       </td>
                       <td style={style}>
                         <BitField fld="tags" />
+                      </td>
+                      <td style={style}>
+                        <BitField fld="ptags" />
                       </td>
                       <td style={style}>
                         <BitField2 tcs={this.state.tcs} fld="pbc" />

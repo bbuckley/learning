@@ -6,12 +6,14 @@ export const allFields = [
   'pbc',
   'ric',
   'rics',
+  'events',
+  'setup',
+  'run',
   'completed',
   'certed',
-  'run',
   'status',
   'ssn',
-  'origngal_ssn',
+  'original_ssn',
   'tc',
   'tags',
   'ptags',
@@ -24,6 +26,8 @@ const personal = ['ptags', 'pnotes'];
 const attr = ['alignText', 'editable', 'sort_type', 'sortable', 'tooltip'];
 
 //console.log({ allFields, calculated, personal, attr });
+
+class Fields {}
 
 export const fields = {
   id: { sort_type: 'text', sortable: false, editable: false },
