@@ -41,8 +41,9 @@ export const hide = (state = {}, { type, id, field, values, value }) => {
         ),
       };
     case HIDE_ONLY:
-      return { [field]: values.filter(x => x !== value) };
-    //return { ...state, [field]: values.filter(x => x !== value) };
+      console.log('in hold only', field, value, values);
+      //return { [field]: values.filter(x => x !== value) };
+      return { ...state, [field]: values.filter(x => x !== value) };
     //return { [field]: value };
     case HIDE_OTHER_FIELDS_CLEAR:
       return { [field]: state[field] };

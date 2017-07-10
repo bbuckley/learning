@@ -6,6 +6,7 @@ import './Foo.css';
 import {
   SORT_TOGGLE,
   HIDE_VALUE,
+  HIDE_ONLY,
   HIDE_CLEAR,
   HIDE_REMOVE_FILTER,
   EDIT_VALUE,
@@ -53,12 +54,12 @@ const Header = ({ flds, sort }) =>
     </tr>
   </thead>;
 
-const Row = ({ flds, tc }) =>
+const Row = ({ flds, tc, tcs }) =>
   <tr>
-    {flds.map(fld => <Field tc={tc} fld={fld} key={fld} />)}
+    {flds.map(fld => <Field tc={tc} fld={fld} key={fld} tcs={tcs} />)}
   </tr>;
 
-const Field = ({ tc, fld, onClick }) => {
+const Field = ({ tc, fld, onClick, tcs }) => {
   let style = fields[fld].editable
     ? { cursor: 'pointer' }
     : { cursor: 'not-allowed' };
@@ -70,8 +71,18 @@ const Field = ({ tc, fld, onClick }) => {
     };
   }
   //const fClick = fields[fld].editable ? () => console.log({ fld, tc }) : null;
-  const fClick = () =>
-    store.dispatch({ type: HIDE_VALUE, field: fld, value: tc[fld] });
+  const fClick = () => {
+    //const values = tcs.map(tc => tc[fld]);
+    const values = [...new Set(tcs.map(tc => tc[fld]))].sort();
+    console.log('here', fld, tc[fld], values);
+    store.dispatch({
+      type: HIDE_ONLY,
+      field: fld,
+      value: tc[fld],
+      values,
+    });
+    //store.dispatch({ type: HIDE_VALUE, field: fld, value: tc[fld] });
+  };
 
   return (
     <td style={style} key={fld} onClick={fClick}>
@@ -83,7 +94,7 @@ const Field = ({ tc, fld, onClick }) => {
 const Rows = ({ tcs, flds }) => {
   return (
     <tbody>
-      {tcs.map(tc => <Row key={tc.id} tc={tc} flds={flds} />)}
+      {tcs.map(tc => <Row key={tc.id} tc={tc} flds={flds} tcs={tcs} />)}
     </tbody>
   );
 };
