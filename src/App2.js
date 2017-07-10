@@ -24,6 +24,8 @@ import firebase, { FIRE_NAME } from './base';
 
 import Example from './branch';
 import Presentation from './Presentation';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
 const NotFound = () => <div>not found</div>;
 // const Foo = () => <div style={{ padding: '20px' }}>this is foo</div>;
@@ -193,8 +195,124 @@ class App2 extends Component {
             exact={true}
             path="/tabs"
             render={() =>
-              <div className="tabs">
-                tabs
+              <div
+                style={{
+                  margin: '5px',
+                  border: '3px',
+                  padding: '10px',
+                  borderStyle: 'solid',
+                  borderColor: 'red',
+                }}
+              >
+                <h1>React Tabs</h1>
+                <Tabs tcs={this.state.tcs}>
+                  <TabList>
+                    <Tab>Matrix</Tab>
+                    <Tab>Filter</Tab>
+                    <Tab>Angular</Tab>
+                  </TabList>
+
+                  <TabPanel>
+                    <ListView tcs={this.state.tcs} />
+                  </TabPanel>
+                  <TabPanel>
+                    <BitField fld="pbc" />
+                    <BitField fld="calc_type" />
+                  </TabPanel>
+                  <TabPanel>
+                    <h2>Why AngularJS?</h2>
+                    <p>
+                      HTML is great for declaring static documents, but it
+                      falters when we try to use it for declaring dynamic views
+                      in web-applications. AngularJS lets you extend HTML
+                      vocabulary for your application. The resulting environment
+                      is extraordinarily expressive, readable, and quick to
+                      develop.
+                    </p>
+                    <h2>Alternatives</h2>
+                    <p>
+                      Other frameworks deal with HTML’s shortcomings by either
+                      abstracting away HTML, CSS, and/or JavaScript or by
+                      providing an imperative way for manipulating the DOM.
+                      Neither of these address the root problem that HTML was
+                      not designed for dynamic views.
+                    </p>
+                    <h2>Extensibility</h2>
+                    <p>
+                      AngularJS is a toolset for building the framework most
+                      suited to your application development. It is fully
+                      extensible and works well with other libraries. Every
+                      feature can be modified or replaced to suit your unique
+                      development workflow and feature needs. Read on to find
+                      out how.
+                    </p>
+                    <p>
+                      Source:{' '}
+                      <a href="https://angularjs.org/" target="_blank">
+                        Angular
+                      </a>
+                    </p>
+                  </TabPanel>
+                </Tabs>
+                <Tabs>
+                  <TabList>
+                    <Tab>Luigi</Tab>
+                    <Tab>Yoshi</Tab>
+                    <Tab>4 th</Tab>
+                  </TabList>
+                  <TabPanel>
+                    <p>
+                      Luigi (Japanese: ルイージ Hepburn: Ruīji?) is a fictional
+                      character featured in video games and related media
+                      released by Nintendo. Created by prominent game designer
+                      Shigeru Miyamoto, Luigi is portrayed as the slightly
+                      younger but taller fraternal twin brother of Nintendo's
+                      mascot Mario, and appears in many games throughout the
+                      Mario franchise, frequently as a sidekick to his brother.
+                    </p>
+                    <p>
+                      Source:{' '}
+                      <a
+                        href="http://en.wikipedia.org/wiki/Luigi"
+                        target="_blank"
+                      >
+                        Wikipedia
+                      </a>
+                    </p>
+                  </TabPanel>
+                  <TabPanel>
+                    <p>
+                      Yoshi (ヨッシー Yosshī?) /ˈjoʊʃi/ or /ˈjɒʃi/, once romanized
+                      as Yossy, is a fictional anthropomorphic dinosaur
+                      (referred to as a dragon at times) who appears in video
+                      games published by Nintendo. He debuted in Super Mario
+                      World (1990) on the Super Nintendo Entertainment System as
+                      Mario and Luigi's sidekick (a role he has often reprised),
+                      and he later established his own series with several
+                      platform and puzzle games, including Super Mario World 2:
+                      Yoshi's Island. He has also appeared in many of the
+                      spin-off Mario games including the Mario Party, the Mario
+                      Kart, and the Super Smash Bros. series, as well as in
+                      other various Mario sports titles. Yoshi also appears in
+                      New Super Mario Bros. Wii (2009) as the characters
+                      companion and steed, similar to his original debut role in
+                      Super Mario World. Yoshi belongs to the species of the
+                      same name which comes in various colors, with green being
+                      the most common.
+                    </p>
+                    <p>
+                      Source:{' '}
+                      <a
+                        href="http://en.wikipedia.org/wiki/Yoshi"
+                        target="_blank"
+                      >
+                        Wikipedia
+                      </a>
+                    </p>
+                  </TabPanel>
+                  <TabPanel>the fourth text</TabPanel>
+                </Tabs>{' '}
+                {' '}
               </div>}
           />
 
