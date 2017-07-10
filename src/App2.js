@@ -163,6 +163,7 @@ class App2 extends Component {
         - <Link to="/list">List</Link>
         - <Link to="/RandomOne">RandomOne</Link>
         - <Link to="/aaa">A</Link>
+        - <Link to="/tabs">Tabs</Link>
 
         <p>
           <a href="#" onClick={() => console.log(store.getState())}>state</a>
@@ -188,6 +189,15 @@ class App2 extends Component {
               </div>}
           />
           <Route exact={true} path="/" render={() => <p>Welcome</p>} />
+          <Route
+            exact={true}
+            path="/tabs"
+            render={() =>
+              <div className="tabs">
+                tabs
+              </div>}
+          />
+
           <Route
             exact={true}
             path="/aaa"
