@@ -16,6 +16,7 @@ import PgaTourView from './pgatourview';
 import Foo from './Foo';
 import FooFilter from './FooFilter';
 import A from './A';
+import { allFields } from './fields';
 
 import { store } from './index';
 
@@ -207,59 +208,55 @@ class App2 extends Component {
                 <h1>React Tabs</h1>
                 <Tabs tcs={this.state.tcs}>
                   <TabList>
-                    <Tab>Matrix</Tab>
+                    <Tab>TCs</Tab>
                     <Tab>Filter</Tab>
-                    <Tab>Angular</Tab>
+                    <Tab>Edit</Tab>
                   </TabList>
 
                   <TabPanel>
-                    <ListView tcs={this.state.tcs} />
+                    <Tabs>
+                      <TabList>
+                        <Tab>Std</Tab>
+                        <Tab>All</Tab>
+                        <Tab>All1</Tab>
+                      </TabList>
+                      <TabPanel>
+                        <Foo
+                          tcs={this.state.tcs}
+                          flds={['id', 'tc', 'calc_type', 'pbc', 'dob', 'crd']}
+                        />
+                      </TabPanel>
+                      <TabPanel>
+                        <Foo tcs={this.state.tcs} flds={['tc', 'dob', 'crd']} />
+                      </TabPanel>
+                      <TabPanel>
+                        <Foo tcs={this.state.tcs} flds={allFields} />
+                      </TabPanel>
+                    </Tabs>
                   </TabPanel>
                   <TabPanel>
                     <BitField fld="pbc" />
                     <BitField fld="calc_type" />
+                    <Tabs>
+                      <TabList>
+                        <Tab>primary</Tab>
+                        <Tab>secondary</Tab>
+                      </TabList>
+                      <TabPanel><BitField fld="calc_type" /></TabPanel>
+                      <TabPanel>this is two</TabPanel>
+                    </Tabs>
                   </TabPanel>
-                  <TabPanel>
-                    <h2>Why AngularJS?</h2>
-                    <p>
-                      HTML is great for declaring static documents, but it
-                      falters when we try to use it for declaring dynamic views
-                      in web-applications. AngularJS lets you extend HTML
-                      vocabulary for your application. The resulting environment
-                      is extraordinarily expressive, readable, and quick to
-                      develop.
-                    </p>
-                    <h2>Alternatives</h2>
-                    <p>
-                      Other frameworks deal with HTML’s shortcomings by either
-                      abstracting away HTML, CSS, and/or JavaScript or by
-                      providing an imperative way for manipulating the DOM.
-                      Neither of these address the root problem that HTML was
-                      not designed for dynamic views.
-                    </p>
-                    <h2>Extensibility</h2>
-                    <p>
-                      AngularJS is a toolset for building the framework most
-                      suited to your application development. It is fully
-                      extensible and works well with other libraries. Every
-                      feature can be modified or replaced to suit your unique
-                      development workflow and feature needs. Read on to find
-                      out how.
-                    </p>
-                    <p>
-                      Source:{' '}
-                      <a href="https://angularjs.org/" target="_blank">
-                        Angular
-                      </a>
-                    </p>
-                  </TabPanel>
+                  <TabPanel><One id="-KlRH-MMGaiWmcvuAd4L" /></TabPanel>
+
                 </Tabs>
+                {/*
                 <Tabs>
                   <TabList>
                     <Tab>Luigi</Tab>
                     <Tab>Yoshi</Tab>
                     <Tab>4 th</Tab>
                   </TabList>
+
                   <TabPanel>
                     <p>
                       Luigi (Japanese: ルイージ Hepburn: Ruīji?) is a fictional
@@ -311,8 +308,8 @@ class App2 extends Component {
                     </p>
                   </TabPanel>
                   <TabPanel>the fourth text</TabPanel>
-                </Tabs>{' '}
-                {' '}
+                </Tabs>
+                */}
               </div>}
           />
 

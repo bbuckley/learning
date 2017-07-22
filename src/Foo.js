@@ -42,12 +42,13 @@ const Header = ({ flds, sort }) =>
   <thead>
     <tr>
       {flds.map(fld => {
+        console.log({ fld });
         return (
           <HeadLink
             key={fld}
             fld={fld}
             value={symbol(fld, sort)}
-            isLive={fields[fld].sortable}
+            isLive={!fields['sortable'] !== undefined || fields[fld].sortable}
           />
         );
       })}
@@ -60,7 +61,8 @@ const Row = ({ flds, tc, tcs }) =>
   </tr>;
 
 const Field = ({ tc, fld, onClick, tcs }) => {
-  let style = fields[fld].editable
+  console.log({ fld });
+  let style = fields[fld].editable !== undefined
     ? { cursor: 'pointer' }
     : { cursor: 'not-allowed' };
 
@@ -166,11 +168,13 @@ class Foo extends Component {
 
     return (
       <div className="Foo">
-        <a href="#" onClick={() => this.setAll(fcs)}>x</a>
+        {/* <a href="#" onClick={() => this.setAll(fcs)}>x</a> */}
         <table>
+
           <caption>
             <NofM fcs={fcs} tcs={tcs} hide={hide} />
           </caption>
+
           <Header flds={flds} sort={sort} />
           <Rows flds={flds} tcs={fcs} />
         </table>

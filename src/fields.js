@@ -1,6 +1,7 @@
 export const allFields = [
   'id',
   'bcd',
+  'crd',
   'doe',
   'dot',
   'pbc',
@@ -9,8 +10,9 @@ export const allFields = [
   'events',
   'setup',
   'run',
-  'completed',
+  // 'completed',
   'certed',
+  'grid',
   'status',
   'ssn',
   'original_ssn',
@@ -27,7 +29,11 @@ const attr = ['alignText', 'editable', 'sort_type', 'sortable', 'tooltip'];
 
 //console.log({ allFields, calculated, personal, attr });
 
-class Fields {}
+export class Fields {
+  field(x) {
+    return true;
+  }
+}
 
 export const fields = {
   id: { sort_type: 'text', sortable: false, editable: false },
@@ -39,7 +45,7 @@ export const fields = {
     editable: true,
   },
   calc_type: { sort_type: 'text', sortable: true, editable: true },
-  crd: { editable: true },
+  crd: { editable: true, sortable: true, sort_type: 'date' },
   tags: { tooltip: 'shared tag', isTag: true, sortable: false, editable: true },
   ptags: {
     tooltip: 'personal tag',

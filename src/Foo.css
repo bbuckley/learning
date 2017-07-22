@@ -2,3 +2,17 @@
   text-align: left;
   padding: 10px;
 }
+
+.Foo table {
+  border-collapse: collapse;
+  border-style: hidden;
+}
+
+.Foo table td, table th {
+  border: 2px solid purple;
+  padding: 8px;
+}
+
+.Foo table tr:nth-child(even) {
+  background-color: #ffde00;
+}
