@@ -64,7 +64,7 @@ const randomBarp = () => {
 
 class Count extends Component {
   state = {
-    n: 0,
+    n: 10000,
   };
 
   render() {
