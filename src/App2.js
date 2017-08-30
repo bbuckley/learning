@@ -48,6 +48,18 @@ const ListOne = () => {
   );
 };
 
+import glamorous from 'glamorous';
+const MyStyledSection = glamorous.section({
+  margin: 1,
+  backgroundColor: 'green',
+  color: 'blue',
+});
+const MyStyledSection2 = glamorous.section({
+  margin: 10,
+  backgroundColor: 'red',
+  color: 'blue',
+});
+
 const randomBarp = () => {
   const names = ['David', 'Brian', 'Karl'];
   const i = Math.floor(Math.random() * names.length);
@@ -56,8 +68,15 @@ const randomBarp = () => {
   const j2 = Math.floor(Math.random() * 44 + 21);
   return (
     <div>
-      <Barp name={names[i]} age={j} />
+      <MyStyledSection>
+        <Barp name={names[i]} age={j} />
+        <Barp name={names[i]} age={j} />
+      </MyStyledSection>
+      <MyStyledSection2>
+        <Barp name={names[i]} age={j} />
+      </MyStyledSection2>
       <Barp name={names[i2]} age={j2} />
+      <Barp name={names[i2]} age={44} />
     </div>
   );
 };
